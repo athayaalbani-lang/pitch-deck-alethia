@@ -835,6 +835,31 @@
   z-index: 1;
 }
 
+/* Fullscreen stacked slides occupy one viewport each. The scaled artboard is
+   centered inside that viewport, so adjacent slides never peek into view. */
+.stacked-slides-container[data-slides-display="fullscreen"],
+.stacked-mobile-slides-container[data-slides-display="fullscreen"] {
+  width: 100vw;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.stacked-slides-container[data-slides-display="fullscreen"][data-orientation="horizontal"],
+.stacked-mobile-slides-container[data-slides-display="fullscreen"][data-orientation="horizontal"] {
+  flex-direction: row;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.stacked-slides-container[data-slides-display="fullscreen"][data-orientation="vertical"],
+.stacked-mobile-slides-container[data-slides-display="fullscreen"][data-orientation="vertical"] {
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 /* Mobile slideshow layout: the slide fills the entire viewport at its
    natural scale (cards or fullscreen) and a bottom sheet overlays the
    bottom edge with navigation controls. The sheet auto-opens on slide
@@ -1087,6 +1112,5 @@
   background: transparent;
   align-items: center;
 }
-
 
 

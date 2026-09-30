@@ -162,7 +162,7 @@ export function useContainerDimensionScale({
 
       const scaleFromScrollAxis = isCards
         ? scrollAxisBudget / slideScrollSize
-        : Infinity;
+        : scrollAxisAvail / slideScrollSize;
       const scaleFromCrossAxis = crossAxisAvail / slideCrossSize;
       setScale(Math.min(scaleFromScrollAxis, scaleFromCrossAxis));
     };

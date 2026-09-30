@@ -1,67 +1,66 @@
 {
   "blocks": {
-    "badge": { "type": "text", "content": "Audience // demographic funnel" },
-    "title": { "type": "text", "content": "Who We Build For" },
-    "funnelHeading": { "type": "text", "content": "Funnel" },
+    "badge": { "type": "text", "content": "Prototype // people and roles" },
+    "title": { "type": "text", "content": "One practice space, three ways to take part." },
+    "funnelHeading": { "type": "text", "content": "A simple learning loop" },
     "funnel": {
       "type": "table",
-      "title": "Funnel steps",
+      "title": "Learning loop",
       "columns": [
-        { "key": "figure", "title": "Figure", "type": "text" },
-        { "key": "label", "title": "Label", "type": "text" }
+        { "key": "figure", "title": "Step", "type": "text" },
+        { "key": "label", "title": "What happens", "type": "text" }
       ],
       "rows": [
-        { "id": "fn1", "figure": "284,4 M", "label": "total population" },
-        { "id": "fn2", "figure": "229,4 M", "label": "connected · 80,66% penetration" },
-        { "id": "fn3", "figure": "50 M+", "label": "self-reported victims · 22%" }
+        { "id": "fn1", "figure": "01", "label": "Practise in a simulated scenario" },
+        { "id": "fn2", "figure": "02", "label": "Review the decision and progress" },
+        { "id": "fn3", "figure": "03", "label": "Share or learn from community reports" }
       ]
     },
     "tiers": {
       "type": "table",
-      "title": "Tiers",
+      "title": "Prototype roles",
       "columns": [
-        { "key": "tag", "title": "Tag", "type": "text" },
-        { "key": "name", "title": "Name", "type": "text" },
-        { "key": "description", "title": "Description", "type": "text" }
+        { "key": "tag", "title": "Role", "type": "text" },
+        { "key": "name", "title": "Area", "type": "text" },
+        { "key": "description", "title": "What they do", "type": "text" }
       ],
       "rows": [
         {
           "id": "t1",
-          "tag": "Tier 1",
-          "name": "The General Public",
-          "description": "Everyone reachable by a scam message. 65% are contacted weekly and only 22% ever report it. This tier is the point of the product."
+          "tag": "01",
+          "name": "Learner",
+          "description": "Practises how to inspect, verify, and respond to simulated suspicious messages and files."
         },
         {
           "id": "t2",
-          "tag": "Tier 2",
-          "name": "The Exposed Daily",
-          "description": "50 M+ Indonesians admit to being defrauded. They are hit, they lose money, and they do nothing. This is where the 4% recovery rate comes from."
+          "tag": "02",
+          "name": "Community member",
+          "description": "Submits reports, reviews case context, and contributes signals or investigation notes where available."
         },
         {
           "id": "t3",
-          "tag": "Tier 3",
-          "name": "The Mid-Market Professional",
-          "description": "Finance, HR and admin staff · SME owners · community and campus organisers. People who are socially engineered on behalf of someone else."
+          "tag": "03",
+          "name": "Administrator",
+          "description": "Reviews reports and manages the daily quests presented to learners."
         }
       ]
     },
-    "mvpHeading": { "type": "text", "content": "MVP" },
+    "mvpHeading": { "type": "text", "content": "Current prototype" },
     "mvpItems": {
       "type": "table",
-      "title": "MVP scope",
-      "columns": [{ "key": "label", "title": "Item", "type": "text" }],
+      "title": "Prototype scope",
+      "columns": [{ "key": "label", "title": "Included capability", "type": "text" }],
       "rows": [
-        { "id": "mv1", "label": "3 practice modules" },
-        { "id": "mv2", "label": "18 achievements" },
-        { "id": "mv3", "label": "daily quests + streaks" },
-        { "id": "mv4", "label": "report hub + community review" },
-        { "id": "mv5", "label": "1 admin console" },
-        { "id": "mv6", "label": "server-scored, replay-proof ledger" }
+        { "id": "mv1", "label": "Three interactive practice modules" },
+        { "id": "mv2", "label": "Account-based progress, streaks, and achievements" },
+        { "id": "mv3", "label": "Daily quests and points" },
+        { "id": "mv4", "label": "Community reports with signals and notes" },
+        { "id": "mv5", "label": "Admin report review and quest management" }
       ]
     },
     "targetNote": {
       "type": "text",
-      "content": "First-year registered-user target — [fill in]. This is an assumption, not data."
+      "content": "Prototype scope only · no user, adoption, or impact targets are claimed."
     }
   }
 }

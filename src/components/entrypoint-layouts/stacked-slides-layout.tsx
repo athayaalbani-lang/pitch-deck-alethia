@@ -299,6 +299,7 @@ function StackedSlide({
   scaledWidth,
   scaledHeight,
   displayScale,
+  isFullscreen,
   componentMap,
 }: {
   face: FaceEntry;
@@ -307,6 +308,7 @@ function StackedSlide({
   scaledWidth: number;
   scaledHeight: number;
   displayScale: number;
+  isFullscreen: boolean;
   componentMap: Record<string, ComponentType>;
 }) {
   const { ref: mountRef, isIntersecting: isNearViewport } = useIntersection({
@@ -332,26 +334,58 @@ function StackedSlide({
       id={faceIdToHash(face.id)}
       data-face-id={face.id}
       className="stacked-slide-wrapper"
-      style={{ width: scaledWidth, height: scaledHeight, zIndex: 1 }}
+      style={{
+        width: isFullscreen ? "100vw" : scaledWidth,
+        height: isFullscreen ? "100dvh" : scaledHeight,
+        display: isFullscreen ? "grid" : undefined,
+        placeItems: isFullscreen ? "center" : undefined,
+        zIndex: 1,
+      }}
     >
-      <div
-        style={{
-          width: slideWidth,
-          height: slideHeight,
-          transform: `scale(${displayScale})`,
-          transformOrigin: "top left",
-        }}
-      >
-        {shouldMount && (
-          <DynamicFaceRender
-            faceId={face.id}
-            slideWidth={slideWidth}
-            slideHeight={slideHeight}
-            componentMap={componentMap}
-            isVisible={isVisible}
-          />
-        )}
-      </div>
+      {isFullscreen ? (
+        <div style={{ width: scaledWidth, height: scaledHeight, position: "relative" }}>
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: slideWidth,
+              height: slideHeight,
+              transform: `scale(${displayScale})`,
+              transformOrigin: "top left",
+            }}
+          >
+            {shouldMount && (
+              <DynamicFaceRender
+                faceId={face.id}
+                slideWidth={slideWidth}
+                slideHeight={slideHeight}
+                componentMap={componentMap}
+                isVisible={isVisible}
+              />
+            )}
+          </div>
+        </div>
+      ) : (
+        <div
+          style={{
+            width: slideWidth,
+            height: slideHeight,
+            transform: `scale(${displayScale})`,
+            transformOrigin: "top left",
+          }}
+        >
+          {shouldMount && (
+            <DynamicFaceRender
+              faceId={face.id}
+              slideWidth={slideWidth}
+              slideHeight={slideHeight}
+              componentMap={componentMap}
+              isVisible={isVisible}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -443,6 +477,7 @@ export function StackedSlidesLayout({
           scaledWidth={scaledWidth}
           scaledHeight={scaledHeight}
           displayScale={displayScale}
+          isFullscreen={slidesDisplay === "FULLSCREEN"}
           componentMap={componentMap}
         />
       ))}

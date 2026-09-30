@@ -10,15 +10,15 @@
         { "key": "progress", "title": "Progress %", "type": "text" }
       ],
       "rows": [
-        { "id": "s1", "label": "Points", "figure": "320", "caption": "30 to next level", "progress": "91" },
-        { "id": "s2", "label": "Level", "figure": "3 · Investigator", "caption": "toward level 4", "progress": "64" },
-        { "id": "s3", "label": "Modules", "figure": "2/3", "caption": "66% complete", "progress": "66" },
-        { "id": "s4", "label": "Reports", "figure": "1", "caption": "awaiting review", "progress": "20" }
+        { "id": "s1", "label": "Points", "figure": "—", "caption": "Earned through prototype activity", "progress": "0" },
+        { "id": "s2", "label": "Level", "figure": "—", "caption": "Based on account points", "progress": "0" },
+        { "id": "s3", "label": "Modules", "figure": "—", "caption": "Completion varies by learner", "progress": "0" },
+        { "id": "s4", "label": "Reports", "figure": "—", "caption": "Your report review status", "progress": "0" }
       ]
     },
     "streakHeading": { "type": "text", "content": "Consecutive days" },
-    "streakDays": { "type": "text", "content": "4" },
-    "streakLongest": { "type": "text", "content": "Longest: 7 days" },
+    "streakDays": { "type": "text", "content": "—" },
+    "streakLongest": { "type": "text", "content": "Personal activity" },
     "week": {
       "type": "table",
       "title": "Week strip",
@@ -27,31 +27,31 @@
         { "key": "done", "title": "Practised", "type": "boolean" }
       ],
       "rows": [
-        { "id": "d1", "day": "Mon", "done": true },
-        { "id": "d2", "day": "Tue", "done": true },
-        { "id": "d3", "day": "Wed", "done": true },
-        { "id": "d4", "day": "Thu", "done": true },
-        { "id": "d5", "day": "Fri", "done": true },
+        { "id": "d1", "day": "Mon", "done": false },
+        { "id": "d2", "day": "Tue", "done": false },
+        { "id": "d3", "day": "Wed", "done": false },
+        { "id": "d4", "day": "Thu", "done": false },
+        { "id": "d5", "day": "Fri", "done": false },
         { "id": "d6", "day": "Sat", "done": false },
         { "id": "d7", "day": "Sun", "done": false }
       ]
     },
-    "questHeading": { "type": "text", "content": "Daily quest" },
-    "questTitle": { "type": "text", "content": "Clear one phishing drill today" },
+    "questHeading": { "type": "text", "content": "Daily quests" },
+    "questTitle": { "type": "text", "content": "A short activity set by the Alethia team" },
     "questDetail": {
       "type": "text",
-      "content": "Assigned at 00:00 local. One completion per key, verified server-side."
+      "content": "The dashboard can show assigned quests and the points attached to them."
     },
-    "questReward": { "type": "text", "content": "+15 pts" },
-    "claimLabel": { "type": "text", "content": "Claim" },
-    "claimedLabel": { "type": "text", "content": "Claimed" },
+    "questReward": { "type": "text", "content": "Points" },
+    "claimLabel": { "type": "text", "content": "Quest panel" },
+    "claimedLabel": { "type": "text", "content": "Quest panel" },
     "retirementNotice": {
       "type": "text",
-      "content": "This quest was deactivated by an admin — its assignment was withdrawn"
+      "content": "Example dashboard layout · activity values depend on the signed-in learner."
     },
     "footer": {
       "type": "text",
-      "content": "One get_dashboard_state call feeds all four numbers. profiles.level is rewritten by a BEFORE INSERT OR UPDATE OF points trigger; the client cannot write that column."
+      "content": "Dashboard areas: points and level · daily activity · quests · published practice modules. Values are account-specific."
     }
   }
 }

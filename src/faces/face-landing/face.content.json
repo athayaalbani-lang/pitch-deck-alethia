@@ -1,69 +1,72 @@
 {
   "blocks": {
-    "badge": { "type": "text", "content": "01 // landing, login, register" },
-    "routeChip": { "type": "text", "content": "three entrances" },
-    "landingHeadline": { "type": "text", "content": "The State Of Being Hidden" },
-    "landingCta": { "type": "text", "content": "Start" },
+    "badge": { "type": "text", "content": "01 // landing and account access" },
+    "routeChip": { "type": "text", "content": "3D entry · 3 product areas" },
+    "landingHeadline": { "type": "text", "content": "A world that leads into practice." },
+    "landingCta": { "type": "text", "content": "Explore Alethia" },
     "isleChips": {
       "type": "table",
-      "title": "Isle annotations",
+      "title": "Landing areas",
       "columns": [
-        { "key": "label", "title": "Label", "type": "text" },
-        { "key": "value", "title": "Value", "type": "text" }
+        { "key": "label", "title": "Area", "type": "text" },
+        { "key": "value", "title": "Destination", "type": "text" }
       ],
       "rows": [
-        { "id": "i1", "label": "Server", "value": "progress" },
-        { "id": "i2", "label": "Desktop", "value": "simulation" },
-        { "id": "i3", "label": "Lens", "value": "report hub" }
+        { "id": "i1", "label": "Server island", "value": "Progress & streaks" },
+        { "id": "i2", "label": "Computer island", "value": "Practice modules" },
+        { "id": "i3", "label": "Lens island", "value": "Community reports" }
       ]
     },
     "authTabs": {
       "type": "table",
-      "title": "Auth tabs",
-      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "title": "Access options",
+      "columns": [{ "key": "label", "title": "Option", "type": "text" }],
       "rows": [
         { "id": "a1", "label": "Sign in" },
-        { "id": "a2", "label": "Register" }
+        { "id": "a2", "label": "Create account" }
       ]
     },
     "authFields": {
       "type": "table",
-      "title": "Auth fields",
+      "title": "Account form",
       "columns": [
-        { "key": "label", "title": "Label", "type": "text" },
-        { "key": "value", "title": "Value", "type": "text" }
+        { "key": "label", "title": "Field", "type": "text" },
+        { "key": "value", "title": "Example", "type": "text" }
       ],
       "rows": [
-        { "id": "af1", "label": "Username", "value": "operator_04" },
-        { "id": "af2", "label": "Password", "value": "••••••••••••" }
+        { "id": "af1", "label": "Username or email", "value": "Enter your account" },
+        { "id": "af2", "label": "Username", "value": "Choose a username" },
+        { "id": "af3", "label": "Email", "value": "Enter your email" },
+        { "id": "af4", "label": "Password", "value": "••••••••" },
+        { "id": "af5", "label": "Confirm password", "value": "••••••••" }
       ]
     },
-    "authActionSignIn": { "type": "text", "content": "Enter the console" },
-    "authActionRegister": { "type": "text", "content": "Create an operator" },
-    "specHeading": { "type": "text", "content": "Access spec" },
+    "authActionSignIn": { "type": "text", "content": "Sign in to practise" },
+    "authActionRegister": { "type": "text", "content": "Create an account" },
+    "specHeading": { "type": "text", "content": "What the entry flow does" },
     "spec": {
       "type": "table",
-      "title": "Security spec",
+      "title": "Entry flow",
       "columns": [
-        { "key": "key", "title": "Key", "type": "text" },
-        { "key": "value", "title": "Value", "type": "text" }
+        { "key": "key", "title": "Feature", "type": "text" },
+        { "key": "value", "title": "Prototype behavior", "type": "text" }
       ],
       "rows": [
-        { "id": "sp1", "key": "Primary store", "value": "Supabase Auth" },
-        { "id": "sp2", "key": "Fallback hash", "value": "PBKDF2-SHA256" },
-        { "id": "sp3", "key": "Work factor", "value": "310.000 iterations" },
-        { "id": "sp4", "key": "Legacy rows", "value": "single-round SHA-256, upgraded on login" },
-        { "id": "sp5", "key": "Session", "value": "cookie-scoped, 5 routes guarded" }
+        { "id": "sp1", "key": "Landing", "value": "3D island journey to product areas" },
+        { "id": "sp2", "key": "Access", "value": "Sign in or create an account" },
+        { "id": "sp3", "key": "Practice", "value": "Continue to the learner dashboard" },
+        { "id": "sp4", "key": "Progress", "value": "Saved locally and synced to an account when available" },
+        { "id": "sp5", "key": "Admin", "value": "Separate administrator sign-in" }
       ]
     },
     "claims": {
       "type": "table",
-      "title": "Bottom claims",
-      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "title": "Product entry points",
+      "columns": [{ "key": "label", "title": "Entry", "type": "text" }],
       "rows": [
-        { "id": "c1", "label": "No real data" },
-        { "id": "c2", "label": "Three entrances" },
-        { "id": "c3", "label": "Five routes require a session" }
+        { "id": "c1", "label": "3D landing journey" },
+        { "id": "c2", "label": "Learner account access" },
+        { "id": "c3", "label": "Protected learner areas" }
       ]
     }
   }

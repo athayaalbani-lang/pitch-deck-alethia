@@ -1,85 +1,77 @@
 {
   "blocks": {
-    "title": { "type": "text", "content": "Profile Page — Your Dossier, Your Controls" },
+    "title": { "type": "text", "content": "Your Profile — Progress, Activity, and Account" },
     "routeChip": { "type": "text", "content": "/profile" },
-
     "card1": {
       "type": "object",
       "title": "IDENTITY",
-      "label": { "type": "text", "content": "callsign" },
-      "callSign": { "type": "text", "content": "nightwatch" },
-      "bioLabel": { "type": "text", "content": "bio" },
-      "bio": { "type": "text", "content": "Threat triage · IDN" },
-      "levelLabel": { "type": "text", "content": "level + role" },
-      "level": { "type": "text", "content": "LVL 07 · ANALYST" },
-      "gridLabel": { "type": "text", "content": "18 weeks" },
-      "badgesLabel": { "type": "text", "content": "4 badge slots" }
+      "label": { "type": "text", "content": "username" },
+      "callSign": { "type": "text", "content": "Your account" },
+      "bioLabel": { "type": "text", "content": "profile" },
+      "bio": { "type": "text", "content": "Optional learner details" },
+      "levelLabel": { "type": "text", "content": "level" },
+      "level": { "type": "text", "content": "Account-specific" },
+      "gridLabel": { "type": "text", "content": "report activity · 18 weeks" },
+      "badgesLabel": { "type": "text", "content": "4 badge display slots" }
     },
-
     "card2": {
       "type": "object",
-      "title": "PROGRESSION",
-      "masteryLabel": { "type": "text", "content": "mastery rail" },
+      "title": "PROGRESS",
+      "masteryLabel": { "type": "text", "content": "learning record" },
       "pointsLabel": { "type": "text", "content": "points" },
-      "points": { "type": "text", "content": "1,240" },
-      "authoritative": { "type": "text", "content": "server-authoritative" },
-      "modulesLabel": { "type": "text", "content": "modules" },
-      "modules": { "type": "text", "content": "9 / 12" },
-      "streakLabel": { "type": "text", "content": "streak" },
-      "streak": { "type": "text", "content": "21d" }
+      "points": { "type": "text", "content": "—" },
+      "authoritative": { "type": "text", "content": "Values vary by account" },
+      "modulesLabel": { "type": "text", "content": "modules completed" },
+      "modules": { "type": "text", "content": "— / 3" },
+      "streakLabel": { "type": "text", "content": "daily streak" },
+      "streak": { "type": "text", "content": "—" }
     },
-
     "card3": {
       "type": "object",
-      "title": "OUTPUT",
-      "habitsLabel": { "type": "text", "content": "report habits" },
-      "latestLabel": { "type": "text", "content": "latest 5" },
+      "title": "ACTIVITY",
+      "habitsLabel": { "type": "text", "content": "practice modules" },
+      "latestLabel": { "type": "text", "content": "community reports" },
       "signalLabel": { "type": "text", "content": "signal" },
       "habits": {
         "type": "table",
-        "title": "Per-module report habits",
-        "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+        "title": "Practice modules",
+        "columns": [{ "key": "label", "title": "Module", "type": "text" }],
         "rows": [
-          { "id": "h1", "label": "Phishing" },
-          { "id": "h2", "label": "Impersonation" },
-          { "id": "h3", "label": "Investment" },
-          { "id": "h4", "label": "Fake call" }
+          { "id": "h1", "label": "Courier SMS phishing" },
+          { "id": "h2", "label": "Marketplace social engineering" },
+          { "id": "h3", "label": "Risky document analysis" }
         ]
       },
       "reports": {
         "type": "table",
-        "title": "Latest reports",
-        "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+        "title": "Your reports",
+        "columns": [{ "key": "label", "title": "Activity", "type": "text" }],
         "rows": [
-          { "id": "r1", "label": "INV-4471" },
-          { "id": "r2", "label": "INV-4468" },
-          { "id": "r3", "label": "INV-4462" },
-          { "id": "r4", "label": "INV-4455" },
-          { "id": "r5", "label": "INV-4449" }
+          { "id": "r1", "label": "Your submitted reports" },
+          { "id": "r2", "label": "Your investigation notes" },
+          { "id": "r3", "label": "Your report activity" }
         ]
       }
     },
-
     "card4": {
       "type": "object",
       "title": "ACCOUNT",
       "userLabel": { "type": "text", "content": "username" },
-      "username": { "type": "text", "content": "nightwatch" },
+      "username": { "type": "text", "content": "Account-specific" },
       "mailLabel": { "type": "text", "content": "email" },
-      "mail": { "type": "text", "content": "n•••@proton.me" },
-      "authLabel": { "type": "text", "content": "auth" },
-      "auth": { "type": "text", "content": "2FA ACTIVE" },
-      "edit": { "type": "text", "content": "Edit" },
+      "mail": { "type": "text", "content": "Account-specific" },
+      "authLabel": { "type": "text", "content": "access" },
+      "auth": { "type": "text", "content": "Sign in to manage" },
+      "edit": { "type": "text", "content": "Edit profile" },
       "signOut": { "type": "text", "content": "Sign out" }
     },
-
     "footer": {
       "type": "object",
       "editRoute": { "type": "text", "content": "/profile/edit" },
-      "editList": { "type": "text", "content": "avatar · username · password · socials" },
+      "editList": { "type": "text", "content": "avatar · username · password · social links" },
       "publicRoute": { "type": "text", "content": "/profile/[username]" },
-      "publicList": { "type": "text", "content": "shared dossier" },
-      "pii": { "type": "text", "content": "PII never exposed" }
+      "publicList": { "type": "text", "content": "selected profile details · reports · investigations" },
+      "pii": { "type": "text", "content": "Public profile shows a limited selection" }
     }
   }
 }

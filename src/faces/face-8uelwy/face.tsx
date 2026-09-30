@@ -1,230 +1,87 @@
-import React, { useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
-import { blocks } from "./face.content.json";
-import { Atmosphere } from "@/components/ui/atmosphere";
-import { Overline, Reveal, Ring } from "@/components/ui/8bit";
-import { Capsule } from "@/components/ui/sbs";
-import { LevelSprites } from "@/components/ui/pixel-art";
-import { TextContent } from "@/components/ui/text-content";
+import React from "react";
+import { AlethiaScreen, ProductButton, ProductPageHeader, ProductPanel, ProductPill } from "@/components/ui/alethia-screen";
 
-const MONO = "font-grotesk uppercase tracking-[0.18em]";
-
-const NOTES = [
-  { t: "09:14", v: "Sender domain registered 3 days ago" },
-  { t: "09:19", v: "Link host differs from display host" },
-  { t: "09:31", v: "Confirmed against source" },
+const sampleReports = [
+  { title: "Example · Delivery message asks for a fee", meta: "SMS · phishing pattern", state: "Queued for review", tone: "warning" as const },
+  { title: "Example · Marketplace seller moves chat off-platform", meta: "Marketplace · social engineering", state: "Reviewed", tone: "signal" as const },
+  { title: "Example · Unexpected document attachment", meta: "Email · risky file", state: "Queued for review", tone: "warning" as const },
 ];
 
 export default function ReportHubFace() {
-  const root = useRef<HTMLDivElement>(null);
-  const inView = useInView(root, { once: true, amount: 0.25 });
-  const [step, setStep] = useState(0);
-  const [verdict, setVerdict] = useState<"valid" | "invalid" | null>(null);
-  const [revealed, setRevealed] = useState(false);
-
-  const steps = blocks.steps.rows;
-  const current = steps[step];
-  const validPct = verdict === "valid" ? 78 : verdict === "invalid" ? 22 : 50;
-
-
   return (
-    <div ref={root} className="w-full h-full font-body">
-      <Atmosphere ghost={current.step} ring="bottom-right">
-        <div className="w-full h-full flex flex-col @xl:flex-row">
-          {/* LEFT — oversized index + title */}
-          <div className="@xl:w-[34%] shrink-0 border-b @xl:border-b-0 @xl:border-r border-[var(--line)] px-6 @xl:px-14 py-5 @xl:py-10 flex flex-col">
-            <div className="flex items-center gap-3">
-              <Ring size={20} thickness={0.4} color="var(--cyan)" />
-              <Overline>
-                <TextContent content={blocks.label.content} data-content-keys={["label"]} />
-              </Overline>
-            </div>
-
-            {/* huge step number */}
-            <div className="mt-auto pt-4 @xl:pt-0">
-              <Reveal shown={inView} key={current.step}>
-                <div className="font-condensed font-bold text-[var(--cyan)] text-[76px] @xl:text-[190px] leading-[0.78] tracking-[-0.03em]">
-                  {current.step}
-                </div>
-              </Reveal>
-              <Reveal shown={inView} delay={120}>
-                <TextContent
-                  content={blocks.title.content}
-                  data-content-keys={["title"]}
-                  className="font-condensed font-semibold text-white text-[22px] @xl:text-[42px] leading-[1.0] tracking-[-0.01em] mt-3 @xl:mt-5"
-                />
-              </Reveal>
-            </div>
+    <AlethiaScreen active="reports" footer="ALETHIA · COMMUNITY REPORTS">
+      <div className="flex h-full min-h-0 flex-col gap-3 @xl:gap-5">
+        <ProductPageHeader
+          title="Community reports"
+          description="Browse reports, share a suspicious pattern, and review the context contributed by the community."
+          action={<ProductButton>Add a report</ProductButton>}
+        />
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-[#263544] pb-2 @xl:pb-4">
+          <div className="flex items-center gap-1.5 @xl:gap-2">
+            <ProductPill tone="signal">All reports</ProductPill><ProductPill>My reports</ProductPill>
           </div>
-
-          {/* RIGHT — the moving part */}
-          <div className="flex-1 min-w-0 flex flex-col">
-            {/* Step selector: the four capsules from the reference map. */}
-            <div className="flex flex-wrap items-center gap-2 @xl:gap-4 px-6 @xl:px-14 pt-5 @xl:pt-9">
-              {steps.map((s, i) => (
-                <Capsule
-                  key={s.id}
-                  size="md"
-                  tilt={i % 2 === 0 ? -2.5 : 2}
-                  dimmed={step !== i}
-                  onClick={() => {
-                    setStep(i);
-                    setVerdict(null);
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")} · {s.verb}
-                </Capsule>
-              ))}
-
-              {/* This slide's verdict line is "Rank follows the ledger", so the
-                  ladder gets represented. Parked at the end of the selector row
-                  where there was dead space. */}
-              <motion.div
-                className="ml-auto"
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <LevelSprites size={56} gap={10} />
-              </motion.div>
-            </div>
-
-            {/* headline + stage as one centred block */}
-            <div className="flex-1 min-h-0 flex flex-col justify-center gap-6 @xl:gap-12 px-6 @xl:px-14 py-6 @xl:py-10">
-              <motion.div
-                key={current.id}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
-              >
-                <TextContent
-                  content={current.title}
-                  data-content-keys={[`steps.rows.${step}.title`]}
-                  className="font-condensed font-semibold text-white text-[28px] @xl:text-[68px] leading-[0.96] tracking-[-0.02em]"
-                />
-                <TextContent
-                  content={current.line}
-                  data-content-keys={[`steps.rows.${step}.line`]}
-                  className="font-grotesk text-[var(--muted)] text-[12px] @xl:text-[21px] mt-2 @xl:mt-5"
-                />
-              </motion.div>
-
-              {/* the interactive stage */}
-              <div className="flex flex-col gap-4 @xl:gap-7">
-              {step === 0 && (
-                <div className="flex flex-col gap-4 @xl:gap-7">
-                  <div className="flex h-8 @xl:h-16 overflow-hidden">
-                    <motion.div
-                      className="bg-[var(--cyan)]"
-                      animate={{ width: revealed ? "30%" : "18%" }}
-                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                    <div className="flex-1 bg-[var(--navy-3)]" />
-                  </div>
-                  <div className="flex items-center justify-between gap-4">
-                    <Capsule size="sm" tilt={-1.5} glow={false}>
-                      Public · signal + evidence
-                    </Capsule>
-                    <Capsule
-                      size="sm"
-                      tilt={1.5}
-                      onClick={() => setRevealed((r) => !r)}
-                    >
-                      {revealed ? "Seal it" : "Reveal name"}
-                    </Capsule>
-                  </div>
-                </div>
-              )}
-
-              {step === 1 && (
-                <div className="flex flex-col gap-4 @xl:gap-7">
-                  <div className="flex h-8 @xl:h-16 overflow-hidden">
-                    <motion.div
-                      className="bg-[var(--cyan)]"
-                      animate={{ width: `${validPct}%` }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                    <div className="flex-1 bg-[var(--navy-3)]" />
-                  </div>
-                  <div className="flex items-center gap-3 @xl:gap-6">
-                    {["valid", "invalid"].map((v, i) => (
-                      <Capsule
-                        key={v}
-                        size="md"
-                        tilt={i === 0 ? -2 : 2}
-                        dimmed={verdict !== v}
-                        glow
-                        onClick={() => setVerdict(v as "valid" | "invalid")}
-                      >
-                        {blocks.verdict.rows[i].label}
-                      </Capsule>
-                    ))}
-                    <span
-                      className={`${MONO} text-[var(--steel)] text-[9px] @xl:text-[16px] tabular-nums w-[56px] @xl:w-[92px] text-right`}
-                    >
-                      {validPct}%
-                    </span>
-                  </div>
-                </div>
-              )}
-
-              {step === 2 && (
-                <div className="flex flex-col">
-                  {NOTES.map((n, i) => (
-                    <motion.div
-                      key={n.t}
-                      initial={{ opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.35, delay: i * 0.09 }}
-                      className="flex items-baseline gap-3 @xl:gap-10 border-b border-[var(--line)] py-3 @xl:py-6"
-                    >
-                      <span
-                        className={`${MONO} text-[var(--cyan)] text-[9px] @xl:text-[16px] tabular-nums`}
-                      >
-                        {n.t}
-                      </span>
-                      <span
-                        className={`${MONO} text-[var(--body)] text-[9px] @xl:text-[20px] truncate`}
-                      >
-                        {n.v}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-
-              {step === 3 && (
-                <div className="flex flex-col gap-4 @xl:gap-7">
-                  <div className="flex gap-2 @xl:gap-4">
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <motion.div
-                        key={i}
-                        className="h-6 @xl:h-14 flex-1"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.4, delay: i * 0.08 }}
-                        style={{
-                          background: i <= 2 ? "var(--cyan)" : "var(--navy-3)",
-                          transformOrigin: "left",
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <div className="flex justify-between">
-                    <span className={`${MONO} text-[var(--cyan)] text-[9px] @xl:text-[17px]`}>
-                      Investigator · 320
-                    </span>
-                    <span className={`${MONO} text-[var(--steel)] text-[9px] @xl:text-[17px]`}>
-                      Guardian · 550
-                    </span>
-                  </div>
-                </div>
-              )}
-              </div>
-            </div>
+          <div className="flex items-center gap-1.5 @xl:gap-2">
+            <span className="mr-1 font-mono text-[6px] @xl:text-[9px] uppercase tracking-[.1em] text-[#8191a1]">Sort</span>
+            <ProductPill tone="signal">Top</ProductPill><ProductPill>Newest</ProductPill><ProductPill>Oldest</ProductPill>
           </div>
         </div>
-      </Atmosphere>
-    </div>
+
+        <div className="grid min-h-0 flex-1 gap-3 @xl:grid-cols-[1.05fr_.95fr] @xl:gap-5">
+          <ProductPanel className="flex min-h-0 flex-col">
+            <div className="mb-2 @xl:mb-4 flex items-center justify-between gap-3">
+              <h2 className="font-mono text-[8px] @xl:text-[11px] font-bold uppercase tracking-[.14em] text-[#a6e86b]">Report feed</h2>
+              <ProductPill>Illustrative examples</ProductPill>
+            </div>
+            <div className="flex min-h-0 flex-1 flex-col divide-y divide-[#263544] overflow-hidden border-y border-[#263544]">
+              {sampleReports.map((report, index) => (
+                <article className={`flex min-h-0 flex-1 flex-col justify-center px-2 py-1.5 @xl:px-4 @xl:py-3 ${index === 0 ? "border-l-2 border-l-[#a6e86b] bg-[#a6e86b]/[.035]" : "border-l-2 border-l-transparent"}`} key={report.title}>
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-[8px] @xl:text-sm font-semibold leading-snug">{report.title}</h3>
+                    <ProductPill tone={report.tone}>{report.state}</ProductPill>
+                  </div>
+                  <div className="mt-1.5 @xl:mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[6px] @xl:text-[9px] text-[#91a0af]">
+                    <span>{report.meta}</span><span>·</span><span>Contributor username shown</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p className="mt-2 @xl:mt-3 font-mono text-[6px] @xl:text-[9px] text-[#8191a1]">Titles and report rows above are examples, not live community data.</p>
+          </ProductPanel>
+
+          <ProductPanel className="flex min-h-0 flex-col">
+            <div className="flex items-start justify-between gap-3 border-b border-[#263544] pb-2 @xl:pb-4">
+              <div>
+                <p className="font-mono text-[6px] @xl:text-[9px] uppercase tracking-[.12em] text-[#a6e86b]">Illustrative report detail</p>
+                <h2 className="mt-1 text-[10px] @xl:text-lg font-bold">Delivery message asks for a fee</h2>
+              </div>
+              <ProductPill tone="warning">Queued</ProductPill>
+            </div>
+            <div className="grid flex-1 grid-cols-2 gap-2 @xl:gap-3 py-2 @xl:py-4">
+              <div className="border border-[#263544] bg-[#0b1420] p-2 @xl:p-4">
+                <p className="font-mono text-[6px] @xl:text-[9px] uppercase text-[#8191a1]">Channel</p>
+                <p className="mt-1 text-[8px] @xl:text-sm">SMS message</p>
+              </div>
+              <div className="border border-[#263544] bg-[#0b1420] p-2 @xl:p-4">
+                <p className="font-mono text-[6px] @xl:text-[9px] uppercase text-[#8191a1]">Pattern</p>
+                <p className="mt-1 text-[8px] @xl:text-sm">Urgent payment request</p>
+              </div>
+              <div className="col-span-2 border border-[#263544] bg-[#0b1420] p-2 @xl:p-4">
+                <p className="font-mono text-[6px] @xl:text-[9px] uppercase text-[#8191a1]">Report context</p>
+                <p className="mt-1 text-[7px] @xl:text-xs leading-relaxed text-[#d1dae2]">Example only: inspect the sender and link, then verify through the courier's official channel before responding.</p>
+              </div>
+            </div>
+            <div className="border-t border-[#263544] pt-2 @xl:pt-4">
+              <div className="flex items-center justify-between gap-2">
+                <p className="font-mono text-[6px] @xl:text-[9px] uppercase tracking-[.1em] text-[#a6e86b]">Community context</p>
+                <ProductPill>Investigator verdict requires a reason</ProductPill>
+              </div>
+              <div className="mt-2 @xl:mt-3 flex flex-wrap items-center gap-2">
+                <ProductPill>Signal report</ProductPill><ProductPill>Valid / Invalid</ProductPill><ProductPill>Investigation note</ProductPill>
+              </div>
+            </div>
+          </ProductPanel>
+        </div>
+      </div>
+    </AlethiaScreen>
   );
 }

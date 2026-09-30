@@ -1,52 +1,52 @@
 {
   "blocks": {
-    "label": { "type": "text", "content": "Practice insights" },
-    "title": { "type": "text", "content": "The ledger<br>does not lie" },
-    "caption": { "type": "text", "content": "No self-reporting" },
+    "label": { "type": "text", "content": "Learning insights" },
+    "title": { "type": "text", "content": "Practice progress, made visible." },
+    "caption": { "type": "text", "content": "Account-specific record" },
     "scoreExplainer": {
       "type": "text",
-      "content": "Every point is scored by the server from what you actually flagged — right or wrong. Nothing you type about yourself counts."
+      "content": "The prototype brings together module outcomes, points, quests, and achievements. Values vary by learner account."
     },
-    "levelsHeading": { "type": "text", "content": "Rank · points needed" },
-    "statesHeading": { "type": "text", "content": "Skill score · out of 100" },
+    "levelsHeading": { "type": "text", "content": "Learner levels" },
+    "statesHeading": { "type": "text", "content": "Practice outcomes" },
     "statesExplainer": {
       "type": "text",
-      "content": "Familiar = spotted on sight. Skilled = confirmed with evidence. Needs practice = missed or overturned."
+      "content": "Familiar, skilled, and needs practice are feedback labels in the learner record—not a certification."
     },
-    "attemptHeading": { "type": "text", "content": "Latest attempt" },
+    "attemptHeading": { "type": "text", "content": "Latest module activity" },
     "attemptExplainer": {
       "type": "text",
-      "content": "One run through the module, scored automatically. Replay-proof — the server keeps the first result."
+      "content": "Module outcomes are recorded as part of progress when available. This illustration contains no learner results."
     },
     "levels": {
       "type": "table",
-      "title": "levels",
+      "title": "Learner levels",
       "columns": [
-        { "key": "label", "title": "Label", "type": "text" },
-        { "key": "value", "title": "Value", "type": "text" }
+        { "key": "label", "title": "Level", "type": "text" },
+        { "key": "value", "title": "Points", "type": "text" }
       ],
       "rows": [
-        { "id": "a1", "label": "Recruit", "value": "0" },
-        { "id": "a2", "label": "Analyst", "value": "60" },
-        { "id": "a3", "label": "Investigator", "value": "150" },
-        { "id": "a4", "label": "Caretaker", "value": "300" },
-        { "id": "a5", "label": "Signal Guardian", "value": "550" }
+        { "id": "a1", "label": "Novice", "value": "—" },
+        { "id": "a2", "label": "Analyst", "value": "—" },
+        { "id": "a3", "label": "Investigator", "value": "—" },
+        { "id": "a4", "label": "Caretaker", "value": "—" },
+        { "id": "a5", "label": "Signal Guardian", "value": "—" }
       ]
     },
     "states": {
       "type": "table",
-      "title": "states",
+      "title": "Practice outcome labels",
       "columns": [
         { "key": "label", "title": "Label", "type": "text" },
-        { "key": "value", "title": "Value", "type": "text" }
+        { "key": "value", "title": "Example value", "type": "text" }
       ],
       "rows": [
-        { "id": "b1", "label": "Familiar", "value": "33" },
-        { "id": "b2", "label": "Skilled", "value": "66" },
-        { "id": "b3", "label": "Needs practice", "value": "25" }
+        { "id": "b1", "label": "Familiar", "value": "0" },
+        { "id": "b2", "label": "Skilled", "value": "0" },
+        { "id": "b3", "label": "Needs practice", "value": "0" }
       ]
     },
-    "you": { "type": "text", "content": "You" },
+    "you": { "type": "text", "content": "Current" },
     "next": { "type": "text", "content": "Next" }
   }
 }

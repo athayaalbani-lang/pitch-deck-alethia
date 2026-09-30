@@ -6,11 +6,11 @@
     },
     "statusLabel": {
       "type": "text",
-      "content": "STATUS // SESSION_ACTIVE"
+      "content": "STATUS // PROTOTYPE OVERVIEW"
     },
     "reservedLabel": {
       "type": "text",
-      "content": "[ RESERVED FOR LIVE DEMO / PRESENTATION CANVAS ]"
+      "content": "ALETHIA · SAFE PRACTICE PROTOTYPE"
     },
     "wordmark": {
       "type": "text",
@@ -18,7 +18,7 @@
     },
     "tagline": {
       "type": "text",
-      "content": "Practice spotting social engineering before it spots you."
+      "content": "Practise spotting social engineering before it spots you."
     },
     "recapTiles": {
       "type": "table",
@@ -45,7 +45,7 @@
           "id": "t1",
           "num": "01",
           "label": "LANDING & ACCESS",
-          "targetFaceId": "face-uqqcri"
+          "targetFaceId": "face-landing"
         },
         {
           "id": "t2",
@@ -87,15 +87,15 @@
     },
     "closingStatement": {
       "type": "text",
-      "content": "Rp 9,1 trillion lost. Four percent recovered. The gap is not knowledge — it is practice."
+      "content": "Practise the decision. Review your progress. Learn from community reports."
     },
     "callToAction": {
       "type": "text",
-      "content": "Every score you saw today came from the server. Come prove it yourself."
+      "content": "Explore the current prototype: practise, review progress, and learn from community reports."
     },
     "qrPlaceholderLabel": {
       "type": "text",
-      "content": "[ LIVE DEMO / SCAN TO PROVE ]"
+      "content": "SAFE SIMULATIONS · LEARNER PROGRESS · COMMUNITY REPORTS"
     }
   }
 }

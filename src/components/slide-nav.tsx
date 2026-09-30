@@ -41,7 +41,6 @@ export function SlideNav() {
   const total = Number(rawTotal) || 0;
   const names = namesRaw ? namesRaw.split("|") : [];
   const currentName = names[index] ?? "";
-  const nextName = names[index + 1] ?? "";
   const atStart = index <= 0;
   const atEnd = total === 0 || index >= total - 1;
 
@@ -142,12 +141,6 @@ export function SlideNav() {
                 style={{ color: atEnd ? "var(--steel)" : "rgba(0,0,0,0.55)" }}
               >
                 {atEnd ? "End" : "Next"}
-              </span>
-              <span
-                className={`${MONO} mt-1 max-w-[90px] truncate text-[9px] sm:max-w-none sm:text-[11px]`}
-                style={{ color: atEnd ? "var(--steel)" : "var(--ink-0)" }}
-              >
-                {nextName || "—"}
               </span>
             </span>
             <span

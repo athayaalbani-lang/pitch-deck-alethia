@@ -1,128 +1,92 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "motion/react";
-import { TextContent } from "@/components/ui/text-content";
-import { MaskReveal } from "@/components/ui/motion";
 import { Atmosphere } from "@/components/ui/atmosphere";
-import { Capsule } from "@/components/ui/sbs";
+import { MaskReveal } from "@/components/ui/motion";
 import { navigateTo } from "@/utils/face-navigation";
-import { blocks } from "./face.content.json";
-import { controls } from "./face.controls.json";
 import { NodeGraph } from "./components/node-graph";
 
-const MONO = "font-grotesk uppercase tracking-[0.18em]";
+const destinations = [
+  { number: "01", label: "Practice modules", faceId: "face-1ecenb" },
+  { number: "02", label: "Community reports", faceId: "face-8uelwy" },
+  { number: "03", label: "Practice insights", faceId: "face-9sa50d" },
+];
 
 export default function OpeningFace() {
   const root = useRef<HTMLDivElement>(null);
   const inView = useInView(root, { once: true, amount: 0.3 });
-  const showGraph = controls.showNodeRender?.value ?? true;
 
   return (
-    <div ref={root} className="w-full h-full font-body">
-      <Atmosphere ghost="A" ring="bottom-right" bokeh={20}>
-      <div className="w-full h-full flex flex-col">
-        <div className="flex-1 min-h-0 flex flex-col @xl:flex-row">
-        {/* LEFT 60% */}
-        <div className="@xl:w-[60%] flex flex-col justify-center px-5 py-5 @xl:px-16 @xl:py-12 gap-3 @xl:gap-8 border-b @xl:border-b-0 @xl:border-r border-[var(--line)]">
-          <MaskReveal>
-          <motion.div
-            initial={{ opacity: 0, filter: "blur(12px)", y: 18 }}
-            animate={inView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
-            transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
-          >
-            <TextContent
-              content={blocks.wordmark.content}
-              data-content-keys={["wordmark"]}
-              className="font-condensed font-bold text-white text-5xl @xl:text-[168px] leading-[0.82] tracking-[-0.02em] break-words"
-            />
-            <motion.div
-              className="h-px w-full bg-[var(--cyan)] mt-3 @xl:mt-6"
-              initial={{ scaleX: 0 }}
-              animate={inView ? { scaleX: 1 } : {}}
-              transition={{ duration: 1, delay: 0.2, ease: [0.65, 0, 0.35, 1] }}
-              style={{ transformOrigin: "left" }}
-            />
-            <TextContent
-              content={blocks.tagline.content}
-              data-content-keys={["tagline"]}
-              className="font-grotesk text-[var(--ice)] text-base @xl:text-[30px] mt-3 @xl:mt-6 max-w-[900px]"
-            />
-          </motion.div>
-          </MaskReveal>
+    <div ref={root} className="h-full w-full font-body text-[var(--ice)]">
+      <Atmosphere ghost="A" ring="bottom-right" bokeh={16}>
+        <div className="relative flex h-full w-full flex-col px-5 py-4 @xl:px-14 @xl:py-8">
+          <header className="flex shrink-0 items-center justify-between border-b border-[var(--line)] pb-3 @xl:pb-5">
+            <div className="flex items-center gap-3 @xl:gap-4">
+              <span className="grid h-8 w-8 @xl:h-12 @xl:w-12 place-items-center border border-[#a6e86b]/45 bg-[#a6e86b]/[.08] font-mono text-xs @xl:text-xl font-bold text-[#a6e86b] shadow-[0_0_24px_rgba(166,232,107,.12)]">A_</span>
+              <span className="font-mono text-[10px] @xl:text-sm font-bold tracking-[.22em]">ALETHIA</span>
+            </div>
+            <span className="font-mono text-[7px] @xl:text-[10px] uppercase tracking-[.16em] text-[var(--steel)]">Product walkthrough · Web prototype</span>
+          </header>
 
-          <div className="grid grid-cols-2 @xl:grid-cols-4 gap-2 @xl:gap-4">
-            {blocks.stats.rows.map((row, i) => (
-              <motion.div
-                key={row.id}
-                initial={{ opacity: 0, y: 16 }}
+          <main className="flex min-h-0 flex-1 flex-col @xl:flex-row @xl:items-center gap-5 @xl:gap-12 py-5 @xl:py-8">
+            <section className="flex min-h-0 flex-1 flex-col justify-center @xl:w-[56%] @xl:flex-none">
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.35 + i * 0.09 }}
-                className="border border-[var(--line)] px-3 py-2 @xl:px-5 @xl:py-5"
+                transition={{ duration: 0.5 }}
+                className="font-mono text-[7px] @xl:text-[11px] uppercase tracking-[.2em] text-[#a6e86b]"
               >
-                <TextContent
-                  content={row.figure}
-                  data-content-keys={[`stats.rows.${i}.figure`]}
-                  className={`font-condensed font-bold text-[var(--cyan)] text-[24px] @xl:text-[52px] leading-none`}
-                />
-                <TextContent
-                  content={row.caption}
-                  data-content-keys={[`stats.rows.${i}.caption`]}
-                  className={`${MONO} text-[var(--muted)] text-[7px] @xl:text-[15px] mt-1 @xl:mt-3 leading-snug`}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+                A safe place to practise
+              </motion.p>
+              <MaskReveal>
+                <motion.h1
+                  initial={{ opacity: 0, filter: "blur(12px)", y: 18 }}
+                  animate={inView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
+                  transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1] }}
+                  className="mt-2 font-condensed text-[72px] @xl:text-[172px] font-bold leading-[.78] tracking-[-.055em] text-white"
+                >
+                  ALETHIA
+                </motion.h1>
+              </MaskReveal>
+              <div className="mt-5 @xl:mt-9 h-px w-full max-w-[880px] bg-gradient-to-r from-[#a6e86b] via-[#a6e86b]/30 to-transparent" />
+              <h2 className="mt-4 @xl:mt-7 max-w-[920px] font-heading text-[22px] @xl:text-[42px] font-semibold leading-[1.08] tracking-[-.035em] text-[var(--ice)]">
+                Learn the trick before it tricks you.
+              </h2>
+              <p className="mt-3 @xl:mt-5 max-w-[760px] text-[9px] @xl:text-[16px] leading-relaxed text-[var(--body)]">
+                Practise spotting social engineering in fictional scenarios, then review the clues behind each decision.
+              </p>
+              <button
+                type="button"
+                onClick={() => navigateTo({ faceId: "face-landing" })}
+                className="mt-5 @xl:mt-8 inline-flex w-fit items-center gap-4 border border-[#a6e86b] bg-[#a6e86b] px-4 py-2.5 @xl:px-6 @xl:py-4 font-mono text-[8px] @xl:text-[12px] font-bold uppercase tracking-[.08em] text-[#07101c] shadow-[0_0_30px_rgba(166,232,107,.12)] transition hover:bg-[#b7f27d]"
+              >
+                Explore the 3D landing <span aria-hidden="true">↗</span>
+              </button>
+            </section>
 
-        {/* RIGHT 40% */}
-        <div className="@xl:w-[40%] flex flex-col px-5 py-4 @xl:px-10 @xl:py-10 gap-3 @xl:gap-8 min-h-0">
-          {showGraph && (
-            <div className="hidden @xl:block flex-1 min-h-0">
+            <section className="min-h-0 flex-1 @xl:w-[44%] @xl:flex-none" aria-label="Alethia product areas">
               <NodeGraph
                 active={inView}
-                nodes={blocks.graphNodes.rows.map((r) => r.label)}
-                adminLabel={blocks.graphAdmin.content}
+                nodes={["Practice", "Progress", "Reports"]}
+                adminLabel="Admin tools"
               />
-            </div>
-          )}
-          <div className="flex flex-col">
-            {blocks.features.rows.map((row, i) => (
-              <motion.button
-                key={row.id}
-                type="button"
-                onClick={() => navigateTo({ faceId: row.faceId })}
-                initial={{ opacity: 0, x: 14 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.5 + i * 0.06 }}
-                className="group flex items-center gap-3 @xl:gap-5 py-1.5 @xl:py-2.5 border-b border-[var(--line)] text-left"
-              >
-                <TextContent
-                  content={row.num}
-                  data-content-keys={[`features.rows.${i}.num`]}
-                  className={`${MONO} text-[var(--cyan)] text-[9px] @xl:text-[19px]`}
-                />
-                <TextContent
-                  content={row.label}
-                  data-content-keys={[`features.rows.${i}.label`]}
-                  className={`${MONO} text-[var(--muted)] group-hover:text-white transition-colors text-[9px] @xl:text-[19px]`}
-                />
-              </motion.button>
-            ))}
-          </div>
-        </div>
-      </div>
+            </section>
+          </main>
 
-      {/* BOTTOM BAR */}
-      <div className="border-t border-[var(--line)] grid grid-cols-1 @xl:grid-cols-3">
-        {blocks.tags.rows.map((row, i) => (
-          <TextContent
-            key={row.id}
-            content={row.label}
-            data-content-keys={[`tags.rows.${i}.label`]}
-            className={`${MONO} text-[var(--ice)] text-[8px] @xl:text-[19px] px-5 @xl:px-10 py-2 @xl:py-5 border-t @xl:border-t-0 @xl:border-l first:border-t-0 first:@xl:border-l-0 border-[var(--line)]`}
-          />
-        ))}
-      </div>
-      </div>
+          <nav aria-label="Explore product screens" className="grid shrink-0 grid-cols-3 border-y border-[var(--line)]">
+            {destinations.map((item, index) => (
+              <button
+                key={item.number}
+                type="button"
+                onClick={() => navigateTo({ faceId: item.faceId })}
+                className={`group flex min-w-0 items-center gap-2 @xl:gap-4 px-2 py-2.5 @xl:px-6 @xl:py-4 text-left transition hover:bg-[#a6e86b]/[.04] ${index > 0 ? "border-l border-[var(--line)]" : ""}`}
+              >
+                <span className="font-mono text-[7px] @xl:text-[11px] text-[#a6e86b]">{item.number}</span>
+                <span className="truncate text-[7px] @xl:text-[13px] font-medium text-[var(--body)] group-hover:text-white">{item.label}</span>
+                <span className="ml-auto hidden @xl:block font-mono text-[11px] text-[var(--steel)] transition group-hover:translate-x-1 group-hover:text-[#a6e86b]">↗</span>
+              </button>
+            ))}
+          </nav>
+        </div>
       </Atmosphere>
     </div>
   );

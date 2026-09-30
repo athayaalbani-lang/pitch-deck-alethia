@@ -1,59 +1,29 @@
 {
   "blocks": {
-    "badge": { "type": "text", "content": "Architecture // differentiation" },
-    "title": { "type": "text", "content": "Why This Isn't Like The Others" },
-    "themHeader": { "type": "text", "content": "Them" },
-    "usHeader": { "type": "text", "content": "Alethia" },
+    "badge": { "type": "text", "content": "Product flow // from cue to choice" },
+    "title": { "type": "text", "content": "Built around the decision moment." },
+    "themHeader": { "type": "text", "content": "In the prototype" },
+    "usHeader": { "type": "text", "content": "Learner experience" },
     "rows": {
       "type": "table",
-      "title": "Comparison rows",
+      "title": "Learning flow",
       "columns": [
-        { "key": "label", "title": "Dimension", "type": "text" },
-        { "key": "them", "title": "Them", "type": "text" },
-        { "key": "us", "title": "Alethia", "type": "text" }
+        { "key": "label", "title": "Stage", "type": "text" },
+        { "key": "them", "title": "Prototype activity", "type": "text" },
+        { "key": "us", "title": "Learner sees", "type": "text" }
       ],
       "rows": [
-        {
-          "id": "r1",
-          "label": "Delivery",
-          "them": "video courses, awareness posters",
-          "us": "decision drills — you choose, under time pressure, and find out what you got wrong"
-        },
-        {
-          "id": "r2",
-          "label": "Trustworthy results",
-          "them": "the client reports its own score",
-          "us": "scores are written server-side; the browser cannot forge one"
-        },
-        {
-          "id": "r3",
-          "label": "Unlock rule",
-          "them": "a boolean flag in client state",
-          "us": "fails closed — if the server cannot confirm, it stays locked"
-        },
-        {
-          "id": "r4",
-          "label": "Replay",
-          "them": "submitting twice counts twice",
-          "us": "a keyed points ledger rejects a duplicated completion"
-        },
-        {
-          "id": "r5",
-          "label": "Privacy",
-          "them": "connect your account, enter real data, upload receipts",
-          "us": "nothing leaves the device — the exercise runs locally"
-        },
-        {
-          "id": "r6",
-          "label": "Reactivity",
-          "them": "a curriculum that never changes",
-          "us": "a retired quest disappears — assignments withdrawn"
-        }
+        { "id": "r1", "label": "Encounter", "them": "Open a simulated message or file", "us": "A safe scenario with fictional details" },
+        { "id": "r2", "label": "Inspect", "them": "Review sender, link, context, or file details", "us": "Clues and prompts to slow the decision down" },
+        { "id": "r3", "label": "Decide", "them": "Choose how to respond", "us": "Feedback tied to the choices in that module" },
+        { "id": "r4", "label": "Continue", "them": "Return to the guided module path", "us": "Completion and access progress on the account" },
+        { "id": "r5", "label": "Contribute", "them": "Submit or explore a community report", "us": "Report details, community signals, and notes" },
+        { "id": "r6", "label": "Review", "them": "Use the learner profile or admin tools", "us": "Personal learning record; report and quest controls for admins" }
       ]
     },
     "closing": {
       "type": "text",
-      "content": "A national hotline reached 4% recovery. Awareness was never the missing piece — <strong>practice is</strong>."
+      "content": "Alethia is a practice prototype: simulated scenarios, learner progress, and community reporting in one web experience."
     }
   }
 }

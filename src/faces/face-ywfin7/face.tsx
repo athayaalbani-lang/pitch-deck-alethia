@@ -1,140 +1,69 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { blocks } from "./face.content.json";
-import { controls } from "./face.controls.json";
-import { TextContent } from "@/components/ui/text-content";
-import { Icon } from "@/components/ui/icon";
+import React from "react";
+import { motion } from "motion/react";
 import { Atmosphere } from "@/components/ui/atmosphere";
-import { Capsule, RoundControl } from "@/components/ui/sbs";
 import { MaskReveal } from "@/components/ui/motion";
-import { Overline, Ring } from "@/components/ui/8bit";
 import { navigateTo } from "@/utils/face-navigation";
 
-const MONO = "font-grotesk uppercase tracking-[0.18em]";
+const nextSteps = [
+  { label: "Training modules", note: "Explore the guided practice path", faceId: "face-1ecenb" },
+  { label: "Community reports", note: "Review shared examples", faceId: "face-8uelwy" },
+  { label: "Practice insights", note: "See account-based progress", faceId: "face-9sa50d" },
+];
 
 export default function ClosingFace() {
-  const showQrBox = controls.showQrBox?.value ?? true;
-  const root = useRef<HTMLDivElement>(null);
-  const inView = useInView(root, { once: true, amount: 0.3 });
-
   return (
-    <div ref={root} className="w-full h-full font-body">
-      <Atmosphere ghost="GO" ring="center" bokeh={22}>
-        <div className="w-full h-full flex flex-col justify-between px-6 @xl:px-12 py-5 @xl:py-9 relative z-10">
-
-          {/* Top bar */}
-          <div className="flex items-center justify-between border-b border-[var(--hairline)] pb-3 @xl:pb-4">
+    <div className="h-full w-full font-body text-[var(--ice)]">
+      <Atmosphere ghost="GO" ring="center" bokeh={18}>
+        <div className="relative flex h-full w-full flex-col px-5 py-4 @xl:px-14 @xl:py-8">
+          <header className="flex shrink-0 items-center justify-between border-b border-[var(--line)] pb-3 @xl:pb-5">
             <div className="flex items-center gap-3 @xl:gap-4">
-              <Ring size={16} thickness={0.5} color="var(--cyan)" />
-              <TextContent
-                content={blocks.badge.content}
-                className={`${MONO} text-[var(--cyan)] text-[8px] @xl:text-sm`}
-                data-content-keys={["badge"]}
-              />
+              <span className="grid h-8 w-8 @xl:h-12 @xl:w-12 place-items-center border border-[#a6e86b]/45 bg-[#a6e86b]/[.08] font-mono text-xs @xl:text-xl font-bold text-[#a6e86b]">A_</span>
+              <span className="font-mono text-[10px] @xl:text-sm font-bold tracking-[.22em]">ALETHIA</span>
             </div>
-            <TextContent
-              content={blocks.statusLabel.content}
-              className={`${MONO} text-[var(--steel)] text-[8px] @xl:text-sm`}
-              data-content-keys={["statusLabel"]}
-            />
-          </div>
+            <span className="font-mono text-[7px] @xl:text-[10px] uppercase tracking-[.16em] text-[var(--steel)]">Current web prototype</span>
+          </header>
 
-          {/* Main */}
-          <div className="flex-1 flex flex-col items-center justify-center text-center my-3 @xl:my-5 w-full">
+          <main className="flex min-h-0 flex-1 flex-col items-center justify-center py-5 @xl:py-8 text-center">
             <MaskReveal>
-              <TextContent
-                content={blocks.wordmark.content}
-                className="font-condensed font-black text-[64px] @xl:text-[150px] leading-[0.84] tracking-[-0.02em] text-white uppercase"
-                data-content-keys={["wordmark"]}
-              />
+              <motion.h1
+                initial={{ opacity: 0, y: 18, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1] }}
+                className="font-condensed text-[68px] @xl:text-[160px] font-black leading-[.82] tracking-[-.05em] text-white"
+              >
+                ALETHIA
+              </motion.h1>
             </MaskReveal>
+            <p className="mt-4 @xl:mt-7 max-w-[1060px] font-heading text-[18px] @xl:text-[34px] font-medium leading-tight tracking-[-.025em] text-[var(--body)]">
+              A safe place to practise spotting social engineering.
+            </p>
+            <p className="mt-2 @xl:mt-4 font-mono text-[7px] @xl:text-[10px] uppercase tracking-[.14em] text-[#a6e86b]">
+              Fictional scenarios · Learner progress · Community reports
+            </p>
 
-            <TextContent
-              content={blocks.tagline.content}
-              className="font-grotesk text-[15px] @xl:text-[30px] text-[var(--body)] font-medium tracking-wide max-w-[1200px] mt-2 @xl:mt-4"
-              data-content-keys={["tagline"]}
-            />
+            <nav aria-label="Continue exploring Alethia" className="mt-6 @xl:mt-12 grid w-full max-w-[1440px] grid-cols-1 @xl:grid-cols-3 border-y border-[var(--line)] text-left">
+              {nextSteps.map((step, index) => (
+                <button
+                  key={step.faceId}
+                  type="button"
+                  onClick={() => navigateTo({ faceId: step.faceId })}
+                  className={`group flex items-center justify-between gap-4 px-3 py-3 @xl:px-7 @xl:py-6 text-left transition hover:bg-[#a6e86b]/[.04] ${index > 0 ? "border-t @xl:border-t-0 @xl:border-l border-[var(--line)]" : ""}`}
+                >
+                  <span>
+                    <span className="block font-mono text-[6px] @xl:text-[9px] uppercase tracking-[.16em] text-[#a6e86b]">0{index + 1}</span>
+                    <span className="mt-1 block text-[9px] @xl:text-[15px] font-semibold text-[var(--ice)]">{step.label}</span>
+                    <span className="mt-1 block text-[7px] @xl:text-[11px] text-[var(--steel)]">{step.note}</span>
+                  </span>
+                  <span className="font-mono text-sm @xl:text-lg text-[var(--steel)] transition group-hover:translate-x-1 group-hover:text-[#a6e86b]">↗</span>
+                </button>
+              ))}
+            </nav>
+          </main>
 
-            {/* Recap tiles as capsules, mirroring the reference hotspots. */}
-            <div className="w-full max-w-[1500px] mt-6 @xl:mt-10">
-              <div className="flex flex-wrap items-center justify-center gap-2.5 @xl:gap-5 mb-2.5 @xl:mb-4">
-                {blocks.recapTiles.rows.slice(0, 4).map((tile, idx) => (
-                  <Capsule
-                    key={tile.id}
-                    size="sm"
-                    tilt={idx % 2 === 0 ? -2 : 2}
-                    onClick={() => navigateTo({ faceId: tile.targetFaceId })}
-                  >
-                    <span className="flex items-center gap-2">
-                      <span>{tile.num}</span>
-                      <TextContent
-                        content={tile.label}
-                        data-content-keys={[`recapTiles.rows.${idx}.label`]}
-                      />
-                    </span>
-                  </Capsule>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-2.5 @xl:gap-5">
-                {blocks.recapTiles.rows.slice(4, 7).map((tile, idx) => (
-                  <Capsule
-                    key={tile.id}
-                    size="sm"
-                    tilt={idx % 2 === 0 ? 2 : -2}
-                    onClick={() => navigateTo({ faceId: tile.targetFaceId })}
-                  >
-                    <span className="flex items-center gap-2">
-                      <span>{tile.num}</span>
-                      <TextContent
-                        content={tile.label}
-                        data-content-keys={[`recapTiles.rows.${idx + 4}.label`]}
-                      />
-                    </span>
-                  </Capsule>
-                ))}
-              </div>
-            </div>
-
-            {/* Closing statement */}
-            <div className="mt-6 @xl:mt-10 max-w-[1300px] w-full">
-              <Capsule size="lg" tilt={-1}>
-                <TextContent
-                  content={blocks.closingStatement.content}
-                  data-content-keys={["closingStatement"]}
-                />
-              </Capsule>
-            </div>
-
-            <div className="flex items-center gap-2.5 @xl:gap-4 mt-5 @xl:mt-8">
-              <Ring size={18} thickness={0.5} color="var(--cyan)" />
-              <TextContent
-                content={blocks.callToAction.content}
-                className={`${MONO} text-[var(--cyan)] text-[9px] @xl:text-[19px] font-semibold`}
-                data-content-keys={["callToAction"]}
-              />
-            </div>
-          </div>
-
-          {/* Lower third */}
-          <div className="h-24 @xl:h-32 w-full flex items-center justify-center z-10 relative">
-            {showQrBox ? (
-              <div className="flex items-center gap-4 @xl:gap-6 text-[var(--steel)]">
-                <Icon name="qr-code" size={30} className="text-[var(--steel)]" />
-                <TextContent
-                  content={blocks.qrPlaceholderLabel.content}
-                  className={`${MONO} text-[8px] @xl:text-[15px]`}
-                  data-content-keys={["qrPlaceholderLabel"]}
-                />
-              </div>
-            ) : (
-              <TextContent
-                content={blocks.reservedLabel.content}
-                className={`${MONO} text-[var(--steel)] text-[8px] @xl:text-[15px]`}
-                data-content-keys={["reservedLabel"]}
-              />
-            )}
-          </div>
+          <footer className="flex shrink-0 items-center justify-between gap-3 border-t border-[var(--line)] pt-3 @xl:pt-5 font-mono text-[6px] @xl:text-[9px] uppercase tracking-[.1em] text-[var(--steel)]">
+            <span>Practice happens in a guided, fictional environment</span>
+            <span className="text-[#a6e86b]/80">ALETHIA · WEB PROTOTYPE</span>
+          </footer>
         </div>
       </Atmosphere>
     </div>

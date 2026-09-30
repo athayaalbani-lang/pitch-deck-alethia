@@ -1,7 +1,7 @@
 {
   "blocks": {
-    "badge": { "type": "text", "content": "03 // training path" },
-    "title": { "type": "text", "content": "Three Modules, One Path" },
+    "badge": { "type": "text", "content": "03 // practice modules" },
+    "title": { "type": "text", "content": "Three Scenarios, One Guided Path" },
     "lockIcon": { "type": "icon", "name": "lock" },
     "modules": {
       "type": "table",
@@ -19,31 +19,31 @@
         {
           "id": "m1",
           "index": "01",
-          "name": "SMS Phishing",
+          "name": "Courier SMS Phishing",
           "route": "/simulation/courier-sms",
-          "points": "20 pts",
-          "mechanic": "Incoming message; a safe versus risky call",
-          "chip": "Open",
+          "points": "Step 01",
+          "mechanic": "Inspect a fictional delivery message, verify, then choose a response",
+          "chip": "Available",
           "state": "open"
         },
         {
           "id": "m2",
           "index": "02",
-          "name": "Social Engineering",
+          "name": "Marketplace Social Engineering",
           "route": "/simulation/social-engineering",
-          "points": "30 pts",
-          "mechanic": "A person asks; you decide what to disclose",
-          "chip": "Locked",
+          "points": "Step 02",
+          "mechanic": "Combine contextual clues and choose a mitigation",
+          "chip": "Next in path",
           "state": "locked"
         },
         {
           "id": "m3",
           "index": "03",
-          "name": "Malicious Download",
+          "name": "Risky Document Analysis",
           "route": "/simulation/executable-file",
-          "points": "50 pts",
-          "mechanic": "An untrusted file; you decide whether it runs",
-          "chip": "Locked",
+          "points": "Step 03",
+          "mechanic": "Inspect file details, verify the source, then decide",
+          "chip": "Next in path",
           "state": "locked"
         }
       ]
@@ -58,18 +58,18 @@
       "rows": [
         {
           "id": "g1",
-          "key": "Access decided server-side",
-          "value": "get_verified_module_access — not a client flag"
+          "key": "Guided sequence",
+          "value": "Module access follows the learner's recorded progress"
         },
         {
           "id": "g2",
-          "key": "Fails closed",
-          "value": "if the server cannot confirm, it stays locked"
+          "key": "Three scenario types",
+          "value": "SMS · marketplace conversation · risky document"
         },
         {
           "id": "g3",
-          "key": "Replay rejected",
-          "value": "module:<id> ledger key — duplicates are refused"
+          "key": "Return and review",
+          "value": "Completed modules remain available to revisit"
         }
       ]
     }

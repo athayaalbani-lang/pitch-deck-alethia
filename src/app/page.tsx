@@ -32,7 +32,7 @@ export const componentMap = {
   "face-ywfin7": Faceywfin7Face,
 };
 
-export const projectConfig = {"layout":"STACKED","slidesDisplay":"CARDS","stackedOrientation":"HORIZONTAL","cardsBackgroundColor":"#080B10","cardsCorners":"SQUARE","mobileCanvas":"COMPACT","tokens":{"palette":[{"name":"--background","value":"#080B10"},{"name":"--panel","value":"#131A22"},{"name":"--border","value":"#1E2731"},{"name":"--cyan","value":"#A6E86B"},{"name":"--green","value":"#7ED957"},{"name":"--red","value":"#F0645B"},{"name":"--navy-0","value":"#080B10"},{"name":"--navy-1","value":"#0D1219"},{"name":"--navy-2","value":"#111820"},{"name":"--navy-3","value":"#161E27"},{"name":"--navy-4","value":"#1C2530"},{"name":"--line","value":"#1E2731"},{"name":"--blue","value":"#24303C"},{"name":"--ice","value":"#F2F6F9"},{"name":"--body","value":"#C2CCD6"},{"name":"--steel","value":"#6B7885"},{"name":"--muted","value":"#8593A1"},{"name":"--violet","value":"#7C8FA3"},{"name":"--amber","value":"#9AA7B4"}],"fonts":[{"name":"--font-display","family":"Plus Jakarta Sans"},{"name":"--font-body","family":"Inter"},{"name":"--font-mono","family":"IBM Plex Mono"},{"name":"--font-pixel","family":"Silkscreen"}]}};
+export const projectConfig = {"layout":"STACKED","slidesDisplay":"FULLSCREEN","stackedOrientation":"HORIZONTAL","cardsBackgroundColor":"#050b14","cardsCorners":"SQUARE","mobileCanvas":"COMPACT","tokens":{"palette":[{"name":"--background","value":"#080B10"},{"name":"--panel","value":"#131A22"},{"name":"--border","value":"#1E2731"},{"name":"--cyan","value":"#A6E86B"},{"name":"--green","value":"#7ED957"},{"name":"--red","value":"#F0645B"},{"name":"--navy-0","value":"#080B10"},{"name":"--navy-1","value":"#0D1219"},{"name":"--navy-2","value":"#111820"},{"name":"--navy-3","value":"#161E27"},{"name":"--navy-4","value":"#1C2530"},{"name":"--line","value":"#1E2731"},{"name":"--blue","value":"#24303C"},{"name":"--ice","value":"#F2F6F9"},{"name":"--body","value":"#C2CCD6"},{"name":"--steel","value":"#6B7885"},{"name":"--muted","value":"#8593A1"},{"name":"--violet","value":"#7C8FA3"},{"name":"--amber","value":"#9AA7B4"}],"fonts":[{"name":"--font-display","family":"Plus Jakarta Sans"},{"name":"--font-body","family":"Inter"},{"name":"--font-mono","family":"IBM Plex Mono"},{"name":"--font-pixel","family":"Silkscreen"}]}};
 
 export default function Page() {
   return (
@@ -41,10 +41,10 @@ export default function Page() {
         faces={visibleFaces}
         componentMap={componentMap}
         layout="STACKED"
-        slidesDisplay="CARDS"
+        slidesDisplay="FULLSCREEN"
         stackedOrientation="HORIZONTAL"
-        cardsSlidesPerView={1.25}
-        cardsBackgroundColor={"#000000"}
+        cardsSlidesPerView={1}
+        cardsBackgroundColor={"#050b14"}
         cardsBackgroundImage={""}
         cardsCorners="SQUARE"
         mobileCanvas="COMPACT"

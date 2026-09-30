@@ -2,7 +2,7 @@
   "controls": {
     "showQrBox": {
       "type": "switch",
-      "value": true
+      "value": false
     }
   }
 }

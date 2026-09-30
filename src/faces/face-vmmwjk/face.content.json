@@ -1,81 +1,61 @@
 {
   "blocks": {
-    "badge": { "type": "text", "content": "Report // national fraud metrics" },
+    "badge": { "type": "text", "content": "The challenge // the decision moment" },
     "title": {
       "type": "text",
-      "content": "Indonesia Is the World's Most Reported Fraud Market"
+      "content": "A suspicious message can make urgency feel like proof."
     },
-    "heroFigure": { "type": "text", "content": "Rp 9,1 T" },
+    "heroFigure": { "type": "text", "content": "Pause." },
     "heroCaption": {
       "type": "text",
-      "content": "Lost to digital fraud · Nov 2024 – Jan 2026"
+      "content": "Alethia turns that moment into a safe, guided practice scenario."
     },
     "chart": {
       "type": "table",
-      "title": "Cumulative loss",
+      "title": "Practice sequence",
       "columns": [
-        { "key": "period", "title": "Period", "type": "text" },
-        { "key": "amount", "title": "Amount", "type": "text" },
-        { "key": "value", "title": "Value", "type": "text" }
+        { "key": "period", "title": "Step", "type": "text" },
+        { "key": "amount", "title": "Action", "type": "text" },
+        { "key": "value", "title": "Order", "type": "text" }
       ],
       "rows": [
-        { "id": "c1", "period": "Nov24 – Aug25", "amount": "Rp 4,6 T", "value": "4.6" },
-        { "id": "c2", "period": "Nov24 – Oct25", "amount": "Rp 7,0 T", "value": "7.0" },
-        { "id": "c3", "period": "Nov24 – Jan26", "amount": "Rp 9,1 T", "value": "9.1" }
+        { "id": "c1", "period": "01 · Inspect", "amount": "Check the sender", "value": "1" },
+        { "id": "c2", "period": "02 · Verify", "amount": "Use a trusted channel", "value": "2" },
+        { "id": "c3", "period": "03 · Decide", "amount": "Choose what to do next", "value": "3" }
       ]
     },
     "statCards": {
       "type": "table",
-      "title": "Stat cards",
+      "title": "What the prototype includes",
       "columns": [
-        { "key": "figure", "title": "Figure", "type": "text" },
-        { "key": "label", "title": "Label", "type": "text" },
-        { "key": "detail", "title": "Detail", "type": "text" }
+        { "key": "figure", "title": "Feature", "type": "text" },
+        { "key": "label", "title": "Area", "type": "text" },
+        { "key": "detail", "title": "Description", "type": "text" }
       ],
       "rows": [
-        {
-          "id": "sc1",
-          "figure": "874",
-          "label": "Reports per day",
-          "detail": "Highest of any country"
-        },
-        {
-          "id": "sc2",
-          "figure": "65%",
-          "label": "Of mobile users",
-          "detail": "Scammed weekly"
-        },
-        {
-          "id": "sc3",
-          "figure": "4%",
-          "label": "Recovered",
-          "detail": "Rp 386,9 B returned"
-        },
-        {
-          "id": "sc4",
-          "figure": "66%",
-          "label": "Of adults hit",
-          "detail": "In the last 12 months"
-        }
+        { "id": "sc1", "figure": "03", "label": "Practice modules", "detail": "SMS phishing, social engineering, and risky documents" },
+        { "id": "sc2", "figure": "PATH", "label": "Guided access", "detail": "Module access follows account progress" },
+        { "id": "sc3", "figure": "LOG", "label": "Learning record", "detail": "Progress, points, quests, and achievements" },
+        { "id": "sc4", "figure": "SHARE", "label": "Community reports", "detail": "Submit reports and review community context" }
       ]
     },
     "modus": {
       "type": "table",
-      "title": "Where the money went",
+      "title": "Practice scenarios",
       "columns": [
-        { "key": "label", "title": "Modus", "type": "text" },
-        { "key": "figures", "title": "Figures", "type": "text" },
+        { "key": "label", "title": "Scenario", "type": "text" },
+        { "key": "figures", "title": "Learner focus", "type": "text" },
         { "key": "highlight", "title": "Highlight", "type": "boolean" }
       ],
       "rows": [
-        { "id": "m1", "label": "Online shopping", "figures": "53.928 cases · Rp 988 B", "highlight": false },
-        { "id": "m2", "label": "Fake call / impersonation", "figures": "31.298 cases · Rp 1,31 T", "highlight": true },
-        { "id": "m3", "label": "Investment fraud", "figures": "19.850 cases · Rp 1,09 T", "highlight": false }
+        { "id": "m1", "label": "Courier SMS", "figures": "Inspect sender and link", "highlight": false },
+        { "id": "m2", "label": "Marketplace conversation", "figures": "Notice trust shifts and unusual asks", "highlight": true },
+        { "id": "m3", "label": "Risky document", "figures": "Check source, context, and file details", "highlight": false }
       ]
     },
     "sources": {
       "type": "text",
-      "content": "APJII · OJK / Indonesia Anti-Scam Center · Komdigi · GASA"
+      "content": "Product scope shown here is based on the Alethia web prototype. No market-size or outcome statistics are implied."
     }
   }
 }

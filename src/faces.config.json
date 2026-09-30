@@ -6,23 +6,9 @@
       "hidden": false
     },
     {
-      "id": "face-vmmwjk",
-      "name": "Why Alethia Has To Exist",
-      "hidden": false
-    },
-    {
-      "id": "face-qvqt48",
-      "name": "Who We Build For",
-      "hidden": false
-    },
-    {
-      "id": "face-dzd1rq",
-      "name": "Why This Isn't Like The Others",
-      "hidden": false
-    },
-    {
       "id": "face-landing",
-      "name": "Landing & Access"
+      "name": "3D Landing",
+      "hidden": false
     },
     {
       "id": "face-0r58ng",
@@ -31,7 +17,12 @@
     },
     {
       "id": "face-1ecenb",
-      "name": "Training",
+      "name": "Training Modules",
+      "hidden": false
+    },
+    {
+      "id": "face-vmmwjk",
+      "name": "Courier SMS Simulation",
       "hidden": false
     },
     {
@@ -41,7 +32,7 @@
     },
     {
       "id": "face-9sa50d",
-      "name": "Training Insight",
+      "name": "Practice Insights",
       "hidden": false
     },
     {
@@ -58,6 +49,16 @@
       "id": "face-ywfin7",
       "name": "Closing & Call to Action",
       "hidden": false
+    },
+    {
+      "id": "face-qvqt48",
+      "name": "Who We Build For",
+      "hidden": true
+    },
+    {
+      "id": "face-dzd1rq",
+      "name": "Why This Isn't Like The Others",
+      "hidden": true
     }
   ]
 }

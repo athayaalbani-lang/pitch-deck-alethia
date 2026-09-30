@@ -1,8 +1,8 @@
 {
   "layout": "STACKED",
-  "slidesDisplay": "CARDS",
+  "slidesDisplay": "FULLSCREEN",
   "stackedOrientation": "HORIZONTAL",
-  "cardsBackgroundColor": "#080B10",
+  "cardsBackgroundColor": "#050b14",
   "cardsCorners": "SQUARE",
   "mobileCanvas": "COMPACT",
   "tokens": {

@@ -1,171 +1,58 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { TextContent } from "@/components/ui/text-content";
-import { Atmosphere } from "@/components/ui/atmosphere";
-import { Capsule, NeonFrame } from "@/components/ui/sbs";
-import { MaskReveal } from "@/components/ui/motion";
-import { Overline, Ring } from "@/components/ui/8bit";
-import { blocks } from "./face.content.json";
-import { controls } from "./face.controls.json";
+import React from "react";
+import { AlethiaScreen, ProductButton, ProductPageHeader, ProductPanel, ProductPill } from "@/components/ui/alethia-screen";
 
-const MONO = "font-grotesk uppercase tracking-[0.18em]";
+const checkpoints = ["Message arrives", "Inspect", "Verify", "Choose a response", "See the outcome"];
 
-export default function WhyExistsFace() {
-  const root = useRef<HTMLDivElement>(null);
-  const inView = useInView(root, { once: true, amount: 0.25 });
-  const density = controls.barEmphasis?.value ?? 1;
-
-  const maxVal = Math.max(
-    ...blocks.chart.rows.map((r) => Number(r.value) || 0),
-    1,
-  );
-
+export default function CourierSimulationFace() {
   return (
-    <div ref={root} className="w-full h-full font-body">
-      <Atmosphere ghost="WHY" ring="bottom-left" bokeh={12}>
-      <div className="w-full h-full flex flex-col">
-      {/* TOP BAND */}
-      <div className="px-5 py-4 @xl:px-14 @xl:py-8 border-b border-[var(--line)]">
-        <div className="flex items-center gap-2.5 mb-1.5 @xl:mb-4">
-          <Ring size={14} thickness={0.5} color="var(--steel)" />
-          <TextContent
-            content={blocks.badge.content}
-            data-content-keys={["badge"]}
-            className={`${MONO} text-[var(--steel)] text-[9px] @xl:text-sm`}
-          />
-        </div>
-        <MaskReveal>
-          <TextContent
-            content={blocks.title.content}
-            data-content-keys={["title"]}
-            className="font-condensed font-bold text-white text-[28px] @xl:text-[74px] leading-[0.9] tracking-[-0.02em] break-words"
-          />
-        </MaskReveal>
-        <div className="h-[3px] w-24 @xl:w-56 bg-[var(--cyan)] mt-2 @xl:mt-5" />
-      </div>
-
-      <div className="flex-1 min-h-0 flex flex-col @xl:flex-row">
-        {/* LEFT 40% */}
-        <div className="@xl:w-[40%] border-b @xl:border-b-0 @xl:border-r border-[var(--line)] px-5 py-4 @xl:px-12 @xl:py-9 flex flex-col justify-between gap-3 @xl:gap-6">
-          <div>
-            <div className="flex items-end gap-3 @xl:gap-5">
-              <motion.div
-                initial={{ opacity: 0, filter: "blur(14px)" }}
-                animate={inView ? { opacity: 1, filter: "blur(0px)" } : {}}
-                transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
-              >
-                <TextContent
-                  content={blocks.heroFigure.content}
-                  data-content-keys={["heroFigure"]}
-                  className="font-condensed font-bold text-[var(--cyan)] text-[56px] @xl:text-[126px] leading-[0.82] tracking-[-0.04em]"
-                />
-              </motion.div>
-            </div>
-            <TextContent
-              content={blocks.heroCaption.content}
-              data-content-keys={["heroCaption"]}
-              className={`${MONO} text-[var(--muted)] text-[9px] @xl:text-sm mt-2 @xl:mt-4 leading-relaxed max-w-[620px]`}
-            />
-          </div>
-
-          <div className="flex flex-col gap-2 @xl:gap-4">
-            {blocks.chart.rows.map((row, i) => {
-              const pct = ((Number(row.value) || 0) / maxVal) * 100;
-              return (
-                <div key={row.id} className="flex flex-col gap-1 @xl:gap-2">
-                  <div className="flex items-baseline justify-between">
-                    <TextContent
-                      content={row.period}
-                      data-content-keys={[`chart.rows.${i}.period`]}
-                      className={`${MONO} text-[var(--muted)] text-[8px] @xl:text-xs`}
-                    />
-                    <TextContent
-                      content={row.amount}
-                      data-content-keys={[`chart.rows.${i}.amount`]}
-                      className={`${MONO} text-[var(--cyan)] text-[10px] @xl:text-lg`}
-                    />
-                  </div>
-                  <div
-                    className="w-full bg-[var(--navy-4)]"
-                    style={{ height: `${6 + density * 4}px` }}
-                  >
-                    <motion.div
-                      className="h-full bg-[var(--cyan)]"
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${pct}%` } : {}}
-                      transition={{ duration: 1, delay: 0.3 + i * 0.18, ease: "easeOut" }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* RIGHT 60% */}
-        <div className="@xl:w-[60%] grid grid-cols-2 grid-rows-2">
-          {blocks.statCards.rows.map((row, i) => (
-            <motion.div
-              key={row.id}
-              initial={{ opacity: 0, y: 18 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.25 + i * 0.1 }}
-              className="border-b border-r border-[var(--line)] px-4 py-3 @xl:px-9 @xl:py-7 flex flex-col justify-center"
-            >
-              <TextContent
-                content={row.figure}
-                data-content-keys={[`statCards.rows.${i}.figure`]}
-                className="font-condensed font-bold text-[var(--cyan)] text-[30px] @xl:text-[70px] leading-none"
-              />
-              <TextContent
-                content={row.label}
-                data-content-keys={[`statCards.rows.${i}.label`]}
-                className={`${MONO} text-white text-[9px] @xl:text-base mt-1.5 @xl:mt-4`}
-              />
-              <TextContent
-                content={row.detail}
-                data-content-keys={[`statCards.rows.${i}.detail`]}
-                className="font-grotesk text-[var(--muted)] text-[9px] @xl:text-base mt-1 @xl:mt-3 leading-snug"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* MODUS BAND */}
-      <div className="border-t border-[var(--line)] grid grid-cols-1 @xl:grid-cols-3">
-        {blocks.modus.rows.map((row, i) => {
-          const hot = row.highlight;
-          return (
-            <div
-              key={row.id}
-              className="px-5 @xl:px-10 py-2 @xl:py-5 border-t @xl:border-t-0 @xl:border-l first:border-t-0 first:@xl:border-l-0 border-[var(--line)]"
-            >
-              <TextContent
-                content={row.label}
-                data-content-keys={[`modus.rows.${i}.label`]}
-                className={`${MONO} text-[9px] @xl:text-sm ${hot ? "text-[var(--amber)]" : "text-[var(--body)]"}`}
-              />
-              <TextContent
-                content={row.figures}
-                data-content-keys={[`modus.rows.${i}.figures`]}
-                className={`font-condensed font-bold text-[18px] @xl:text-[34px] mt-0.5 @xl:mt-2 ${hot ? "text-[var(--ice)]" : "text-[var(--cyan)]"}`}
-              />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* FOOTER */}
-      <div className="border-t border-[var(--line)] px-5 @xl:px-10 py-1.5 @xl:py-3">
-        <TextContent
-          content={blocks.sources.content}
-          data-content-keys={["sources"]}
-          className={`${MONO} text-[var(--steel)] text-[7px] @xl:text-[11px] leading-relaxed`}
+    <AlethiaScreen active="training" footer="ALETHIA · SAFE SIMULATION · NO REAL DATA IS COLLECTED">
+      <div className="flex h-full min-h-0 flex-col gap-3 @xl:gap-5">
+        <ProductPageHeader
+          title="Courier message"
+          description="A simulated delivery message is designed to make you act before you have time to check. Inspect the sender and link, verify through an official channel, then choose a response."
+          action={<ProductPill tone="signal">Module 01 · SMS phishing</ProductPill>}
         />
+        <ol className="grid shrink-0 grid-cols-5 border-y border-[#263544]">
+          {checkpoints.map((checkpoint, index) => <li className={`border-b-2 px-1.5 py-2 @xl:px-3 @xl:py-3 font-mono text-[5px] @xl:text-[9px] ${index === 0 ? "border-[#a6e86b] text-[#a6e86b]" : "border-transparent text-[#8191a1]"}`} key={checkpoint}><span className="mr-1 @xl:mr-2">{index + 1}</span>{checkpoint}</li>)}
+        </ol>
+
+        <div className="grid min-h-0 flex-1 gap-3 @xl:grid-cols-[.72fr_1.05fr_1.05fr] @xl:gap-5">
+          <ProductPanel className="flex min-h-0 flex-col">
+            <div className="flex items-center justify-between gap-2 border-b border-[#263544] pb-2 @xl:pb-4"><h2 className="font-mono text-[7px] @xl:text-[10px] font-bold uppercase tracking-[.14em] text-[#a6e86b]">Simulation flow</h2><ProductPill>5 steps</ProductPill></div>
+            <div className="mt-2 @xl:mt-4 flex-1 space-y-2 @xl:space-y-4">
+              {checkpoints.map((step, index) => <div className="flex items-center gap-2 @xl:gap-3" key={step}><span className={`grid h-5 w-5 @xl:h-8 @xl:w-8 shrink-0 place-items-center rounded-full border font-mono text-[6px] @xl:text-[9px] ${index === 0 ? "border-[#a6e86b] bg-[#a6e86b] text-[#0b1420]" : "border-[#364657] text-[#91a0af]"}`}>{index + 1}</span><span className={`text-[6px] @xl:text-[9px] ${index === 0 ? "font-semibold text-[#edf4f8]" : "text-[#91a0af]"}`}>{step}</span></div>)}
+            </div>
+            <div className="border-t border-[#263544] pt-2 @xl:pt-4"><p className="font-mono text-[5px] @xl:text-[8px] uppercase tracking-[.12em] text-[#8191a1]">Safe simulation</p><p className="mt-1 text-[6px] @xl:text-[9px] leading-relaxed text-[#a6e86b]">No real parcel, courier, or personal data is involved.</p></div>
+          </ProductPanel>
+
+          <ProductPanel className="flex min-h-0 flex-col">
+            <div className="mx-auto w-full max-w-[480px] flex-1 overflow-hidden border border-[#364657] bg-[#0a111a] shadow-[0_12px_40px_rgba(0,0,0,.35)]">
+              <div className="flex items-center justify-between border-b border-[#263544] bg-[#111c28] px-3 py-2 @xl:px-5 @xl:py-3"><span className="font-mono text-[6px] @xl:text-[9px] uppercase text-[#91a0af]">SMS · Today, 09:41</span><span className="font-mono text-[6px] @xl:text-[9px] text-[#edf4f8]">ParcelPath Desk</span></div>
+              <div className="flex h-full flex-col p-3 @xl:p-6">
+                <div className="max-w-[90%] border border-[#263544] bg-[#182534] p-2.5 @xl:p-5">
+                  <p className="text-[8px] @xl:text-sm leading-relaxed">Your parcel is waiting at a sorting centre.</p>
+                  <p className="mt-2 text-[8px] @xl:text-sm leading-relaxed">Confirm before 6:00 PM or the parcel will be returned.</p>
+                  <p className="mt-2 @xl:mt-4 rounded border border-[#edbd67]/30 bg-[#edbd67]/[.05] p-2 font-mono text-[7px] @xl:text-[11px] text-[#edbd67]">parcel-check[.]example/confirm</p>
+                </div>
+                <p className="mt-2 @xl:mt-4 font-mono text-[5px] @xl:text-[8px] uppercase tracking-[.1em] text-[#8191a1]">Fictional message · link safely defanged</p>
+                <div className="mt-auto grid gap-1.5 @xl:gap-2 pt-3 @xl:pt-6">
+                  <ProductButton>Inspect message</ProductButton>
+                  <span className="inline-flex min-h-7 @xl:min-h-10 items-center justify-center border border-[#263544] px-3 font-mono text-[6px] @xl:text-[9px] text-[#91a0af]">Start the 5-step practice</span>
+                </div>
+              </div>
+            </div>
+          </ProductPanel>
+
+          <ProductPanel className="flex min-h-0 flex-col">
+            <div className="flex items-start justify-between gap-3 border-b border-[#263544] pb-2 @xl:pb-4"><div><h2 className="font-mono text-[7px] @xl:text-[10px] font-bold uppercase tracking-[.14em] text-[#a6e86b]">Analyst notes</h2><p className="mt-1 text-[6px] @xl:text-[9px] text-[#91a0af]">Signals the learner can inspect</p></div><img alt="" aria-hidden="true" className="h-8 w-8 @xl:h-12 @xl:w-12 object-contain" src="/media/leveltwo.webp" /></div>
+            <div className="mt-2 @xl:mt-4 space-y-2 @xl:space-y-4">
+              <div className="border-l-2 border-[#edbd67] bg-[#0b1420] p-2 @xl:p-4"><p className="font-mono text-[6px] @xl:text-[9px] text-[#edbd67]">Sender is not verified</p><p className="mt-1 text-[6px] @xl:text-[10px] leading-relaxed text-[#d0d9e1]">A display name does not prove the message came from a courier.</p></div>
+              <div className="border-l-2 border-[#edbd67] bg-[#0b1420] p-2 @xl:p-4"><p className="font-mono text-[6px] @xl:text-[9px] text-[#edbd67]">Domain does not match</p><p className="mt-1 text-[6px] @xl:text-[10px] leading-relaxed text-[#d0d9e1]">Compare the link with the courier's official app or site.</p></div>
+            </div>
+            <div className="mt-auto border-t border-[#263544] pt-2 @xl:pt-4"><p className="font-mono text-[5px] @xl:text-[8px] uppercase text-[#8191a1]">Choose a response</p><div className="mt-1.5 @xl:mt-3 flex flex-wrap gap-1.5"><ProductPill>Open link</ProductPill><ProductPill tone="signal">Verify officially</ProductPill><ProductPill>Report & delete</ProductPill></div></div>
+          </ProductPanel>
+        </div>
       </div>
-      </div>
-      </Atmosphere>
-    </div>
+    </AlethiaScreen>
   );
 }

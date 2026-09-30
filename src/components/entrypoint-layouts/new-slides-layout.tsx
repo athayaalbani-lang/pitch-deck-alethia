@@ -17,7 +17,6 @@ import { useCursorAutoHide } from "@/hooks/use-cursor-auto-hide";
 import { useKeyboardNavigation } from "@/hooks/use-keyboard-navigation";
 import {
   CARDS_SLIDES_PER_VIEW_DEFAULT,
-  MIN_CARDS_PEEK_SLIDES_PER_VIEW,
   useWindowScale,
 } from "@/hooks/use-slides-scale";
 import { useSwipeNavigation } from "@/hooks/use-swipe-navigation";
@@ -345,9 +344,9 @@ export function NewSlidesLayout({
       <StackedSlidesLayout
         faces={faces}
         componentMap={componentMap}
-        slidesDisplay="CARDS"
+        slidesDisplay={resolvedSlidesDisplay}
         orientation="VERTICAL"
-        cardsSlidesPerView={MIN_CARDS_PEEK_SLIDES_PER_VIEW}
+        cardsSlidesPerView={1}
         cardsBackgroundColor={cardsBackgroundColor}
         cardsBackgroundImage={cardsBackgroundImage}
         cornersMode={cornersMode}

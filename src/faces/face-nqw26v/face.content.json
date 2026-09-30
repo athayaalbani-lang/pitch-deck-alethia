@@ -1,25 +1,9 @@
 {
   "blocks": {
-    "label": {
-      "type": "text",
-      "title": "label",
-      "content": "Admin console"
-    },
-    "headline": {
-      "type": "text",
-      "title": "headline",
-      "content": "A console, not a card grid."
-    },
-    "body": {
-      "type": "text",
-      "title": "body",
-      "content": "Two sections. One action each."
-    },
-    "addressBar": {
-      "type": "text",
-      "title": "addressBar",
-      "content": "alethia / admin"
-    },
+    "label": { "type": "text", "title": "label", "content": "Admin tools · illustrative view" },
+    "headline": { "type": "text", "title": "headline", "content": "Review reports. Manage daily quests." },
+    "body": { "type": "text", "title": "body", "content": "These are the two main areas available in the Alethia admin prototype." },
+    "addressBar": { "type": "text", "title": "addressBar", "content": "alethia / admin" },
     "sections": {
       "type": "table",
       "title": "sections",
@@ -28,23 +12,11 @@
         { "key": "label", "title": "Label", "type": "text" }
       ],
       "rows": [
-        {
-          "id": "s1",
-          "index": "01",
-          "label": "Report review"
-        },
-        {
-          "id": "s2",
-          "index": "02",
-          "label": "Quest editor"
-        }
+        { "id": "s1", "index": "01", "label": "Report review" },
+        { "id": "s2", "index": "02", "label": "Daily quest management" }
       ]
     },
-    "historyHeading": {
-      "type": "text",
-      "title": "historyHeading",
-      "content": "Session log"
-    },
+    "historyHeading": { "type": "text", "title": "historyHeading", "content": "Review activity" },
     "tabs": {
       "type": "table",
       "title": "tabs",
@@ -61,13 +33,13 @@
       "rows": [
         { "id": "f1", "label": "All" },
         { "id": "f2", "label": "Queued" },
-        { "id": "f3", "label": "Escalated" },
-        { "id": "f4", "label": "Resolved" }
+        { "id": "f3", "label": "Approved" },
+        { "id": "f4", "label": "Rejected" }
       ]
     },
     "reports": {
       "type": "table",
-      "title": "reports",
+      "title": "Illustrative report rows",
       "columns": [
         { "key": "id", "title": "Id", "type": "text" },
         { "key": "title", "title": "Title", "type": "text" },
@@ -76,41 +48,13 @@
         { "key": "age", "title": "Age", "type": "text" }
       ],
       "rows": [
-        {
-          "id": "r1",
-          "title": "Credential replay on a municipal portal",
-          "signal": "high",
-          "state": "queued",
-          "age": "2h"
-        },
-        {
-          "id": "r2",
-          "title": "Support desk impersonation over SMS",
-          "signal": "high",
-          "state": "queued",
-          "age": "4h"
-        },
-        {
-          "id": "r3",
-          "title": "Invoice redirection in a supplier thread",
-          "signal": "medium",
-          "state": "escalated",
-          "age": "11h"
-        },
-        {
-          "id": "r4",
-          "title": "OAuth consent granted to an unlisted app",
-          "signal": "low",
-          "state": "resolved",
-          "age": "1d"
-        }
+        { "id": "r1", "title": "Example · suspicious delivery message", "signal": "—", "state": "queued", "age": "—" },
+        { "id": "r2", "title": "Example · unexpected marketplace request", "signal": "—", "state": "queued", "age": "—" },
+        { "id": "r3", "title": "Example · unknown document", "signal": "—", "state": "approved", "age": "—" },
+        { "id": "r4", "title": "Example · unusual account prompt", "signal": "—", "state": "approved", "age": "—" }
       ]
     },
-    "detailHeading": {
-      "type": "text",
-      "title": "detailHeading",
-      "content": "Decision"
-    },
+    "detailHeading": { "type": "text", "title": "detailHeading", "content": "Review decision" },
     "actions": {
       "type": "table",
       "title": "actions",
@@ -118,83 +62,39 @@
       "rows": [
         { "id": "a1", "label": "Approve" },
         { "id": "a2", "label": "Reject" },
-        { "id": "a3", "label": "Queue" }
+        { "id": "a3", "label": "Remove" }
       ]
     },
-    "noteLabel": {
-      "type": "text",
-      "title": "noteLabel",
-      "content": "Admin note"
-    },
-    "noteValue": {
-      "type": "text",
-      "title": "noteValue",
-      "content": "No note yet."
-    },
-    "notePlaceholder": {
-      "type": "text",
-      "title": "notePlaceholder",
-      "content": "Add a note for the record…"
-    },
+    "noteLabel": { "type": "text", "title": "noteLabel", "content": "Reviewer note" },
+    "noteValue": { "type": "text", "title": "noteValue", "content": "Illustrative record" },
+    "notePlaceholder": { "type": "text", "title": "notePlaceholder", "content": "Add a review note…" },
     "ledger": {
       "type": "table",
-      "title": "ledger",
+      "title": "Admin areas",
       "columns": [
-        { "key": "key", "title": "Key", "type": "text" },
-        { "key": "value", "title": "Value", "type": "text" }
+        { "key": "key", "title": "Area", "type": "text" },
+        { "key": "value", "title": "Shown in console", "type": "text" }
       ],
       "rows": [
-        { "id": "g1", "key": "Reports today", "value": "48" },
-        { "id": "g2", "key": "Awaiting decision", "value": "12" },
-        { "id": "g3", "key": "Median review", "value": "9m" },
-        { "id": "g4", "key": "Live quests", "value": "7" }
+        { "id": "g1", "key": "Report queue", "value": "Review" },
+        { "id": "g2", "key": "Report detail", "value": "Context" },
+        { "id": "g3", "key": "Quest setup", "value": "Edit" },
+        { "id": "g4", "key": "Quest order", "value": "Manage" }
       ]
     },
     "quests": {
       "type": "table",
-      "title": "quests",
+      "title": "Quest examples · values are configurable",
       "columns": [
-        { "key": "name", "title": "Name", "type": "text" },
-        { "key": "mechanic", "title": "Mechanic", "type": "text" },
-        { "key": "points", "title": "Points", "type": "text" },
+        { "key": "name", "title": "Quest type", "type": "text" },
+        { "key": "mechanic", "title": "Activity", "type": "text" },
+        { "key": "points", "title": "Reward", "type": "text" },
         { "key": "assignments", "title": "Assignments", "type": "text" }
       ],
       "rows": [
-        {
-          "id": "q1",
-          "name": "Read a thread twice",
-          "mechanic": "two-pass read, both logged",
-          "points": "15",
-          "assignments": "2,104"
-        },
-        {
-          "id": "q2",
-          "name": "Vote a verdict you disagree with",
-          "mechanic": "forced alternate read",
-          "points": "25",
-          "assignments": "861"
-        },
-        {
-          "id": "q3",
-          "name": "Write a note that survives review",
-          "mechanic": "note kept on a closed report",
-          "points": "40",
-          "assignments": "317"
-        },
-        {
-          "id": "q4",
-          "name": "Spot the forwarding rule",
-          "mechanic": "inbox-rule detection drill",
-          "points": "20",
-          "assignments": "1,540"
-        },
-        {
-          "id": "q5",
-          "name": "Answer safe when it is risky",
-          "mechanic": "pressure drill, decoy domain",
-          "points": "60",
-          "assignments": "94"
-        }
+        { "id": "q1", "name": "Daily login", "mechanic": "Sign in", "points": "Set by admin", "assignments": "—" },
+        { "id": "q2", "name": "Complete a module", "mechanic": "Finish practice", "points": "Set by admin", "assignments": "—" },
+        { "id": "q3", "name": "Create a report", "mechanic": "Submit a report", "points": "Set by admin", "assignments": "—" }
       ]
     },
     "questActions": {
@@ -208,15 +108,7 @@
         { "id": "qa4", "label": "Apply" }
       ]
     },
-    "applyResult": {
-      "type": "text",
-      "title": "applyResult",
-      "content": "Applied"
-    },
-    "status": {
-      "type": "text",
-      "title": "status",
-      "content": "Session active"
-    }
+    "applyResult": { "type": "text", "title": "applyResult", "content": "Preview interaction · not a live admin action" },
+    "status": { "type": "text", "title": "status", "content": "Illustrative prototype" }
   }
 }
