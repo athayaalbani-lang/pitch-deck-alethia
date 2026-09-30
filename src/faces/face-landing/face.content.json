@@ -1,0 +1,70 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "01 // landing, login, register" },
+    "routeChip": { "type": "text", "content": "three entrances" },
+    "landingHeadline": { "type": "text", "content": "The State Of Being Hidden" },
+    "landingCta": { "type": "text", "content": "Start" },
+    "isleChips": {
+      "type": "table",
+      "title": "Isle annotations",
+      "columns": [
+        { "key": "label", "title": "Label", "type": "text" },
+        { "key": "value", "title": "Value", "type": "text" }
+      ],
+      "rows": [
+        { "id": "i1", "label": "Server", "value": "progress" },
+        { "id": "i2", "label": "Desktop", "value": "simulation" },
+        { "id": "i3", "label": "Lens", "value": "report hub" }
+      ]
+    },
+    "authTabs": {
+      "type": "table",
+      "title": "Auth tabs",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "a1", "label": "Sign in" },
+        { "id": "a2", "label": "Register" }
+      ]
+    },
+    "authFields": {
+      "type": "table",
+      "title": "Auth fields",
+      "columns": [
+        { "key": "label", "title": "Label", "type": "text" },
+        { "key": "value", "title": "Value", "type": "text" }
+      ],
+      "rows": [
+        { "id": "af1", "label": "Username", "value": "operator_04" },
+        { "id": "af2", "label": "Password", "value": "••••••••••••" }
+      ]
+    },
+    "authActionSignIn": { "type": "text", "content": "Enter the console" },
+    "authActionRegister": { "type": "text", "content": "Create an operator" },
+    "specHeading": { "type": "text", "content": "Access spec" },
+    "spec": {
+      "type": "table",
+      "title": "Security spec",
+      "columns": [
+        { "key": "key", "title": "Key", "type": "text" },
+        { "key": "value", "title": "Value", "type": "text" }
+      ],
+      "rows": [
+        { "id": "sp1", "key": "Primary store", "value": "Supabase Auth" },
+        { "id": "sp2", "key": "Fallback hash", "value": "PBKDF2-SHA256" },
+        { "id": "sp3", "key": "Work factor", "value": "310.000 iterations" },
+        { "id": "sp4", "key": "Legacy rows", "value": "single-round SHA-256, upgraded on login" },
+        { "id": "sp5", "key": "Session", "value": "cookie-scoped, 5 routes guarded" }
+      ]
+    },
+    "claims": {
+      "type": "table",
+      "title": "Bottom claims",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "c1", "label": "No real data" },
+        { "id": "c2", "label": "Three entrances" },
+        { "id": "c3", "label": "Five routes require a session" }
+      ]
+    }
+  }
+}

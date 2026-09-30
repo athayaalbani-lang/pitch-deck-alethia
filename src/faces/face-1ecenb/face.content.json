@@ -1,0 +1,77 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "03 // training path" },
+    "title": { "type": "text", "content": "Three Modules, One Path" },
+    "lockIcon": { "type": "icon", "name": "lock" },
+    "modules": {
+      "type": "table",
+      "title": "Modules",
+      "columns": [
+        { "key": "index", "title": "Index", "type": "text" },
+        { "key": "name", "title": "Name", "type": "text" },
+        { "key": "route", "title": "Route", "type": "text" },
+        { "key": "points", "title": "Points", "type": "text" },
+        { "key": "mechanic", "title": "Mechanic", "type": "text" },
+        { "key": "chip", "title": "State chip", "type": "text" },
+        { "key": "state", "title": "State key", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "m1",
+          "index": "01",
+          "name": "SMS Phishing",
+          "route": "/simulation/courier-sms",
+          "points": "20 pts",
+          "mechanic": "Incoming message; a safe versus risky call",
+          "chip": "Open",
+          "state": "open"
+        },
+        {
+          "id": "m2",
+          "index": "02",
+          "name": "Social Engineering",
+          "route": "/simulation/social-engineering",
+          "points": "30 pts",
+          "mechanic": "A person asks; you decide what to disclose",
+          "chip": "Locked",
+          "state": "locked"
+        },
+        {
+          "id": "m3",
+          "index": "03",
+          "name": "Malicious Download",
+          "route": "/simulation/executable-file",
+          "points": "50 pts",
+          "mechanic": "An untrusted file; you decide whether it runs",
+          "chip": "Locked",
+          "state": "locked"
+        }
+      ]
+    },
+    "guarantees": {
+      "type": "table",
+      "title": "Guarantees",
+      "columns": [
+        { "key": "key", "title": "Key", "type": "text" },
+        { "key": "value", "title": "Value", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "g1",
+          "key": "Access decided server-side",
+          "value": "get_verified_module_access — not a client flag"
+        },
+        {
+          "id": "g2",
+          "key": "Fails closed",
+          "value": "if the server cannot confirm, it stays locked"
+        },
+        {
+          "id": "g3",
+          "key": "Replay rejected",
+          "value": "module:<id> ledger key — duplicates are refused"
+        }
+      ]
+    }
+  }
+}

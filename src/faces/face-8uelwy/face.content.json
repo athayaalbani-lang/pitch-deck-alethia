@@ -1,0 +1,59 @@
+{
+  "blocks": {
+    "label": { "type": "text", "content": "Report hub" },
+    "title": { "type": "text", "content": "One report, four moves" },
+    "loop": { "type": "text", "content": "The loop every report walks" },
+    "steps": {
+      "type": "table",
+      "title": "steps",
+      "columns": [
+        { "key": "step", "title": "Step", "type": "text" },
+        { "key": "verb", "title": "Verb", "type": "text" },
+        { "key": "title", "title": "Title", "type": "text" },
+        { "key": "line", "title": "Line", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "s1",
+          "step": "01",
+          "verb": "submit",
+          "title": "Anonymous by default",
+          "line": "Your name never enters the report."
+        },
+        {
+          "id": "s2",
+          "step": "02",
+          "verb": "inspect",
+          "title": "Read the signal",
+          "line": "Others mark it valid or invalid."
+        },
+        {
+          "id": "s3",
+          "step": "03",
+          "verb": "annotate",
+          "title": "Leave a note",
+          "line": "Reasoning is timestamped and kept."
+        },
+        {
+          "id": "s4",
+          "step": "04",
+          "verb": "earn",
+          "title": "Rank follows the ledger",
+          "line": "Never an admin click."
+        }
+      ]
+    },
+    "verdict": {
+      "type": "table",
+      "title": "verdict",
+      "columns": [
+        { "key": "label", "title": "Label", "type": "text" }
+      ],
+      "rows": [
+        { "id": "v1", "label": "Valid" },
+        { "id": "v2", "label": "Invalid" }
+      ]
+    },
+    "footer": { "type": "text", "content": "Try it" }
+  }
+}

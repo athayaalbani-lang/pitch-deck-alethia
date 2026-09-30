@@ -1,0 +1,8 @@
+{
+  "controls": {
+    "showQrBox": {
+      "type": "switch",
+      "value": true
+    }
+  }
+}

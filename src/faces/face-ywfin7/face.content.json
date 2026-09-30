@@ -1,0 +1,101 @@
+{
+  "blocks": {
+    "badge": {
+      "type": "text",
+      "content": "ALETHIA // CLOSING & DEMO"
+    },
+    "statusLabel": {
+      "type": "text",
+      "content": "STATUS // SESSION_ACTIVE"
+    },
+    "reservedLabel": {
+      "type": "text",
+      "content": "[ RESERVED FOR LIVE DEMO / PRESENTATION CANVAS ]"
+    },
+    "wordmark": {
+      "type": "text",
+      "content": "ALETHIA"
+    },
+    "tagline": {
+      "type": "text",
+      "content": "Practice spotting social engineering before it spots you."
+    },
+    "recapTiles": {
+      "type": "table",
+      "title": "Recap Navigation Tiles",
+      "columns": [
+        {
+          "key": "num",
+          "title": "Number",
+          "type": "text"
+        },
+        {
+          "key": "label",
+          "title": "Label",
+          "type": "text"
+        },
+        {
+          "key": "targetFaceId",
+          "title": "Target Slide ID",
+          "type": "text"
+        }
+      ],
+      "rows": [
+        {
+          "id": "t1",
+          "num": "01",
+          "label": "LANDING & ACCESS",
+          "targetFaceId": "face-uqqcri"
+        },
+        {
+          "id": "t2",
+          "num": "02",
+          "label": "DASHBOARD",
+          "targetFaceId": "face-0r58ng"
+        },
+        {
+          "id": "t3",
+          "num": "03",
+          "label": "TRAINING",
+          "targetFaceId": "face-1ecenb"
+        },
+        {
+          "id": "t4",
+          "num": "04",
+          "label": "REPORTS",
+          "targetFaceId": "face-8uelwy"
+        },
+        {
+          "id": "t5",
+          "num": "05",
+          "label": "INSIGHTS",
+          "targetFaceId": "face-9sa50d"
+        },
+        {
+          "id": "t6",
+          "num": "06",
+          "label": "PROFILE",
+          "targetFaceId": "face-r3r76i"
+        },
+        {
+          "id": "t7",
+          "num": "07",
+          "label": "ADMIN CONSOLE",
+          "targetFaceId": "face-nqw26v"
+        }
+      ]
+    },
+    "closingStatement": {
+      "type": "text",
+      "content": "Rp 9,1 trillion lost. Four percent recovered. The gap is not knowledge — it is practice."
+    },
+    "callToAction": {
+      "type": "text",
+      "content": "Every score you saw today came from the server. Come prove it yourself."
+    },
+    "qrPlaceholderLabel": {
+      "type": "text",
+      "content": "[ LIVE DEMO / SCAN TO PROVE ]"
+    }
+  }
+}

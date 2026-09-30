@@ -1,0 +1,62 @@
+{
+  "blocks": {
+    "wordmark": { "type": "text", "content": "ALETHIA" },
+    "tagline": {
+      "type": "text",
+      "content": "Practice spotting social engineering before it spots you."
+    },
+    "stats": {
+      "type": "table",
+      "title": "Stat strips",
+      "columns": [
+        { "key": "figure", "title": "Figure", "type": "text" },
+        { "key": "caption", "title": "Caption", "type": "text" }
+      ],
+      "rows": [
+        { "id": "s1", "figure": "229,4 M", "caption": "connected indonesians" },
+        { "id": "s2", "figure": "65%", "caption": "contacted by scam weekly" },
+        { "id": "s3", "figure": "Rp 9,1 T", "caption": "lost to digital fraud" },
+        { "id": "s4", "figure": "4%", "caption": "of it ever recovered" }
+      ]
+    },
+    "graphNodes": {
+      "type": "table",
+      "title": "Render nodes",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "n1", "label": "Server" },
+        { "id": "n2", "label": "Desktop" },
+        { "id": "n3", "label": "Lens" }
+      ]
+    },
+    "graphAdmin": { "type": "text", "content": "Admin" },
+    "features": {
+      "type": "table",
+      "title": "Feature index",
+      "columns": [
+        { "key": "num", "title": "Index", "type": "text" },
+        { "key": "label", "title": "Label", "type": "text" },
+        { "key": "faceId", "title": "Slide id", "type": "text" }
+      ],
+      "rows": [
+        { "id": "f1", "num": "01", "label": "Landing & Access", "faceId": "face-landing" },
+        { "id": "f2", "num": "02", "label": "Dashboard", "faceId": "face-0r58ng" },
+        { "id": "f3", "num": "03", "label": "Training", "faceId": "face-1ecenb" },
+        { "id": "f4", "num": "04", "label": "Reports", "faceId": "face-8uelwy" },
+        { "id": "f5", "num": "05", "label": "Insights", "faceId": "face-9sa50d" },
+        { "id": "f6", "num": "06", "label": "Profile", "faceId": "face-r3r76i" },
+        { "id": "f7", "num": "07", "label": "Admin Console", "faceId": "face-nqw26v" }
+      ]
+    },
+    "tags": {
+      "type": "table",
+      "title": "Bottom tags",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "t1", "label": "Security practice platform" },
+        { "id": "t2", "label": "Safe simulation — no real data" },
+        { "id": "t3", "label": "Human-centred security practice" }
+      ]
+    }
+  }
+}

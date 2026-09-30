@@ -1,0 +1,57 @@
+{
+  "blocks": {
+    "stats": {
+      "type": "table",
+      "title": "Top stat strip",
+      "columns": [
+        { "key": "label", "title": "Label", "type": "text" },
+        { "key": "figure", "title": "Figure", "type": "text" },
+        { "key": "caption", "title": "Caption", "type": "text" },
+        { "key": "progress", "title": "Progress %", "type": "text" }
+      ],
+      "rows": [
+        { "id": "s1", "label": "Points", "figure": "320", "caption": "30 to next level", "progress": "91" },
+        { "id": "s2", "label": "Level", "figure": "3 · Investigator", "caption": "toward level 4", "progress": "64" },
+        { "id": "s3", "label": "Modules", "figure": "2/3", "caption": "66% complete", "progress": "66" },
+        { "id": "s4", "label": "Reports", "figure": "1", "caption": "awaiting review", "progress": "20" }
+      ]
+    },
+    "streakHeading": { "type": "text", "content": "Consecutive days" },
+    "streakDays": { "type": "text", "content": "4" },
+    "streakLongest": { "type": "text", "content": "Longest: 7 days" },
+    "week": {
+      "type": "table",
+      "title": "Week strip",
+      "columns": [
+        { "key": "day", "title": "Day", "type": "text" },
+        { "key": "done", "title": "Practised", "type": "boolean" }
+      ],
+      "rows": [
+        { "id": "d1", "day": "Mon", "done": true },
+        { "id": "d2", "day": "Tue", "done": true },
+        { "id": "d3", "day": "Wed", "done": true },
+        { "id": "d4", "day": "Thu", "done": true },
+        { "id": "d5", "day": "Fri", "done": true },
+        { "id": "d6", "day": "Sat", "done": false },
+        { "id": "d7", "day": "Sun", "done": false }
+      ]
+    },
+    "questHeading": { "type": "text", "content": "Daily quest" },
+    "questTitle": { "type": "text", "content": "Clear one phishing drill today" },
+    "questDetail": {
+      "type": "text",
+      "content": "Assigned at 00:00 local. One completion per key, verified server-side."
+    },
+    "questReward": { "type": "text", "content": "+15 pts" },
+    "claimLabel": { "type": "text", "content": "Claim" },
+    "claimedLabel": { "type": "text", "content": "Claimed" },
+    "retirementNotice": {
+      "type": "text",
+      "content": "This quest was deactivated by an admin — its assignment was withdrawn"
+    },
+    "footer": {
+      "type": "text",
+      "content": "One get_dashboard_state call feeds all four numbers. profiles.level is rewritten by a BEFORE INSERT OR UPDATE OF points trigger; the client cannot write that column."
+    }
+  }
+}

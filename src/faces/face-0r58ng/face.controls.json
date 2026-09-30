@@ -1,0 +1,5 @@
+{
+  "controls": {
+    "barThickness": { "type": "slider", "min": 4, "max": 16, "step": 2, "value": 6 }
+  }
+}

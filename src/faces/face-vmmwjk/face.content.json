@@ -1,0 +1,81 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "Report // national fraud metrics" },
+    "title": {
+      "type": "text",
+      "content": "Indonesia Is the World's Most Reported Fraud Market"
+    },
+    "heroFigure": { "type": "text", "content": "Rp 9,1 T" },
+    "heroCaption": {
+      "type": "text",
+      "content": "Lost to digital fraud · Nov 2024 – Jan 2026"
+    },
+    "chart": {
+      "type": "table",
+      "title": "Cumulative loss",
+      "columns": [
+        { "key": "period", "title": "Period", "type": "text" },
+        { "key": "amount", "title": "Amount", "type": "text" },
+        { "key": "value", "title": "Value", "type": "text" }
+      ],
+      "rows": [
+        { "id": "c1", "period": "Nov24 – Aug25", "amount": "Rp 4,6 T", "value": "4.6" },
+        { "id": "c2", "period": "Nov24 – Oct25", "amount": "Rp 7,0 T", "value": "7.0" },
+        { "id": "c3", "period": "Nov24 – Jan26", "amount": "Rp 9,1 T", "value": "9.1" }
+      ]
+    },
+    "statCards": {
+      "type": "table",
+      "title": "Stat cards",
+      "columns": [
+        { "key": "figure", "title": "Figure", "type": "text" },
+        { "key": "label", "title": "Label", "type": "text" },
+        { "key": "detail", "title": "Detail", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "sc1",
+          "figure": "874",
+          "label": "Reports per day",
+          "detail": "Highest of any country"
+        },
+        {
+          "id": "sc2",
+          "figure": "65%",
+          "label": "Of mobile users",
+          "detail": "Scammed weekly"
+        },
+        {
+          "id": "sc3",
+          "figure": "4%",
+          "label": "Recovered",
+          "detail": "Rp 386,9 B returned"
+        },
+        {
+          "id": "sc4",
+          "figure": "66%",
+          "label": "Of adults hit",
+          "detail": "In the last 12 months"
+        }
+      ]
+    },
+    "modus": {
+      "type": "table",
+      "title": "Where the money went",
+      "columns": [
+        { "key": "label", "title": "Modus", "type": "text" },
+        { "key": "figures", "title": "Figures", "type": "text" },
+        { "key": "highlight", "title": "Highlight", "type": "boolean" }
+      ],
+      "rows": [
+        { "id": "m1", "label": "Online shopping", "figures": "53.928 cases · Rp 988 B", "highlight": false },
+        { "id": "m2", "label": "Fake call / impersonation", "figures": "31.298 cases · Rp 1,31 T", "highlight": true },
+        { "id": "m3", "label": "Investment fraud", "figures": "19.850 cases · Rp 1,09 T", "highlight": false }
+      ]
+    },
+    "sources": {
+      "type": "text",
+      "content": "APJII · OJK / Indonesia Anti-Scam Center · Komdigi · GASA"
+    }
+  }
+}

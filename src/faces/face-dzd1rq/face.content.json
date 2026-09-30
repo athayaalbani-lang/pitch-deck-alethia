@@ -1,0 +1,59 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "Architecture // differentiation" },
+    "title": { "type": "text", "content": "Why This Isn't Like The Others" },
+    "themHeader": { "type": "text", "content": "Them" },
+    "usHeader": { "type": "text", "content": "Alethia" },
+    "rows": {
+      "type": "table",
+      "title": "Comparison rows",
+      "columns": [
+        { "key": "label", "title": "Dimension", "type": "text" },
+        { "key": "them", "title": "Them", "type": "text" },
+        { "key": "us", "title": "Alethia", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "r1",
+          "label": "Delivery",
+          "them": "video courses, awareness posters",
+          "us": "decision drills — you choose, under time pressure, and find out what you got wrong"
+        },
+        {
+          "id": "r2",
+          "label": "Trustworthy results",
+          "them": "the client reports its own score",
+          "us": "scores are written server-side; the browser cannot forge one"
+        },
+        {
+          "id": "r3",
+          "label": "Unlock rule",
+          "them": "a boolean flag in client state",
+          "us": "fails closed — if the server cannot confirm, it stays locked"
+        },
+        {
+          "id": "r4",
+          "label": "Replay",
+          "them": "submitting twice counts twice",
+          "us": "a keyed points ledger rejects a duplicated completion"
+        },
+        {
+          "id": "r5",
+          "label": "Privacy",
+          "them": "connect your account, enter real data, upload receipts",
+          "us": "nothing leaves the device — the exercise runs locally"
+        },
+        {
+          "id": "r6",
+          "label": "Reactivity",
+          "them": "a curriculum that never changes",
+          "us": "a retired quest disappears — assignments withdrawn"
+        }
+      ]
+    },
+    "closing": {
+      "type": "text",
+      "content": "A national hotline reached 4% recovery. Awareness was never the missing piece — <strong>practice is</strong>."
+    }
+  }
+}

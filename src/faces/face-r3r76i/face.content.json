@@ -1,0 +1,85 @@
+{
+  "blocks": {
+    "title": { "type": "text", "content": "Profile Page — Your Dossier, Your Controls" },
+    "routeChip": { "type": "text", "content": "/profile" },
+
+    "card1": {
+      "type": "object",
+      "title": "IDENTITY",
+      "label": { "type": "text", "content": "callsign" },
+      "callSign": { "type": "text", "content": "nightwatch" },
+      "bioLabel": { "type": "text", "content": "bio" },
+      "bio": { "type": "text", "content": "Threat triage · IDN" },
+      "levelLabel": { "type": "text", "content": "level + role" },
+      "level": { "type": "text", "content": "LVL 07 · ANALYST" },
+      "gridLabel": { "type": "text", "content": "18 weeks" },
+      "badgesLabel": { "type": "text", "content": "4 badge slots" }
+    },
+
+    "card2": {
+      "type": "object",
+      "title": "PROGRESSION",
+      "masteryLabel": { "type": "text", "content": "mastery rail" },
+      "pointsLabel": { "type": "text", "content": "points" },
+      "points": { "type": "text", "content": "1,240" },
+      "authoritative": { "type": "text", "content": "server-authoritative" },
+      "modulesLabel": { "type": "text", "content": "modules" },
+      "modules": { "type": "text", "content": "9 / 12" },
+      "streakLabel": { "type": "text", "content": "streak" },
+      "streak": { "type": "text", "content": "21d" }
+    },
+
+    "card3": {
+      "type": "object",
+      "title": "OUTPUT",
+      "habitsLabel": { "type": "text", "content": "report habits" },
+      "latestLabel": { "type": "text", "content": "latest 5" },
+      "signalLabel": { "type": "text", "content": "signal" },
+      "habits": {
+        "type": "table",
+        "title": "Per-module report habits",
+        "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+        "rows": [
+          { "id": "h1", "label": "Phishing" },
+          { "id": "h2", "label": "Impersonation" },
+          { "id": "h3", "label": "Investment" },
+          { "id": "h4", "label": "Fake call" }
+        ]
+      },
+      "reports": {
+        "type": "table",
+        "title": "Latest reports",
+        "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+        "rows": [
+          { "id": "r1", "label": "INV-4471" },
+          { "id": "r2", "label": "INV-4468" },
+          { "id": "r3", "label": "INV-4462" },
+          { "id": "r4", "label": "INV-4455" },
+          { "id": "r5", "label": "INV-4449" }
+        ]
+      }
+    },
+
+    "card4": {
+      "type": "object",
+      "title": "ACCOUNT",
+      "userLabel": { "type": "text", "content": "username" },
+      "username": { "type": "text", "content": "nightwatch" },
+      "mailLabel": { "type": "text", "content": "email" },
+      "mail": { "type": "text", "content": "n•••@proton.me" },
+      "authLabel": { "type": "text", "content": "auth" },
+      "auth": { "type": "text", "content": "2FA ACTIVE" },
+      "edit": { "type": "text", "content": "Edit" },
+      "signOut": { "type": "text", "content": "Sign out" }
+    },
+
+    "footer": {
+      "type": "object",
+      "editRoute": { "type": "text", "content": "/profile/edit" },
+      "editList": { "type": "text", "content": "avatar · username · password · socials" },
+      "publicRoute": { "type": "text", "content": "/profile/[username]" },
+      "publicList": { "type": "text", "content": "shared dossier" },
+      "pii": { "type": "text", "content": "PII never exposed" }
+    }
+  }
+}

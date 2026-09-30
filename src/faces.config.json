@@ -1,0 +1,63 @@
+{
+  "faces": [
+    {
+      "id": "face-uqqcri",
+      "name": "Opening",
+      "hidden": false
+    },
+    {
+      "id": "face-vmmwjk",
+      "name": "Why Alethia Has To Exist",
+      "hidden": false
+    },
+    {
+      "id": "face-qvqt48",
+      "name": "Who We Build For",
+      "hidden": false
+    },
+    {
+      "id": "face-dzd1rq",
+      "name": "Why This Isn't Like The Others",
+      "hidden": false
+    },
+    {
+      "id": "face-landing",
+      "name": "Landing & Access"
+    },
+    {
+      "id": "face-0r58ng",
+      "name": "Dashboard",
+      "hidden": false
+    },
+    {
+      "id": "face-1ecenb",
+      "name": "Training",
+      "hidden": false
+    },
+    {
+      "id": "face-8uelwy",
+      "name": "Report Hub",
+      "hidden": false
+    },
+    {
+      "id": "face-9sa50d",
+      "name": "Training Insight",
+      "hidden": false
+    },
+    {
+      "id": "face-r3r76i",
+      "name": "Profile",
+      "hidden": false
+    },
+    {
+      "id": "face-nqw26v",
+      "name": "Admin Panel",
+      "hidden": false
+    },
+    {
+      "id": "face-ywfin7",
+      "name": "Closing & Call to Action",
+      "hidden": false
+    }
+  ]
+}

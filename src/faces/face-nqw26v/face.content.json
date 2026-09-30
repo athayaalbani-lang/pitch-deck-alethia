@@ -1,0 +1,222 @@
+{
+  "blocks": {
+    "label": {
+      "type": "text",
+      "title": "label",
+      "content": "Admin console"
+    },
+    "headline": {
+      "type": "text",
+      "title": "headline",
+      "content": "A console, not a card grid."
+    },
+    "body": {
+      "type": "text",
+      "title": "body",
+      "content": "Two sections. One action each."
+    },
+    "addressBar": {
+      "type": "text",
+      "title": "addressBar",
+      "content": "alethia / admin"
+    },
+    "sections": {
+      "type": "table",
+      "title": "sections",
+      "columns": [
+        { "key": "index", "title": "Index", "type": "text" },
+        { "key": "label", "title": "Label", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "s1",
+          "index": "01",
+          "label": "Report review"
+        },
+        {
+          "id": "s2",
+          "index": "02",
+          "label": "Quest editor"
+        }
+      ]
+    },
+    "historyHeading": {
+      "type": "text",
+      "title": "historyHeading",
+      "content": "Session log"
+    },
+    "tabs": {
+      "type": "table",
+      "title": "tabs",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "t1", "label": "Report review" },
+        { "id": "t2", "label": "Quest editor" }
+      ]
+    },
+    "filters": {
+      "type": "table",
+      "title": "filters",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "f1", "label": "All" },
+        { "id": "f2", "label": "Queued" },
+        { "id": "f3", "label": "Escalated" },
+        { "id": "f4", "label": "Resolved" }
+      ]
+    },
+    "reports": {
+      "type": "table",
+      "title": "reports",
+      "columns": [
+        { "key": "id", "title": "Id", "type": "text" },
+        { "key": "title", "title": "Title", "type": "text" },
+        { "key": "signal", "title": "Signal", "type": "text" },
+        { "key": "state", "title": "State", "type": "text" },
+        { "key": "age", "title": "Age", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "r1",
+          "title": "Credential replay on a municipal portal",
+          "signal": "high",
+          "state": "queued",
+          "age": "2h"
+        },
+        {
+          "id": "r2",
+          "title": "Support desk impersonation over SMS",
+          "signal": "high",
+          "state": "queued",
+          "age": "4h"
+        },
+        {
+          "id": "r3",
+          "title": "Invoice redirection in a supplier thread",
+          "signal": "medium",
+          "state": "escalated",
+          "age": "11h"
+        },
+        {
+          "id": "r4",
+          "title": "OAuth consent granted to an unlisted app",
+          "signal": "low",
+          "state": "resolved",
+          "age": "1d"
+        }
+      ]
+    },
+    "detailHeading": {
+      "type": "text",
+      "title": "detailHeading",
+      "content": "Decision"
+    },
+    "actions": {
+      "type": "table",
+      "title": "actions",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "a1", "label": "Approve" },
+        { "id": "a2", "label": "Reject" },
+        { "id": "a3", "label": "Queue" }
+      ]
+    },
+    "noteLabel": {
+      "type": "text",
+      "title": "noteLabel",
+      "content": "Admin note"
+    },
+    "noteValue": {
+      "type": "text",
+      "title": "noteValue",
+      "content": "No note yet."
+    },
+    "notePlaceholder": {
+      "type": "text",
+      "title": "notePlaceholder",
+      "content": "Add a note for the record…"
+    },
+    "ledger": {
+      "type": "table",
+      "title": "ledger",
+      "columns": [
+        { "key": "key", "title": "Key", "type": "text" },
+        { "key": "value", "title": "Value", "type": "text" }
+      ],
+      "rows": [
+        { "id": "g1", "key": "Reports today", "value": "48" },
+        { "id": "g2", "key": "Awaiting decision", "value": "12" },
+        { "id": "g3", "key": "Median review", "value": "9m" },
+        { "id": "g4", "key": "Live quests", "value": "7" }
+      ]
+    },
+    "quests": {
+      "type": "table",
+      "title": "quests",
+      "columns": [
+        { "key": "name", "title": "Name", "type": "text" },
+        { "key": "mechanic", "title": "Mechanic", "type": "text" },
+        { "key": "points", "title": "Points", "type": "text" },
+        { "key": "assignments", "title": "Assignments", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "q1",
+          "name": "Read a thread twice",
+          "mechanic": "two-pass read, both logged",
+          "points": "15",
+          "assignments": "2,104"
+        },
+        {
+          "id": "q2",
+          "name": "Vote a verdict you disagree with",
+          "mechanic": "forced alternate read",
+          "points": "25",
+          "assignments": "861"
+        },
+        {
+          "id": "q3",
+          "name": "Write a note that survives review",
+          "mechanic": "note kept on a closed report",
+          "points": "40",
+          "assignments": "317"
+        },
+        {
+          "id": "q4",
+          "name": "Spot the forwarding rule",
+          "mechanic": "inbox-rule detection drill",
+          "points": "20",
+          "assignments": "1,540"
+        },
+        {
+          "id": "q5",
+          "name": "Answer safe when it is risky",
+          "mechanic": "pressure drill, decoy domain",
+          "points": "60",
+          "assignments": "94"
+        }
+      ]
+    },
+    "questActions": {
+      "type": "table",
+      "title": "questActions",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "qa1", "label": "Add quest" },
+        { "id": "qa2", "label": "Reorder" },
+        { "id": "qa3", "label": "Deactivate" },
+        { "id": "qa4", "label": "Apply" }
+      ]
+    },
+    "applyResult": {
+      "type": "text",
+      "title": "applyResult",
+      "content": "Applied"
+    },
+    "status": {
+      "type": "text",
+      "title": "status",
+      "content": "Session active"
+    }
+  }
+}

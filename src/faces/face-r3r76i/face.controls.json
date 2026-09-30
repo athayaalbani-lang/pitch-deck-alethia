@@ -1,0 +1,11 @@
+{
+  "controls": {
+    "nameSize": {
+      "type": "slider",
+      "min": 48,
+      "max": 160,
+      "step": 4,
+      "value": 104
+    }
+  }
+}

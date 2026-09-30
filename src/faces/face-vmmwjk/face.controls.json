@@ -1,0 +1,5 @@
+{
+  "controls": {
+    "barEmphasis": { "type": "slider", "min": 0, "max": 4, "step": 1, "value": 1 }
+  }
+}
