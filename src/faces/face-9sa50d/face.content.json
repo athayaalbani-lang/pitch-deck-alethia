@@ -1,0 +1,52 @@
+{
+  "blocks": {
+    "label": { "type": "text", "content": "Learning insights" },
+    "title": { "type": "text", "content": "Practice progress, made visible." },
+    "caption": { "type": "text", "content": "Account-specific record" },
+    "scoreExplainer": {
+      "type": "text",
+      "content": "The prototype brings together module outcomes, points, quests, and achievements. Values vary by learner account."
+    },
+    "levelsHeading": { "type": "text", "content": "Learner levels" },
+    "statesHeading": { "type": "text", "content": "Practice outcomes" },
+    "statesExplainer": {
+      "type": "text",
+      "content": "Familiar, skilled, and needs practice are feedback labels in the learner record—not a certification."
+    },
+    "attemptHeading": { "type": "text", "content": "Latest module activity" },
+    "attemptExplainer": {
+      "type": "text",
+      "content": "Module outcomes are recorded as part of progress when available. This illustration contains no learner results."
+    },
+    "levels": {
+      "type": "table",
+      "title": "Learner levels",
+      "columns": [
+        { "key": "label", "title": "Level", "type": "text" },
+        { "key": "value", "title": "Points", "type": "text" }
+      ],
+      "rows": [
+        { "id": "a1", "label": "Novice", "value": "—" },
+        { "id": "a2", "label": "Analyst", "value": "—" },
+        { "id": "a3", "label": "Investigator", "value": "—" },
+        { "id": "a4", "label": "Caretaker", "value": "—" },
+        { "id": "a5", "label": "Signal Guardian", "value": "—" }
+      ]
+    },
+    "states": {
+      "type": "table",
+      "title": "Practice outcome labels",
+      "columns": [
+        { "key": "label", "title": "Label", "type": "text" },
+        { "key": "value", "title": "Example value", "type": "text" }
+      ],
+      "rows": [
+        { "id": "b1", "label": "Familiar", "value": "0" },
+        { "id": "b2", "label": "Skilled", "value": "0" },
+        { "id": "b3", "label": "Needs practice", "value": "0" }
+      ]
+    },
+    "you": { "type": "text", "content": "Current" },
+    "next": { "type": "text", "content": "Next" }
+  }
+}

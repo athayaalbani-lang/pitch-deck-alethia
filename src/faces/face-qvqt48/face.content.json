@@ -1,0 +1,67 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "Audience // Demographic Funnel" },
+    "title": { "type": "text", "content": "Who We Build For" },
+    "funnelHeading": { "type": "text", "content": "Funnel" },
+    "funnel": {
+      "type": "table",
+      "title": "Reach and exposure",
+      "columns": [
+        { "key": "figure", "title": "Population", "type": "text" },
+        { "key": "label", "title": "Cohort", "type": "text" }
+      ],
+      "rows": [
+        { "id": "fn1", "figure": "284,4 M", "label": "Total population" },
+        { "id": "fn2", "figure": "229,4 M", "label": "Connected · 80,66% penetration" },
+        { "id": "fn3", "figure": "50 M+", "label": "Self-reported victims · 22%" }
+      ]
+    },
+    "tiers": {
+      "type": "table",
+      "title": "Priority tiers",
+      "columns": [
+        { "key": "tag", "title": "Tier", "type": "text" },
+        { "key": "name", "title": "Audience", "type": "text" },
+        { "key": "description", "title": "Why it matters", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "t1",
+          "tag": "01",
+          "name": "The General Public",
+          "description": "Everyone reachable by a scam message. 65% are contacted weekly and only 22% ever report it. This tier is the point of the product."
+        },
+        {
+          "id": "t2",
+          "tag": "02",
+          "name": "The Exposed Daily",
+          "description": "50 M+ Indonesians admit to being defrauded. They are hit, they lose money, and they do nothing. This is where the 4% recovery rate comes from."
+        },
+        {
+          "id": "t3",
+          "tag": "03",
+          "name": "The Mid-Market Professional",
+          "description": "Finance, HR and admin staff · SME owners · community and campus organisers. People who are socially engineered on behalf of someone else."
+        }
+      ]
+    },
+    "mvpHeading": { "type": "text", "content": "MVP" },
+    "mvpItems": {
+      "type": "table",
+      "title": "MVP scope",
+      "columns": [{ "key": "label", "title": "Shipped capability", "type": "text" }],
+      "rows": [
+        { "id": "mv1", "label": "3 practice modules" },
+        { "id": "mv2", "label": "18 achievements" },
+        { "id": "mv3", "label": "Daily quests + streaks" },
+        { "id": "mv4", "label": "Report hub + community review" },
+        { "id": "mv5", "label": "1 admin console" },
+        { "id": "mv6", "label": "Server-scored, replay-proof ledger" }
+      ]
+    },
+    "targetNote": {
+      "type": "text",
+      "content": "First-year registered-user target — [fill in]. This is an assumption, not data."
+    }
+  }
+}

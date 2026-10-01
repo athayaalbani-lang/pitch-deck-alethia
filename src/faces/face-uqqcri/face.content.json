@@ -1,0 +1,62 @@
+{
+  "blocks": {
+    "wordmark": { "type": "text", "content": "ALETHIA" },
+    "tagline": {
+      "type": "text",
+      "content": "A safe place to practise spotting social engineering."
+    },
+    "stats": {
+      "type": "table",
+      "title": "Product at a glance",
+      "columns": [
+        { "key": "figure", "title": "Figure", "type": "text" },
+        { "key": "caption", "title": "Caption", "type": "text" }
+      ],
+      "rows": [
+        { "id": "s1", "figure": "03", "caption": "interactive practice modules" },
+        { "id": "s2", "figure": "01", "caption": "guided learning path" },
+        { "id": "s3", "figure": "LOG", "caption": "personal progress and achievements" },
+        { "id": "s4", "figure": "SHARE", "caption": "community reports and review" }
+      ]
+    },
+    "graphNodes": {
+      "type": "table",
+      "title": "Product areas",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "n1", "label": "Practice" },
+        { "id": "n2", "label": "Progress" },
+        { "id": "n3", "label": "Reports" }
+      ]
+    },
+    "graphAdmin": { "type": "text", "content": "Admin tools" },
+    "features": {
+      "type": "table",
+      "title": "Product areas",
+      "columns": [
+        { "key": "num", "title": "Index", "type": "text" },
+        { "key": "label", "title": "Label", "type": "text" },
+        { "key": "faceId", "title": "Slide id", "type": "text" }
+      ],
+      "rows": [
+        { "id": "f1", "num": "01", "label": "Landing & Access", "faceId": "face-landing" },
+        { "id": "f2", "num": "02", "label": "Dashboard", "faceId": "face-0r58ng" },
+        { "id": "f3", "num": "03", "label": "Practice Modules", "faceId": "face-1ecenb" },
+        { "id": "f4", "num": "04", "label": "Community Reports", "faceId": "face-8uelwy" },
+        { "id": "f5", "num": "05", "label": "Learning Insights", "faceId": "face-9sa50d" },
+        { "id": "f6", "num": "06", "label": "Profile", "faceId": "face-r3r76i" },
+        { "id": "f7", "num": "07", "label": "Admin Console", "faceId": "face-nqw26v" }
+      ]
+    },
+    "tags": {
+      "type": "table",
+      "title": "Product summary",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "t1", "label": "PRACTISE THE DECISION" },
+        { "id": "t2", "label": "REVIEW YOUR PROGRESS" },
+        { "id": "t3", "label": "LEARN WITH COMMUNITY REPORTS" }
+      ]
+    }
+  }
+}

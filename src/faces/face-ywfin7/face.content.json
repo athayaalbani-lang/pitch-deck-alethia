@@ -1,0 +1,40 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "ALETHIA // CLOSING & DEMO" },
+    "statusLabel": { "type": "text", "content": "STATUS // SESSION_ACTIVE" },
+    "wordmark": { "type": "text", "content": "ALETHIA" },
+    "tagline": {
+      "type": "text",
+      "content": "Practice spotting social engineering before it spots you."
+    },
+    "heroLine": {
+      "type": "text",
+      "content": "Rp 9,1 trillion lost. Four percent recovered. The gap is not knowledge — it is practice."
+    },
+    "closingStatement": {
+      "type": "text",
+      "content": "Every score you saw today came from the server. Come prove it yourself."
+    },
+    "footerLabel": { "type": "text", "content": "[ live demo / scan to prove ]" }
+  },
+  "tables": {
+    "recapTiles": {
+      "type": "table",
+      "title": "Demo recap",
+      "columns": [
+        { "key": "num", "title": "Number", "type": "text" },
+        { "key": "label", "title": "Screen", "type": "text" },
+        { "key": "targetFaceId", "title": "Target Slide ID", "type": "text" }
+      ],
+      "rows": [
+        { "id": "t1", "num": "01", "label": "Landing & Access", "targetFaceId": "face-landing" },
+        { "id": "t2", "num": "02", "label": "Dashboard", "targetFaceId": "face-0r58ng" },
+        { "id": "t3", "num": "03", "label": "Training", "targetFaceId": "face-1ecenb" },
+        { "id": "t4", "num": "04", "label": "Reports", "targetFaceId": "face-8uelwy" },
+        { "id": "t5", "num": "05", "label": "Insights", "targetFaceId": "face-9sa50d" },
+        { "id": "t6", "num": "06", "label": "Profile", "targetFaceId": "face-r3r76i" },
+        { "id": "t7", "num": "07", "label": "Admin Console", "targetFaceId": "face-nqw26v" }
+      ]
+    }
+  }
+}

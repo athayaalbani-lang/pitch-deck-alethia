@@ -1,0 +1,61 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "The challenge // the decision moment" },
+    "title": {
+      "type": "text",
+      "content": "A suspicious message can make urgency feel like proof."
+    },
+    "heroFigure": { "type": "text", "content": "Pause." },
+    "heroCaption": {
+      "type": "text",
+      "content": "Alethia turns that moment into a safe, guided practice scenario."
+    },
+    "chart": {
+      "type": "table",
+      "title": "Practice sequence",
+      "columns": [
+        { "key": "period", "title": "Step", "type": "text" },
+        { "key": "amount", "title": "Action", "type": "text" },
+        { "key": "value", "title": "Order", "type": "text" }
+      ],
+      "rows": [
+        { "id": "c1", "period": "01 · Inspect", "amount": "Check the sender", "value": "1" },
+        { "id": "c2", "period": "02 · Verify", "amount": "Use a trusted channel", "value": "2" },
+        { "id": "c3", "period": "03 · Decide", "amount": "Choose what to do next", "value": "3" }
+      ]
+    },
+    "statCards": {
+      "type": "table",
+      "title": "What the prototype includes",
+      "columns": [
+        { "key": "figure", "title": "Feature", "type": "text" },
+        { "key": "label", "title": "Area", "type": "text" },
+        { "key": "detail", "title": "Description", "type": "text" }
+      ],
+      "rows": [
+        { "id": "sc1", "figure": "03", "label": "Practice modules", "detail": "SMS phishing, social engineering, and risky documents" },
+        { "id": "sc2", "figure": "PATH", "label": "Guided access", "detail": "Module access follows account progress" },
+        { "id": "sc3", "figure": "LOG", "label": "Learning record", "detail": "Progress, points, quests, and achievements" },
+        { "id": "sc4", "figure": "SHARE", "label": "Community reports", "detail": "Submit reports and review community context" }
+      ]
+    },
+    "modus": {
+      "type": "table",
+      "title": "Practice scenarios",
+      "columns": [
+        { "key": "label", "title": "Scenario", "type": "text" },
+        { "key": "figures", "title": "Learner focus", "type": "text" },
+        { "key": "highlight", "title": "Highlight", "type": "boolean" }
+      ],
+      "rows": [
+        { "id": "m1", "label": "Courier SMS", "figures": "Inspect sender and link", "highlight": false },
+        { "id": "m2", "label": "Marketplace conversation", "figures": "Notice trust shifts and unusual asks", "highlight": true },
+        { "id": "m3", "label": "Risky document", "figures": "Check source, context, and file details", "highlight": false }
+      ]
+    },
+    "sources": {
+      "type": "text",
+      "content": "Product scope shown here is based on the Alethia web prototype. No market-size or outcome statistics are implied."
+    }
+  }
+}

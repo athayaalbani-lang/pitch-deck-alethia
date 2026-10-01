@@ -1,0 +1,11 @@
+{
+  "controls": {
+    "windowRadius": {
+      "type": "slider",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "value": 14
+    }
+  }
+}

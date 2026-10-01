@@ -1,0 +1,114 @@
+{
+  "blocks": {
+    "label": { "type": "text", "title": "label", "content": "Admin tools · illustrative view" },
+    "headline": { "type": "text", "title": "headline", "content": "Review reports. Manage daily quests." },
+    "body": { "type": "text", "title": "body", "content": "These are the two main areas available in the Alethia admin prototype." },
+    "addressBar": { "type": "text", "title": "addressBar", "content": "alethia / admin" },
+    "sections": {
+      "type": "table",
+      "title": "sections",
+      "columns": [
+        { "key": "index", "title": "Index", "type": "text" },
+        { "key": "label", "title": "Label", "type": "text" }
+      ],
+      "rows": [
+        { "id": "s1", "index": "01", "label": "Report review" },
+        { "id": "s2", "index": "02", "label": "Daily quest management" }
+      ]
+    },
+    "historyHeading": { "type": "text", "title": "historyHeading", "content": "Review activity" },
+    "tabs": {
+      "type": "table",
+      "title": "tabs",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "t1", "label": "Report review" },
+        { "id": "t2", "label": "Quest editor" }
+      ]
+    },
+    "filters": {
+      "type": "table",
+      "title": "filters",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "f1", "label": "All" },
+        { "id": "f2", "label": "Queued" },
+        { "id": "f3", "label": "Approved" },
+        { "id": "f4", "label": "Rejected" }
+      ]
+    },
+    "reports": {
+      "type": "table",
+      "title": "Illustrative report rows",
+      "columns": [
+        { "key": "id", "title": "Id", "type": "text" },
+        { "key": "title", "title": "Title", "type": "text" },
+        { "key": "signal", "title": "Signal", "type": "text" },
+        { "key": "state", "title": "State", "type": "text" },
+        { "key": "age", "title": "Age", "type": "text" }
+      ],
+      "rows": [
+        { "id": "r1", "title": "Example · suspicious delivery message", "signal": "—", "state": "queued", "age": "—" },
+        { "id": "r2", "title": "Example · unexpected marketplace request", "signal": "—", "state": "queued", "age": "—" },
+        { "id": "r3", "title": "Example · unknown document", "signal": "—", "state": "approved", "age": "—" },
+        { "id": "r4", "title": "Example · unusual account prompt", "signal": "—", "state": "approved", "age": "—" }
+      ]
+    },
+    "detailHeading": { "type": "text", "title": "detailHeading", "content": "Review decision" },
+    "actions": {
+      "type": "table",
+      "title": "actions",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "a1", "label": "Approve" },
+        { "id": "a2", "label": "Reject" },
+        { "id": "a3", "label": "Remove" }
+      ]
+    },
+    "noteLabel": { "type": "text", "title": "noteLabel", "content": "Reviewer note" },
+    "noteValue": { "type": "text", "title": "noteValue", "content": "Illustrative record" },
+    "notePlaceholder": { "type": "text", "title": "notePlaceholder", "content": "Add a review note…" },
+    "ledger": {
+      "type": "table",
+      "title": "Admin areas",
+      "columns": [
+        { "key": "key", "title": "Area", "type": "text" },
+        { "key": "value", "title": "Shown in console", "type": "text" }
+      ],
+      "rows": [
+        { "id": "g1", "key": "Report queue", "value": "Review" },
+        { "id": "g2", "key": "Report detail", "value": "Context" },
+        { "id": "g3", "key": "Quest setup", "value": "Edit" },
+        { "id": "g4", "key": "Quest order", "value": "Manage" }
+      ]
+    },
+    "quests": {
+      "type": "table",
+      "title": "Quest examples · values are configurable",
+      "columns": [
+        { "key": "name", "title": "Quest type", "type": "text" },
+        { "key": "mechanic", "title": "Activity", "type": "text" },
+        { "key": "points", "title": "Reward", "type": "text" },
+        { "key": "assignments", "title": "Assignments", "type": "text" }
+      ],
+      "rows": [
+        { "id": "q1", "name": "Daily login", "mechanic": "Sign in", "points": "Set by admin", "assignments": "—" },
+        { "id": "q2", "name": "Complete a module", "mechanic": "Finish practice", "points": "Set by admin", "assignments": "—" },
+        { "id": "q3", "name": "Create a report", "mechanic": "Submit a report", "points": "Set by admin", "assignments": "—" }
+      ]
+    },
+    "questActions": {
+      "type": "table",
+      "title": "questActions",
+      "columns": [{ "key": "label", "title": "Label", "type": "text" }],
+      "rows": [
+        { "id": "qa1", "label": "Add quest" },
+        { "id": "qa2", "label": "Reorder" },
+        { "id": "qa3", "label": "Deactivate" },
+        { "id": "qa4", "label": "Apply" }
+      ]
+    },
+    "applyResult": { "type": "text", "title": "applyResult", "content": "Preview interaction · not a live admin action" },
+    "status": { "type": "text", "title": "status", "content": "Illustrative prototype" }
+  }
+}

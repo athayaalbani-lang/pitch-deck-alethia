@@ -1,0 +1,105 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "Report // National Fraud Metrics" },
+    "title": {
+      "type": "text",
+      "content": "Indonesia Is the World's Most Reported Fraud Market"
+    },
+    "hero": {
+      "type": "text",
+      "content": "Rp 9,1 T"
+    },
+    "heroCaption": {
+      "type": "text",
+      "content": "Lost to digital fraud · Nov 2024 – Jan 2026"
+    },
+    "escalation": {
+      "type": "table",
+      "title": "Cumulative loss window",
+      "columns": [
+        { "key": "window", "title": "Reporting window", "type": "text" },
+        { "key": "figure", "title": "Reported loss", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "e1",
+          "window": "Nov24 – Aug25",
+          "figure": "Rp 4,6 T",
+          "share": 51
+        },
+        {
+          "id": "e2",
+          "window": "Nov24 – Oct25",
+          "figure": "Rp 7,0 T",
+          "share": 77
+        },
+        {
+          "id": "e3",
+          "window": "Nov24 – Jan26",
+          "figure": "Rp 9,1 T",
+          "share": 100
+        }
+      ]
+    },
+    "stats": {
+      "type": "table",
+      "title": "Reported fraud indicators",
+      "columns": [
+        { "key": "figure", "title": "Figure", "type": "text" },
+        { "key": "label", "title": "Indicator", "type": "text" },
+        { "key": "note", "title": "Note", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "m1",
+          "figure": "874",
+          "label": "Reports per day",
+          "note": "Highest of any country"
+        },
+        {
+          "id": "m2",
+          "figure": "65%",
+          "label": "Of mobile users",
+          "note": "Scammed weekly"
+        },
+        {
+          "id": "m3",
+          "figure": "4%",
+          "label": "Recovered",
+          "note": "Rp 386,9 B returned"
+        },
+        {
+          "id": "m4",
+          "figure": "66%",
+          "label": "Of adults hit",
+          "note": "In the last 12 months"
+        }
+      ]
+    },
+    "categories": {
+      "type": "table",
+      "title": "Reported fraud by category",
+      "columns": [
+        { "key": "label", "title": "Category", "type": "text" },
+        { "key": "figure", "title": "Cases and loss", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "g1",
+          "label": "Online shopping",
+          "figure": "53.928 cases · Rp 988 B"
+        },
+        {
+          "id": "g2",
+          "label": "Fake call / impersonation",
+          "figure": "31.298 cases · Rp 1,31 T"
+        },
+        {
+          "id": "g3",
+          "label": "Investment fraud",
+          "figure": "19.850 cases · Rp 1,09 T"
+        }
+      ]
+    }
+  }
+}

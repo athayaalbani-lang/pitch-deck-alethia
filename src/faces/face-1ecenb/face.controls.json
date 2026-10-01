@@ -1,0 +1,5 @@
+{
+  "controls": {
+    "showRoutes": { "type": "switch", "value": true }
+  }
+}

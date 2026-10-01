@@ -1,0 +1,33 @@
+{
+  "blocks": {
+    "label": { "type": "text", "content": "Community reports" },
+    "title": { "type": "text", "content": "Share a report. Add context. Learn together." },
+    "loop": { "type": "text", "content": "A report can move through these actions" },
+    "steps": {
+      "type": "table",
+      "title": "Report actions",
+      "columns": [
+        { "key": "step", "title": "Step", "type": "text" },
+        { "key": "verb", "title": "Verb", "type": "text" },
+        { "key": "title", "title": "Title", "type": "text" },
+        { "key": "line", "title": "Description", "type": "text" }
+      ],
+      "rows": [
+        { "id": "s1", "step": "01", "verb": "submit", "title": "Share an observation", "line": "Add a title, category, and relevant context." },
+        { "id": "s2", "step": "02", "verb": "explore", "title": "Read community reports", "line": "Browse reports and their current review status." },
+        { "id": "s3", "step": "03", "verb": "signal", "title": "Add a considered verdict", "line": "Eligible investigators can vote with a reason." },
+        { "id": "s4", "step": "04", "verb": "review", "title": "Admin review", "line": "Administrators can approve, reject, or remove a report." }
+      ]
+    },
+    "verdict": {
+      "type": "table",
+      "title": "Investigator verdicts",
+      "columns": [{ "key": "label", "title": "Verdict", "type": "text" }],
+      "rows": [
+        { "id": "v1", "label": "Valid" },
+        { "id": "v2", "label": "Invalid" }
+      ]
+    },
+    "footer": { "type": "text", "content": "Illustrative report flow · report authorship is visible in the prototype." }
+  }
+}

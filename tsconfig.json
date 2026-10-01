@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "useDefineForClassFields": true,
+    "types": ["vite/client"],
+
+    /* Strict is deliberately relaxed to `false`: the deck's face components
+       read untyped JSON content blocks, and the navigation/preview chrome is
+       full of optional props threaded through several layers. Turning on
+       `noUnusedLocals`/`noUnusedParameters` on top of that produced a wall of
+       findings in files that are otherwise fine. */
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+
+    "allowJs": true,
+    /* The generated face registry imports its faces with explicit `.tsx`
+       specifiers (`@/faces/face-xxxxxx/face.tsx`). Vite resolves those fine;
+       TS needs the flag to agree. Requires `noEmit`, which is set above. */
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.json"]
+}

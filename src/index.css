@@ -1,0 +1,1274 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap");
+
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #0A0A0B;
+  --muted: #FAFAFA;
+  --muted-foreground: #52525B;
+  --border: #D4D4D8;
+  --input: #D4D4D8;
+  --card: #FFFFFF;
+  --card-foreground: #0A0A0B;
+  --card-border: #D4D4D8;
+  --primary: #191919;
+  --primary-foreground: #FAFAFA;
+  --secondary: #D4D4D8;
+  --secondary-foreground: #27272A;
+  --accent: #000000;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FAFAFA;
+  --chart-1: #2E2E30;
+  --chart-2: #52525B;
+  --chart-3: #7C7C86;
+  --chart-4: #A1A1AA;
+  --chart-5: #D4D4D8;
+  --radius: 0.5rem;
+
+  /* Strip reserved at the bottom of the viewport for the fixed slide nav.
+     The nav is `position: fixed`, so without this the centred slide renders
+     underneath it and its bottom edge is hidden. Both the nav's own inset and
+     the slide wrapper's height read this value, so they cannot drift apart. */
+  --deck-nav-inset: 56px;
+
+  /* The reference's single CSS transition: 150ms on this curve. UI states
+     (hover, press, chip toggles) use it so the deck's micro-interactions feel
+     like the same system as its reveals. */
+  --rw-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --rw-dur-fast: 150ms;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --deck-nav-inset: 66px;
+  }
+}
+
+.dark {
+  --background: #0A0A0B;
+  --foreground: #FAFAFA;
+  --muted: #27272A;
+  --muted-foreground: #A1A1AA;
+  --border: #27272A;
+  --input: #27272A;
+  --card: #0A0A0B;
+  --card-foreground: #FAFAFA;
+  --card-border: #27272A;
+  --primary: #FAFAFA;
+  --primary-foreground: #191919;
+  --secondary: #18181B;
+  --secondary-foreground: #FAFAFA;
+  --accent: #FFFFFF;
+  --accent-foreground: #000000;
+  --destructive: #7F1D1D;
+  --destructive-foreground: #FAFAFA;
+  --chart-1: #2E2E30;
+  --chart-2: #52525B;
+  --chart-3: #7C7C86;
+  --chart-4: #A1A1AA;
+  --chart-5: #D4D4D8;
+  --radius: 0.5rem;
+}
+
+/* Alethia theme: lime accent on deep navy, white headings.
+
+   The legacy token NAMES (--cyan, --navy-0..4, --amber, ...) are the original
+   Alethia palette and are what every face is authored against.
+
+   Layout language — rounded white-hairline chrome, the orbit starfield, the
+   crisp-edges mascot rendering — was adapted from the Web Rewind reference, but
+   the COLOURS are Alethia's own: lime on navy, not the reference's purple and
+   orange. `--spectrum` is therefore a lime ramp, not the reference spectrum. */
+:root {
+  --background: #080b10;
+  --panel: #131a22;
+  --border: #1e2731;
+  --navy-0: #080b10;
+  --navy-1: #0d1219;
+  --navy-2: #111820;
+  --navy-3: #161e27;
+  --navy-4: #1c2530;
+  --ink-0: #000000;
+  --ink-1: #05070a;
+  --ink-2: #0a0e14;
+  --ink-3: #10161f;
+  --hairline: #1c2530;
+  --line: #1e2731;
+  --blue: #24303c;
+  --ice: #f2f6f9;
+  --body: #c2ccd6;
+  --muted: #8593a1;
+  --steel: #6b7885;
+  --violet: #7c8fa3;
+
+  /* Accents — Alethia's lime family. */
+  --cyan: #a6e86b;
+  --cyan-bright: #b7f27d;
+  --green: #7ed957;
+  --red: #f0645b;
+  --amber: #9aa7b4;
+  --signal: #f2a33c;
+  --signal-dim: #7a5320;
+
+  /* Single-hue lime ramp. Used for bars, rules and capsule fills so every
+     gradient in the deck stays inside the Alethia palette. */
+  --spectrum: linear-gradient(
+    90deg,
+    #5e8f2e 0%,
+    #7ed957 34%,
+    #a6e86b 58%,
+    #d8f58f 82%,
+    #f2fbd0 100%
+  );
+  --spectrum-vert: linear-gradient(
+    0deg,
+    #5e8f2e 0%,
+    #7ed957 34%,
+    #a6e86b 58%,
+    #d8f58f 82%,
+    #f2fbd0 100%
+  );
+
+  /* Type system — Alethia's original stack. Roboto Condensed carries the
+     oversized headlines, Archivo the tracked labels, IBM Plex Mono the data.
+     (A Space Mono / Be Vietnam Pro swap was tried here and reverted: both are
+     far wider than these faces and broke line-wrapping across the deck.) */
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", sans-serif;
+  --font-pixel: "Silkscreen", sans-serif;
+  --font-condensed: "Roboto Condensed", "Archivo", sans-serif;
+  --font-grotesk: "Archivo", "Inter", sans-serif;
+  /* Alias kept for the terminal/label voice introduced by the redesign;
+     resolves to Archivo so it matches the deck's existing label style. */
+  --font-terminal: "Archivo", "Inter", sans-serif;
+
+  /* The reference's easing, kept alongside the two earlier passes. */
+  --ease-rewind: cubic-bezier(0.59, 0, 0.39, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --mb-ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --mb-ease-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* The reference rounds its chrome to ~10px. */
+  --rw-radius: 10px;
+  --rw-radius-lg: 14px;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body, "Inter"), sans-serif;
+    background-color: black !important;
+  }
+
+  
+  .font-body {
+    font-family: var(--font-body, "Inter"), sans-serif;
+  }
+
+  .font-heading {
+    font-family: var(--font-heading, "Inter"), sans-serif;
+  }
+
+}
+
+/* ==================================================================== *
+ *  Design language adapted from the 8bit.ai reference
+ *  - elongated hexagon as the structural frame
+ *  - hairline rotating ring as the motion motif
+ *  - diagonal black vignette over every slide
+ *  - mask reveals driven by their two custom easings
+ * ==================================================================== */
+
+/* The hexagon from their `shape-outline` symbol (viewBox 0 0 182 206),
+   converted to a percentage polygon. */
+.u8-hex {
+  clip-path: polygon(
+    50% 0.84%,
+    97.2% 23.84%,
+    97.2% 73%,
+    50% 99.2%,
+    2.85% 76.2%,
+    2.85% 27%
+  );
+}
+
+/* Diagonal black wash. On the reference this sits above the content at
+   45deg; here it is tuned down so lime text stays legible. */
+.u8-vignette {
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0.55) 24%,
+    rgba(0, 0, 0, 0.94) 50%,
+    rgba(0, 0, 0, 0.94) 66%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Their ring: circle r=20 in a 25..75 viewBox, stroke-width 0.2. */
+@keyframes u8-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.u8-ring {
+  animation: u8-spin 1.6s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+/* Slower variant for ambient background rings. */
+@keyframes u8-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.u8-ring-slow {
+  animation: u8-spin-slow 14s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u8-ring,
+  .u8-ring-slow {
+    animation: none;
+  }
+}
+
+/* Mask reveal: the child slides up out of an overflow-hidden box, the
+   signature move of the reference logo/header. */
+.u8-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.u8-mask > * {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1000ms var(--ease-in-out-cubic);
+}
+
+.u8-mask[data-shown="true"] > * {
+  transform: translateY(0);
+}
+
+/* Micro label: the overline that sits above every section title. */
+.u8-overline {
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Hairline rule used as a divider instead of a boxed container. */
+.u8-hairline {
+  background: var(--hairline);
+  height: 1px;
+  width: 100%;
+}
+
+/* Hover treatment across the deck: dim to 50% rather than recolour. Timed to
+   the reference's 150ms so hover and press read as immediate. */
+.u8-dim {
+  transition: opacity var(--rw-dur-fast) var(--rw-ease);
+}
+
+.u8-dim:hover {
+  opacity: 0.5;
+}
+
+/* ==================================================================== *
+ *  Motion lifted verbatim from madbox.io
+ *  Their site is GSAP + Three.js; these are the CSS-layer keyframes and
+ *  the two custom easings that drive every transition on it.
+ * ==================================================================== */
+
+/* @keyframes bounce from .a-experiencePin — a swell, a dip, then rest. */
+@keyframes mb-bounce {
+  0% {
+    transform: scale(1);
+  }
+  5% {
+    transform: scale(1.2);
+  }
+  10% {
+    transform: scale(0.95);
+  }
+  14%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* @keyframes hand — the idle wave they use on CTA affordances. */
+@keyframes mb-hand {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: translateX(-50px);
+  }
+  24% {
+    transform: scale(1) translateX(-50px);
+  }
+  30% {
+    transform: scale(0.96) translateX(-50px);
+  }
+  35% {
+    transform: scale(1.1) translateX(-50px);
+  }
+  40% {
+    transform: scale(0.99) translateX(-50px);
+  }
+  50%,
+  100% {
+    transform: scale(1) translateX(0px);
+  }
+}
+
+/* Their primary easing, on a 6s loop, staggered by --mb-index. */
+.mb-bounce {
+  animation: mb-bounce 6s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  animation-delay: calc(var(--mb-index, 0) * 0.1s);
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* Idle drift for the floating landmasses, layered under the pulse. */
+@keyframes mb-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+.mb-drift {
+  animation: mb-drift 7s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  animation-delay: calc(var(--mb-index, 0) * 0.14s);
+  will-change: transform;
+}
+
+.mb-wave {
+  animation: mb-hand 2.6s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Scan sweep for the pixel-head avatar: travels down the face plate and
+   resets off the top, so it reads as a live feed rather than a static badge. */
+@keyframes mb-scan {
+  0% {
+    transform: translate3d(0, 4%, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(0, 92%, 0);
+    opacity: 0;
+  }
+}
+
+.mb-scan {
+  animation: mb-scan 3.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mb-scan {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mb-bounce,
+  .mb-drift,
+  .mb-wave {
+    animation: none;
+  }
+}
+
+
+.scroll-container {
+  position: relative;
+  overflow: visible;
+  height: auto;
+  min-height: 100dvh;
+  background-color: transparent;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+  width: auto;
+  overflow: visible;
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.faces-container {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+/* Slide wrapper styles */
+.slide-face-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+
+
+/* Preview mode: stack slides and use visibility to hide inactive ones */
+/* opacity: 0 prevents face children from overriding visibility: hidden */
+.slides-preview-content .slide-face-wrapper {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slides-preview-content .slide-face-wrapper [data-face-root][data-face-visible="false"]:not([data-face-webgl="true"]) {
+  content-visibility: hidden;
+}
+
+.slides-preview-content .slide-face-wrapper[data-active="true"] {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide-face-wrapper[data-allow-scroll="true"] {
+  overflow: auto;
+}
+
+/* On touch devices, keep vertical pans on the page scroll path so selecting
+   one slide does not trap gestures inside the selected slide's subtree. */
+@media (hover: none) and (pointer: coarse) {
+  body:not([data-preview-mode]) .scroll-container {
+    touch-action: pan-y;
+  }
+
+  body:not([data-preview-mode]) .slide-face-wrapper,
+  body:not([data-preview-mode]) .slide-face-wrapper [data-face-root],
+  body:not([data-preview-mode]) .slide-face-wrapper [data-face-root] * {
+    touch-action: pan-y;
+  }
+}
+
+.slides-preview-content .slide-face-wrapper[data-allow-scroll="true"] {
+  scrollbar-width: none;
+}
+
+.slides-preview-content .slide-face-wrapper[data-allow-scroll="true"]::-webkit-scrollbar {
+  display: none;
+}
+
+/* Face content container - always full width for slides-only */
+[data-face-content-container] {
+  width: 100%;
+  max-width: 100%;
+}
+
+
+/* Slides preview container - fullscreen with black background */
+.slides-preview-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
+}
+
+.slides-preview-content {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Subtle dark outline so slide boundaries remain visible against the
+   black container background even when the face itself is black. */
+.slides-preview-content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Fullscreen desktop slideshow: edge-to-edge slide with no rounded corners
+   or outline. The container keeps its black background so the viewport
+   letterboxes with black bars whenever the aspect ratio doesn't match. */
+.slides-preview-content[data-slides-display="fullscreen"] {
+  border-radius: 0;
+}
+
+.slides-preview-content[data-slides-display="fullscreen"]::after {
+  display: none;
+}
+
+.slides-preview-content[data-slides-display="cards"]::after {
+  border: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 2px rgba(15, 23, 42, 0.06);
+}
+
+.slides-preview-content[data-slides-display="cards"] {
+  box-shadow: none;
+}
+
+.slides-preview-content[data-slides-display="cards"][data-cards-corners="square"] {
+  border-radius: 0;
+}
+
+.mobile-slideshow-slide-area .slides-preview-content[data-cards-corners="square"],
+.mobile-slideshow-layout[data-slides-display="cards"] .slides-preview-content[data-cards-corners="square"] {
+  border-radius: 0;
+}
+
+.stacked-slides-container[data-slides-display="cards"][data-cards-corners="square"]
+  .stacked-slide-wrapper,
+.stacked-mobile-slides-container[data-slides-display="cards"][data-cards-corners="square"]
+  .stacked-slide-wrapper {
+  border-radius: 0;
+}
+
+
+
+/* Hover zone around the dots (proximity dimming is tracked at the window level) */
+.slides-dots-hover-zone {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9998;
+  padding: 16px 24px 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Stack: dots pill and the collapsed handle share one cell so the rail can
+   smoothly shrink down into the handle (and grow back) instead of swapping. */
+.slides-dots-stack {
+  display: grid;
+  align-items: end;
+  justify-items: center;
+}
+
+.slides-dots-stack > * {
+  grid-area: 1 / 1;
+}
+
+/* Dots indicator - white rounded container; opacity ramps up with proximity */
+.slides-dots-indicator {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: #f3f3f3;
+  border: 1.5px solid #dddddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  opacity: 0.2;
+  transform-origin: bottom center;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slides-dots-stack[data-collapsed="true"] .slides-dots-indicator {
+  transform: scale(0.5);
+  pointer-events: none;
+}
+
+/* Segmented control: a fixed-width viewport that clips a scrollable timeline
+   of numbered cells, with a draggable sliding thumb. */
+.slides-seg-viewport {
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+}
+
+.slides-seg-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 20px;
+  width: max-content;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Each slide gets a 32x20 cell; only its number shows, the box is invisible */
+.slides-seg-cell {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  flex: 0 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #a6a6a6;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.slides-seg-cell[data-active="true"] {
+  color: #070707;
+  cursor: grab;
+}
+
+.slides-seg-cell[data-active="true"]:active {
+  cursor: grabbing;
+}
+
+/* White thumb with a 1.5px outline sits behind the numbers; turns glassy
+   while being dragged */
+.slides-seg-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  box-sizing: border-box;
+  height: 20px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1.5px solid #dddddd;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.slides-seg-thumb[data-dragging="true"] {
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(7px) saturate(1.5);
+  backdrop-filter: blur(7px) saturate(1.5);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Edge fades over the secondary background; hovering scrolls the timeline */
+.slides-seg-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 28px;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.slides-seg-fade-left {
+  left: 0;
+  background: linear-gradient(to right, #f3f3f3 35%, rgba(243, 243, 243, 0));
+}
+
+.slides-seg-fade-right {
+  right: 0;
+  background: linear-gradient(to left, #f3f3f3 35%, rgba(243, 243, 243, 0));
+}
+
+.slides-bottom-indicator-handle {
+  background: rgba(15, 23, 42, 0.72);
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  transform: scale(0.5);
+  transform-origin: bottom center;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slides-dots-stack[data-collapsed="true"] .slides-bottom-indicator-handle {
+  transform: scale(1);
+}
+
+/* Edge arrows for navigation */
+.slides-edge-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 16px;
+  background: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  z-index: 9997;
+  opacity: 0;
+  pointer-events: none;
+  color: #fff;
+}
+
+.slides-edge-arrow[data-visible="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* Top indicator - collapsed state */
+.slides-top-indicator {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: top center;
+  background: rgba(15, 23, 42, 0.72);
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.28);
+  z-index: 9998;
+  opacity: 0.2;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Stacked slides container - full width vertical scroll (default) */
+.stacked-slides-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  align-items: center;
+}
+
+/* Grabbable deck, mirroring the reference's `grabbable` <html>. The cursor
+   only becomes a grab over the slide field; controls keep their own cursor.
+   `perspective` turns the horizontal stack into a depth corridor — see
+   useDeckDepth. The origin sits at the centre of the visible area, so the
+   slide under the pointer is always the one facing the viewer. */
+.stacked-slides-container[data-slides-display="fullscreen"] {
+  cursor: grab;
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
+}
+
+.stacked-slides-container[data-slides-display="fullscreen"] button,
+.stacked-slides-container[data-slides-display="fullscreen"] a {
+  cursor: pointer;
+}
+
+.stacked-slides-container[data-dragging="true"] {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.stacked-slide-wrapper {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  /* Inline dimensions let the browser skip offscreen slides without shifting
+     scroll geometry; the pptx-export page overrides this back to visible */
+  content-visibility: auto;
+}
+
+.stacked-slide-wrapper .slide-face-wrapper {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Horizontal orientation */
+.stacked-slides-container[data-orientation="horizontal"] {
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  height: 100dvh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Card display mode (vertical): black backdrop with gutters between slides
+   and rounded corners on each slide, mirroring slideshow cards mode. */
+.stacked-slides-container[data-slides-display="cards"] {
+  background: #000;
+  padding: 32px;
+  gap: 32px;
+  min-height: 100dvh;
+}
+
+.stacked-slides-container[data-slides-display="cards"][data-orientation="horizontal"] {
+  min-height: 0;
+  padding: 32px;
+  gap: 32px;
+}
+
+.stacked-slides-container[data-slides-display="cards"] .stacked-slide-wrapper {
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.stacked-slides-container[data-slides-display="cards"]
+  .stacked-slide-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 2px rgba(15, 23, 42, 0.06);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Mobile stacked variants */
+.stacked-mobile-slides-container[data-orientation="horizontal"] {
+  flex-direction: row;
+  width: 100vw;
+  height: 100dvh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.stacked-mobile-slides-container[data-slides-display="cards"] {
+  background: #000;
+  padding: 8px;
+  gap: 8px;
+  min-height: 100dvh;
+}
+
+.stacked-mobile-slides-container[data-slides-display="cards"][data-orientation="horizontal"] {
+  min-height: 0;
+  padding: 8px;
+  gap: 8px;
+}
+
+.stacked-mobile-slides-container[data-slides-display="cards"]
+  .stacked-slide-wrapper {
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.stacked-mobile-slides-container[data-slides-display="cards"]
+  .stacked-slide-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 2px rgba(15, 23, 42, 0.06);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Fullscreen stacked slides occupy one viewport each. The scaled artboard is
+   centered inside that viewport, so adjacent slides never peek into view. */
+.stacked-slides-container[data-slides-display="fullscreen"],
+.stacked-mobile-slides-container[data-slides-display="fullscreen"] {
+  width: 100vw;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.stacked-slides-container[data-slides-display="fullscreen"][data-orientation="horizontal"],
+.stacked-mobile-slides-container[data-slides-display="fullscreen"][data-orientation="horizontal"] {
+  flex-direction: row;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.stacked-slides-container[data-slides-display="fullscreen"][data-orientation="vertical"],
+.stacked-mobile-slides-container[data-slides-display="fullscreen"][data-orientation="vertical"] {
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* Mobile slideshow layout: the slide fills the entire viewport at its
+   natural scale (cards or fullscreen) and a bottom sheet overlays the
+   bottom edge with navigation controls. The sheet auto-opens on slide
+   change, auto-closes after a delay, and can be toggled by tapping its
+   drag handle. */
+.mobile-slideshow-layout {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.mobile-slideshow-slide-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(16px + env(safe-area-inset-top)) calc(8px + env(safe-area-inset-right)) calc(55px + 16px + env(safe-area-inset-bottom)) calc(8px + env(safe-area-inset-left));
+}
+
+.mobile-slideshow-layout[data-slides-display="fullscreen"] .mobile-slideshow-slide-area {
+  padding: 0 0 calc(16px + env(safe-area-inset-bottom)) 0;
+}
+
+/* Only the active slide is visible; inactive ones stay mounted to
+   preserve state (map positions, form input, etc.) but are hidden. */
+.mobile-slideshow-slide-area .mobile-slide-item {
+  display: none;
+}
+.mobile-slideshow-slide-area .mobile-slide-item[data-active="true"] {
+  display: flex;
+}
+
+.mobile-slideshow-slide-area .slides-preview-content {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.mobile-slideshow-slide-area .slides-preview-content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mobile-slideshow-layout[data-slides-display="fullscreen"] .slides-preview-content {
+  border-radius: 0;
+}
+.mobile-slideshow-layout[data-slides-display="fullscreen"] .slides-preview-content::after {
+  display: none;
+}
+
+.mobile-slideshow-layout[data-slides-display="cards"] .slides-preview-content::after {
+  border: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 2px rgba(15, 23, 42, 0.06);
+}
+
+.mobile-slideshow-layout[data-slides-display="cards"] .slides-preview-content {
+  box-shadow: none;
+}
+
+/* Bottom sheet — anchored to the viewport bottom, always visible with the
+   slide navigation controls. */
+.mobile-slideshow-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  height: calc(55px + env(safe-area-inset-bottom));
+  padding: 12px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow:
+    0 -8px 24px 0 rgba(0, 0, 0, 0.08),
+    0 -2px 6px 0 rgba(0, 0, 0, 0.04);
+}
+
+.mobile-slideshow-sheet[data-safari-ios="true"] {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
+.mobile-slideshow-sheet-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 100%;
+}
+
+.mobile-slideshow-sheet-content > .slides-dots-indicator {
+  flex: 0 0 auto;
+}
+
+.mobile-slideshow-sheet-content[data-stepper-fill="true"]
+  > .slides-dots-indicator {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.slides-seg-viewport[data-fill="true"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+}
+
+/* Native horizontal touch scrolling (mobile) instead of edge-hover paging */
+.slides-seg-viewport[data-scroll="native"] {
+  overflow-x: auto;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slides-seg-viewport[data-scroll="native"]::-webkit-scrollbar {
+  display: none;
+}
+
+.slides-seg-viewport[data-scroll="native"] .slides-seg-track {
+  touch-action: pan-x;
+}
+
+.slides-seg-viewport[data-scroll="native"] .slides-seg-cell[data-active="true"] {
+  cursor: pointer;
+}
+
+/* Matches the @perhaps/ui Button "secondary" variant: chunky offset
+   shadow that halves on hover and collapses on press, with a 1.5px
+   border. The button also reserves a 4px bottom margin so pressing it
+   down doesn't shift neighbouring elements. */
+.mobile-slideshow-sheet-arrow {
+  all: unset;
+  box-sizing: border-box;
+  width: 31px;
+  height: 31px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #070707;
+  border: 1.5px solid #dddddd;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 2px 0 0 #ededed;
+  transform: translate3d(0, 0, 0);
+  will-change: opacity, transform;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease,
+    opacity 0.15s ease;
+}
+
+@media (hover: hover) {
+  .mobile-slideshow-sheet-arrow:hover:not(:disabled) {
+    transform: translate3d(0, 1px, 0);
+    box-shadow: 0 1px 0 0 #ededed;
+  }
+}
+
+.mobile-slideshow-sheet-arrow:active:not(:disabled) {
+  transform: translate3d(0, 2px, 0);
+  box-shadow: 0 0 0 0 #ededed;
+}
+
+.mobile-slideshow-sheet-arrow:disabled {
+  cursor: default;
+}
+
+.mobile-slideshow-sheet-arrow:disabled > * {
+  opacity: 0.35;
+}
+
+/* Mobile slides vertical scroll container */
+.mobile-slides-container {
+  min-height: 100dvh;
+  width: 100%;
+  background: #000;
+  padding: calc(16px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) calc(100px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  /* Reserve vertical swipes for page scrolling so drags/swipes over
+     interactive face content still let the user scroll between slides.
+     Taps still dispatch click events. */
+  touch-action: pan-y;
+}
+
+/* Fullscreen display: edge-to-edge slides, no cards styling */
+.mobile-slides-container[data-slides-display="fullscreen"] {
+  background: transparent;
+  padding: 0;
+  gap: 0;
+}
+
+.mobile-slides-container[data-slides-display="fullscreen"] .slides-preview-content {
+  border-radius: 0;
+}
+
+.mobile-slides-container[data-slides-display="fullscreen"] .slides-preview-content::after {
+  display: none;
+}
+
+.mobile-slide-item {
+  width: 100%;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  touch-action: pan-y;
+}
+
+/* Force vertical-pan scrolling to win over any touch handlers set by
+   face content (drag/swipe widgets, canvases, etc.). Elements that
+   genuinely need to capture gestures can opt out with
+   touch-action: none at a deeper level. */
+.mobile-slide-item [data-face-root],
+.mobile-slide-item [data-face-root] * {
+  touch-action: pan-y;
+}
+
+/* Pause CSS animations on off-screen Faces (flag set by FaceShell) */
+[data-face-root][data-face-visible="false"],
+[data-face-root][data-face-visible="false"] * {
+  animation-play-state: paused !important;
+}
+
+/* Stacked mobile slides container - full width, no margins, no snap */
+.stacked-mobile-slides-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  align-items: center;
+}
+
+/* ==================================================================== *
+ *  Web Rewind reference language
+ *    - crisp-edges rendering for the 3D mascot
+ *    - the five-stop spectrum as a reusable fill
+ *    - white-hairline rounded chrome instead of hard-cut grids
+ *    - the reference's retro scrollbar
+ * ==================================================================== */
+
+/* The mascot is a rendered pixel sprite. Without this the browser resamples
+   its blocky edges and the illusion collapses. */
+.rw-pixel {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+.rw-spectrum {
+  background: var(--spectrum);
+}
+
+.rw-spectrum-vert {
+  background: var(--spectrum-vert);
+}
+
+/* Lifts type off the dark scene, matching the reference's
+   `text-shadow: 0 0 10px rgba(0,0,0,.6)`. */
+.rw-glow {
+  text-shadow:
+    0 0 10px rgba(0, 0, 0, 0.9),
+    0 0 26px rgba(0, 0, 0, 0.7);
+}
+
+/* Rounded-rect chrome: near-black fill, white hairline, ~10px radius. The
+   deck used to hard-cut every edge; the reference rounds them. */
+.rw-panel {
+  background: var(--ink-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--rw-radius);
+}
+
+/* Full-strength white outline, for the few frames that must read as solid
+   chrome against a busy scene (the reference outlines its top-right buttons
+   in plain white). */
+.rw-panel-solid {
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: var(--rw-radius);
+}
+
+/* The reference's scrollbar: near-white lozenge with a white ring on a grey
+   track. */
+.rw-scroll::-webkit-scrollbar-thumb {
+  background: var(--body);
+  border: 2px solid #fff;
+  border-radius: 50px;
+}
+
+.rw-scroll::-webkit-scrollbar-track {
+  background: #666;
+  border: none;
+  border-radius: 50px;
+}
+
+/* Dashed orbit arc from the reference backdrop. */
+@keyframes rw-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rw-orbit {
+  animation: rw-spin-slow 60s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.rw-orbit-reverse {
+  animation: rw-spin-slow 90s linear infinite reverse;
+  transform-origin: 50% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rw-orbit,
+  .rw-orbit-reverse {
+    animation: none;
+  }
+}
+
+

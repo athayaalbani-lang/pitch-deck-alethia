@@ -1,0 +1,77 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "03 // practice modules" },
+    "title": { "type": "text", "content": "Three Scenarios, One Guided Path" },
+    "lockIcon": { "type": "icon", "name": "lock" },
+    "modules": {
+      "type": "table",
+      "title": "Modules",
+      "columns": [
+        { "key": "index", "title": "Index", "type": "text" },
+        { "key": "name", "title": "Name", "type": "text" },
+        { "key": "route", "title": "Route", "type": "text" },
+        { "key": "points", "title": "Points", "type": "text" },
+        { "key": "mechanic", "title": "Mechanic", "type": "text" },
+        { "key": "chip", "title": "State chip", "type": "text" },
+        { "key": "state", "title": "State key", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "m1",
+          "index": "01",
+          "name": "Courier SMS Phishing",
+          "route": "/simulation/courier-sms",
+          "points": "Step 01",
+          "mechanic": "Inspect a fictional delivery message, verify, then choose a response",
+          "chip": "Available",
+          "state": "open"
+        },
+        {
+          "id": "m2",
+          "index": "02",
+          "name": "Marketplace Social Engineering",
+          "route": "/simulation/social-engineering",
+          "points": "Step 02",
+          "mechanic": "Combine contextual clues and choose a mitigation",
+          "chip": "Next in path",
+          "state": "locked"
+        },
+        {
+          "id": "m3",
+          "index": "03",
+          "name": "Risky Document Analysis",
+          "route": "/simulation/executable-file",
+          "points": "Step 03",
+          "mechanic": "Inspect file details, verify the source, then decide",
+          "chip": "Next in path",
+          "state": "locked"
+        }
+      ]
+    },
+    "guarantees": {
+      "type": "table",
+      "title": "Guarantees",
+      "columns": [
+        { "key": "key", "title": "Key", "type": "text" },
+        { "key": "value", "title": "Value", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "g1",
+          "key": "Guided sequence",
+          "value": "Module access follows the learner's recorded progress"
+        },
+        {
+          "id": "g2",
+          "key": "Three scenario types",
+          "value": "SMS · marketplace conversation · risky document"
+        },
+        {
+          "id": "g3",
+          "key": "Return and review",
+          "value": "Completed modules remain available to revisit"
+        }
+      ]
+    }
+  }
+}
