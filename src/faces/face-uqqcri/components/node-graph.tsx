@@ -21,12 +21,17 @@ export function NodeGraph({
   fill = false,
   /** Multiplies the whole scene's opacity — for use behind foreground content. */
   dim = 1,
+  /* Draw only the curve and its waypoints. Used where the graph is a faint
+     texture behind artwork rather than a panel, where the opaque ground and
+     grid would read as a stray box. */
+  bare = false,
 }: {
   active: boolean;
   nodes: string[];
   adminLabel: string;
   fill?: boolean;
   dim?: number;
+  bare?: boolean;
 }) {
   return (
     <div
@@ -35,21 +40,24 @@ export function NodeGraph({
       }`}
       style={{
         opacity: dim,
-        backgroundColor: "#080b10",
-        backgroundImage:
-          "linear-gradient(to right, rgba(166,232,107,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(166,232,107,.055) 1px, transparent 1px)",
+        backgroundColor: bare ? "transparent" : "#080b10",
+        backgroundImage: bare
+          ? undefined
+          : "linear-gradient(to right, rgba(166,232,107,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(166,232,107,.055) 1px, transparent 1px)",
         backgroundSize: fill ? "64px 64px" : "48px 48px",
       }}
     >
       {/* Bloom behind the curve so the lime reads as emitted light. */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(166,232,107,0.10) 0%, rgba(166,232,107,0.03) 45%, transparent 70%)",
-        }}
-        aria-hidden="true"
-      />
+      {!bare && (
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(166,232,107,0.10) 0%, rgba(166,232,107,0.03) 45%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
+      )}
 
       <svg
         className="absolute inset-0 h-full w-full"

@@ -42,9 +42,9 @@ export default function DashboardFace() {
                   src="/media/operator-pixel-cutout.svg"
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="font-mono text-[7px] @xl:text-[10px] uppercase tracking-[.14em] text-[#a6e86b]">Achievement update</p>
+                  <p className="font-mono text-[7px] @xl:text-[10px] uppercase tracking-[.14em] text-[var(--lime)]">Achievement update</p>
                   <p className="mt-1 text-[10px] @xl:text-base font-semibold">New achievements appear here as you practise.</p>
-                  <p className="mt-0.5 text-[7px] @xl:text-[10px] text-[#8191a1]">Examples shown in this presentation are illustrative; learner records vary.</p>
+                  <p className="mt-0.5 text-[7px] @xl:text-[10px] text-[var(--ink-muted)]">Examples shown in this presentation are illustrative; learner records vary.</p>
                 </div>
                 <ProductPill>Personal record</ProductPill>
               </div>
@@ -66,18 +66,18 @@ export default function DashboardFace() {
             <ProductPanel className="flex h-full min-h-0 flex-col">
               <div className="mb-2 @xl:mb-4 flex items-center justify-between gap-3">
                 <div>
-                  <h2 className="font-mono text-[8px] @xl:text-[11px] font-bold uppercase tracking-[.14em] text-[#a6e86b]">Practice modules</h2>
-                  <p className="mt-1 text-[7px] @xl:text-[10px] text-[#8191a1]">Published modules in the current prototype</p>
+                  <h2 className="font-mono text-[8px] @xl:text-[11px] font-bold uppercase tracking-[.14em] text-[var(--lime)]">Practice modules</h2>
+                  <p className="mt-1 text-[7px] @xl:text-[10px] text-[var(--ink-muted)]">Published modules in the current prototype</p>
                 </div>
                 <ProductPill tone="signal">3 modules</ProductPill>
               </div>
               <div className="grid min-h-0 flex-1 grid-cols-3 gap-2 @xl:gap-3">
                 {modules.map((module, index) => (
-                  <Reveal as="article" className="flex h-full min-w-0 flex-col overflow-hidden border border-[#263544] bg-[#0b1420]" index={index} key={module.title} step={0.09} y={16}>
+                  <Reveal as="article" className="flex h-full min-w-0 flex-col overflow-hidden border border-[var(--space-line)] bg-[var(--space-panel)]" index={index} key={module.title} step={0.09} y={16}>
                     <Tilt className="flex h-full min-h-0 flex-col" max={5} lift={8}>
                       {/* `Tilt` needs a real box to rotate, so the card's own
                           height is applied here rather than on the wrapper. */}
-                      <div className="relative h-[34%] min-h-10 overflow-hidden bg-gradient-to-br from-[#161e27] to-[#0c1521]">
+                      <div className="relative h-[34%] min-h-10 overflow-hidden bg-gradient-to-br from-[var(--space-raised)] to-[var(--space-panel)]">
                         <div
                           aria-hidden="true"
                           className="absolute inset-0 opacity-50"
@@ -92,17 +92,17 @@ export default function DashboardFace() {
                           className="absolute inset-y-0 right-0 w-[65%]"
                           depth={16}
                           float={5}
-                          glow="#7fc4ff"
+                          glow="var(--signal-info)"
                           src={module.image}
                         />
-                        <span className="absolute left-2 top-2 @xl:left-3 @xl:top-3 font-mono text-[6px] @xl:text-[9px] text-[#a6e86b]">{module.status}</span>
+                        <span className="absolute left-2 top-2 @xl:left-3 @xl:top-3 font-mono text-[6px] @xl:text-[9px] text-[var(--lime)]">{module.status}</span>
                       </div>
                       <div className="flex flex-1 flex-col p-2 @xl:p-4">
                         <h3 className="text-[8px] @xl:text-sm font-bold leading-tight">{module.title}</h3>
-                        <p className="mt-1.5 @xl:mt-2 text-[7px] @xl:text-[10px] leading-relaxed text-[#8191a1]">{module.copy}</p>
-                        <div className="mt-auto flex items-center justify-between gap-2 border-t border-[#263544] pt-2 @xl:pt-3 font-mono text-[6px] @xl:text-[9px]">
-                          <span className="text-[#a6e86b]">Access follows progress</span>
-                          <span className="text-[#8191a1]">→</span>
+                        <p className="mt-1.5 @xl:mt-2 text-[7px] @xl:text-[10px] leading-relaxed text-[var(--ink-muted)]">{module.copy}</p>
+                        <div className="mt-auto flex items-center justify-between gap-2 border-t border-[var(--space-line)] pt-2 @xl:pt-3 font-mono text-[6px] @xl:text-[9px]">
+                          <span className="text-[var(--lime)]">Access follows progress</span>
+                          <span className="text-[var(--ink-muted)]">→</span>
                         </div>
                       </div>
                       <Glint delay={0.5 + index * 0.12} />
@@ -119,15 +119,15 @@ export default function DashboardFace() {
                 <ProductPanel className="relative flex h-full min-h-0 flex-col">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h2 className="font-mono text-[8px] @xl:text-[11px] font-bold uppercase tracking-[.14em] text-[#a6e86b]">Daily quest</h2>
+                      <h2 className="font-mono text-[8px] @xl:text-[11px] font-bold uppercase tracking-[.14em] text-[var(--lime)]">Daily quest</h2>
                       <p className="mt-1 @xl:mt-3 text-[10px] @xl:text-lg font-semibold">A short activity for today</p>
-                      <p className="mt-1 text-[7px] @xl:text-[10px] leading-relaxed text-[#8191a1]">Quest definitions and rewards are configured in the admin tools.</p>
+                      <p className="mt-1 text-[7px] @xl:text-[10px] leading-relaxed text-[var(--ink-muted)]">Quest definitions and rewards are configured in the admin tools.</p>
                     </div>
                     <Sprite3D alt="" className="h-9 w-9 shrink-0 @xl:h-14 @xl:w-14" depth={14} float={4} spin src="/media/levelone.webp" />
                   </div>
-                  <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#263544] pt-2 @xl:pt-4">
+                  <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--space-line)] pt-2 @xl:pt-4">
                     <ProductPill>Account-specific</ProductPill>
-                    <span className="font-mono text-[7px] @xl:text-[10px] text-[#a6e86b]">View quest →</span>
+                    <span className="font-mono text-[7px] @xl:text-[10px] text-[var(--lime)]">View quest →</span>
                   </div>
                   <Glint />
                 </ProductPanel>
@@ -138,15 +138,15 @@ export default function DashboardFace() {
               <Tilt className="flex h-full min-h-0 flex-col" max={4} lift={8}>
                 <ProductPanel className="flex h-full min-h-0 flex-col justify-between">
                   <div>
-                    <h2 className="font-mono text-[8px] @xl:text-[11px] font-bold uppercase tracking-[.14em] text-[#a6e86b]">Daily activity</h2>
+                    <h2 className="font-mono text-[8px] @xl:text-[11px] font-bold uppercase tracking-[.14em] text-[var(--lime)]">Daily activity</h2>
                     <p className="mt-1 @xl:mt-3 text-[9px] @xl:text-base font-semibold">Streaks track practice over time.</p>
-                    <p className="mt-1 text-[7px] @xl:text-[10px] text-[#8191a1]">The current and longest streak depend on learner activity.</p>
+                    <p className="mt-1 text-[7px] @xl:text-[10px] text-[var(--ink-muted)]">The current and longest streak depend on learner activity.</p>
                   </div>
                   {/* A shimmer, not a bar chart: the slide deliberately shows no
                       activity values, so nothing here may imply a quantity. */}
                   <div className="flex items-end gap-1.5 @xl:gap-2" aria-label="Illustrative weekly activity strip">
                     {week.map((day) => (
-                      <ScanBar className="h-4 flex-1 border border-[#263544] bg-[#0b1420] @xl:h-8" delay={day * 0.16} key={day} />
+                      <ScanBar className="h-4 flex-1 border border-[var(--space-line)] bg-[var(--space-panel)] @xl:h-8" delay={day * 0.16} key={day} />
                     ))}
                   </div>
                 </ProductPanel>

@@ -810,8 +810,20 @@
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-  /* Inline dimensions let the browser skip offscreen slides without shifting
-     scroll geometry; the pptx-export page overrides this back to visible */
+}
+
+/* In fullscreen, offscreen slides must stay laid out.
+   `content-visibility: auto` lets the browser skip an offscreen slide and stand
+   in `contain-intrinsic-size` for its box. That placeholder disagreed with the
+   slide's real size, so the scroll offsets the deck computes from these wrappers
+   did not describe the laid-out stack — a scroll to slide 4 landed a few hundred
+   pixels off, leaving every slide permanently off-centre and sliced by the
+   viewport edge. Thirteen slides are cheap to lay out; a scroll position that is
+   never the one asked for is not.
+
+   Cards mode keeps the optimisation, where offscreen slides do need skipping and
+   nothing depends on exact scroll offsets. */
+.stacked-slides-container[data-slides-display="cards"] .stacked-slide-wrapper {
   content-visibility: auto;
 }
 
@@ -917,18 +929,31 @@
   align-items: stretch;
 }
 
+/* Horizontal fullscreen: the stack scrolls natively along the inline axis.
+   `overflow-x` MUST stay `auto` — it was `hidden` here, which silently made the
+   container unscrollable, so `scrollTo` did nothing and every prev/next only
+   advanced the hash while the deck stayed put, leaving the active slide sliced
+   by the viewport edge.
+
+   No CSS scroll-snap: its candidate set includes the container's fixed-position
+   background layer, which contributes no scrollable width yet sits at the
+   viewport's centre — so it anchored every settle to itself and the deck rested
+   a few hundred pixels off any slide boundary. Exact alignment is done in JS
+   instead, against each slide's own layout box. */
 .stacked-slides-container[data-slides-display="fullscreen"][data-orientation="horizontal"],
 .stacked-mobile-slides-container[data-slides-display="fullscreen"][data-orientation="horizontal"] {
   flex-direction: row;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: hidden;
+  overscroll-behavior-x: contain;
 }
 
 .stacked-slides-container[data-slides-display="fullscreen"][data-orientation="vertical"],
 .stacked-mobile-slides-container[data-slides-display="fullscreen"][data-orientation="vertical"] {
   flex-direction: column;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
 }
 
 /* Mobile slideshow layout: the slide fills the entire viewport at its

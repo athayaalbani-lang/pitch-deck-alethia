@@ -27,7 +27,11 @@ import {
   getFaceIdFromHash,
   setFaceIdInHash,
 } from "@/utils/face-hash";
-import { setActiveSlideIndex, useRegisterFaceNavigation } from "@/utils/face-navigation";
+import {
+  setActiveSlideIndex,
+  useRegisterFaceNavigation,
+  useSlideStepper,
+} from "@/utils/face-navigation";
 import {
   clearProgrammaticStackedScroll,
   getCurrentStackedFaceId,
@@ -137,11 +141,26 @@ function useStackedHashScroll({
     // The hash is written with `silent: true`, which fires no `hashchange`.
     // Publish the position explicitly so chrome mounted outside the deck
     // (the prev/next bar) still tracks scrolls, keys and button taps.
-    const publishCurrentFace = (faceId: string | null) => {
+    /* Publishes the slide that is actually centred.
+   The IntersectionObserver below reports whichever slide is entering the
+   viewport, which during a settle is the neighbour — so the hash and the slide
+   indicator trailed by one. Deriving the index from the scroll offset instead
+   keeps the label, the progress rail and the visible slide describing the same
+   slide.
+
+   The write lands a beat after the press rather than with it: the tracker names
+   the intended target before the scroll begins, so re-deriving from the offset
+   at that instant would read the slide being left. The settle poll further down
+   corrects it once the offset lands, which is why the URL and the counter can
+   trail the visible slide by about a second. Publishing the named face directly
+   was tried and made the lag lead by one instead, so the offset stays the
+   authority here. */
+const publishCurrentFace = (faceId: string | null) => {
       if (!faceId) return;
-      setFaceIdInHash(faceId, { silent: true });
-      const index = faceIds.indexOf(faceId);
-      if (index !== -1) setActiveSlideIndex(index);
+      const index = getCurrentStackedFaceIndex({ faceIds, orientation });
+      const centredFaceId = faceIds[index] ?? faceId;
+      setFaceIdInHash(centredFaceId, { silent: true });
+      setActiveSlideIndex(index);
     };
 
     publishCurrentFace(getCurrentStackedFaceId());
@@ -160,6 +179,19 @@ function useStackedHashScroll({
     window.addEventListener("scrollend", clearProgrammaticStackedScroll);
     window.addEventListener("hashchange", syncFromHash);
 
+    /* Re-publish once a move has finished. The tracker only fires when the
+       intended face id changes, but the scroll animates after that, so the hash
+       would keep naming a neighbour for the whole transition. `scrollend` does not
+       fire for scripted offset writes, so a poll backs it up; it only writes when
+       the hash has actually drifted from the centred slide. */
+    const settleTimer = window.setInterval(() => {
+      if (isProgrammaticStackedScroll()) return;
+      const index = getCurrentStackedFaceIndex({ faceIds, orientation });
+      const centred = faceIds[index];
+      if (!centred) return;
+      if (getFaceIdFromHash(faceIds) !== centred) publishCurrentFace(centred);
+    }, 200);
+
     return () => {
       if (rafId !== null) cancelAnimationFrame(rafId);
       intersectionObserver?.disconnect();
@@ -167,6 +199,7 @@ function useStackedHashScroll({
       unsubscribeFromTracker();
       window.removeEventListener("scrollend", clearProgrammaticStackedScroll);
       window.removeEventListener("hashchange", syncFromHash);
+      window.clearInterval(settleTimer);
       if (layoutSettleTimeoutId !== null) {
         window.clearTimeout(layoutSettleTimeoutId);
       }
@@ -184,26 +217,52 @@ function getCurrentStackedFaceIndex({
   faceIds: string[];
   orientation: StackedOrientation;
 }): number {
+  /* Nearest slide to the viewport's centre, in layout coordinates.
+   *
+   * The old test asked which slide still had pixels past the leading edge, which
+   * identifies the slide *arriving* rather than the one on screen — so pressing
+   * next twice in a row skipped a slide. Measuring against the centre matches
+   * what the deck actually shows and needs no minimum-visible threshold. Layout
+   * offsets are used rather than rects because the slides carry a 3D transform,
+   * which makes a rect no longer match the slide's real box. */
+  const container = document.querySelector<HTMLElement>(
+    ".stacked-slides-container, .stacked-mobile-slides-container",
+  );
+
+  let best = 0;
+  if (container) {
+    const centre = orientation === "HORIZONTAL"
+      ? container.scrollLeft + container.clientWidth / 2
+      : container.scrollTop + container.clientHeight / 2;
+    let bestDistance = Number.POSITIVE_INFINITY;
+
+    for (let i = 0; i < faceIds.length; i++) {
+      const faceId = faceIds[i];
+      if (!faceId) continue;
+      const element = document.querySelector<HTMLElement>(
+        `[data-face-id="${CSS.escape(faceId)}"]`,
+      );
+      if (!element) continue;
+      const midpoint =
+        orientation === "HORIZONTAL"
+          ? element.offsetLeft + element.offsetWidth / 2
+          : element.offsetTop + element.offsetHeight / 2;
+      const distance = Math.abs(midpoint - centre);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        best = i;
+      }
+    }
+
+    return best;
+  }
+
   const trackedFaceId = getCurrentStackedFaceId();
   if (trackedFaceId) {
     const trackedIndex = faceIds.indexOf(trackedFaceId);
     if (trackedIndex !== -1) return trackedIndex;
   }
-  for (let i = 0; i < faceIds.length; i++) {
-    const faceId = faceIds[i];
-    if (!faceId) continue;
-    const element = document.querySelector<HTMLElement>(
-      `[data-face-id="${CSS.escape(faceId)}"]`,
-    );
-    if (!element) continue;
-    const rect = element.getBoundingClientRect();
-    if (orientation === "HORIZONTAL") {
-      if (rect.right > CURRENT_FACE_MIN_VISIBLE_PX) return i;
-    } else if (rect.bottom > CURRENT_FACE_MIN_VISIBLE_PX) {
-      return i;
-    }
-  }
-  return 0;
+  return best;
 }
 
 function useStackedKeyboardNavigation({
@@ -465,6 +524,20 @@ export function StackedSlidesLayout({
     [visibleFaces],
   );
   useStackedNavigation({ faceIds, orientation });
+
+  /* Prev/next and the progress rail live outside this layout, so they drive the
+     deck through the shared stepper. Without a handler registered here they are
+     inert: the press still advanced the hash, so the deck *looked* like it was
+     navigating while the scroll position never moved and the active slide stayed
+     exactly where it was. */
+  useSlideStepper((direction) => {
+    const current = getCurrentStackedFaceIndex({ faceIds, orientation });
+    const next = direction === "next" ? current + 1 : current - 1;
+    const faceId = faceIds[Math.min(Math.max(next, 0), faceIds.length - 1)];
+    if (!faceId) return;
+    setCurrentStackedFaceId(faceId);
+    scrollStackedFaceIntoView(faceId, "smooth", orientation);
+  });
 
   const isHorizontal = orientation === "HORIZONTAL";
   const displayMode = slidesDisplay === "FULLSCREEN" ? "fullscreen" : "cards";

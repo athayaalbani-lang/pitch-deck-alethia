@@ -4,7 +4,7 @@ import { TextContent } from "@/components/ui/text-content";
 import { Atmosphere } from "@/components/ui/atmosphere";
 import { Ring } from "@/components/ui/8bit";
 import { SpectrumBar, SpectrumRule, TerminalLabel } from "@/components/ui/rewind";
-import { Counter, Glint, Sprite3D, Tilt } from "@/components/ui/anim";
+import { Counter, Glint, Tilt } from "@/components/ui/anim";
 import { blocks } from "./face.content.json";
 
 const MONO = "font-terminal uppercase tracking-[0.18em]";
@@ -50,22 +50,19 @@ export default function FraudMetricsFace() {
           <div className="flex-1 min-h-0 flex flex-col @xl:flex-row border-t border-[var(--line)] bg-[var(--navy-0)]">
             {/* LEFT — HEADLINE LOSS + CUMULATIVE ESCALATION */}
             <div className="relative min-h-0 shrink-0 border-b @xl:border-b-0 @xl:border-r @xl:w-[38%] border-[var(--line)] px-4 py-3 @xl:px-8 @xl:py-8 flex flex-col justify-between gap-4 @xl:gap-0">
-              {/* The floating gem sits in the empty middle of this column and
-                  is the slide's 3D object; it is decorative and never occludes
-                  the figures. */}
+              {/* The flame sits in the empty middle of this column. Decorative,
+                  and never occludes the figures: it is behind them in the
+                  stacking order and this column's figures are drawn above.
+                  The animation lives inside the asset itself (APNG sampled
+                  from the shape reference, skull frozen, fire burning), so
+                  this is a plain image — no sprite code, nothing to drive. */}
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden @xl:block">
-                {/* Positioning lives on this wrapper, never on `Sprite3D` — its
-                    own root is `position: relative`, which would win over an
-                    `absolute` passed through className. */}
-                <div className="absolute left-1/2 top-1/2 h-[26vh] w-[26vh] -translate-x-1/2 -translate-y-[42%]">
-                  <Sprite3D
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[42%]">
+                  <img
                     alt=""
-                    className="h-full w-full"
-                    depth={34}
-                    float={11}
-                    glow="#7fc4ff"
-                    spin
-                    src="/media/Diamond.png"
+                    className="block h-auto w-[252px] select-none"
+                    draggable={false}
+                    src="/media/flame-animated.png"
                   />
                 </div>
               </div>
@@ -86,7 +83,17 @@ export default function FraudMetricsFace() {
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Counter
-                      className="block font-condensed font-bold text-[var(--cyan)] text-[46px] @xl:text-[136px] leading-[0.82] tracking-[-0.03em]"
+                      /* The bottom padding is not decoration: it reserves room
+                         for this figure's own descender.
+                         `leading-[0.82]` gives a 111.5px line box for a 136px
+                         condensed face whose ascent + descent is about 162px, so
+                         the glyphs cannot fit inside it — "Rp 9,1 T" inks to
+                         y=388 while its box ends at y=331. The window label
+                         underneath began at y=342, putting a 46px overlap: the
+                         descender of the "p" ran straight through it.
+                         0.44em is that 57px of overflow plus a 14px gap. In em so
+                         it tracks the type at both breakpoints. */
+                      className="block font-condensed font-bold text-[var(--cyan)] text-[46px] @xl:text-[136px] leading-[0.82] tracking-[-0.03em] pb-[0.44em]"
                       contentKey="hero"
                       duration={1.6}
                       text={current.figure}

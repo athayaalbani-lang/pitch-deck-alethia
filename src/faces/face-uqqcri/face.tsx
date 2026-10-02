@@ -1,11 +1,22 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { Atmosphere } from "@/components/ui/atmosphere";
-import { MaskReveal } from "@/components/ui/motion";
-import { PixelHero } from "@/components/ui/rewind";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { TextContent } from "@/components/ui/text-content";
+import { PlanetBody, PlanetSpin } from "@/components/ui/planet-spin";
 import { navigateTo } from "@/utils/face-navigation";
+import { faces } from "@/faces.config.json";
 import { NodeGraph } from "./components/node-graph";
+import "./hero.css";
+
+/* Artwork.
+ *
+ * `Planetmain-cutout.png` and `Planetside-cutout.png` are derived from
+ * `Planetmain.png` and `Planetside.png`. Those two are JPEGs despite their
+ * extension, so they carry no alpha at all — what looks like transparency is a
+ * painted light-grey checkerboard — and cannot sit on the dark backdrop as-is.
+ * The cut-outs were produced by keying neutral grey seeded from the image
+ * border, which leaves the greys inside the artwork untouched. The originals are
+ * kept alongside them. */
+const PLANET_MAIN = "/media/Planetmain-cutout.png";
+const PLANET_SIDE = "/media/Planetside-cutout.png";
 
 const destinations = [
   { number: "01", label: "Practice modules", faceId: "face-1ecenb" },
@@ -13,110 +24,312 @@ const destinations = [
   { number: "03", label: "Practice insights", faceId: "face-9sa50d" },
 ];
 
+const OPENING_ID = "face-uqqcri";
+
+/* The deck's own position, kept in step with any reordering of faces.config. */
+const slideNumber = String(faces.findIndex((face) => face.id === OPENING_ID) + 1).padStart(2, "0");
+
+/* Artwork is laid out in pixels, so it needs a pixel size — and that size has to
+ * follow the artboard. CSS cannot supply it: `--u` resolves to a length, and a
+ * `transform: scale(var(--u))` is invalid for want of a unitless number. So the
+ * width is measured and the size computed, mirroring the two design bases the
+ * stylesheet uses: 1920 for the desktop artboard, 760 for the compact one. Both
+ * artboards are 16:9, so no separate height pass is needed. */
+const DESIGN_BASE = 1920;
+const COMPACT_BASE = 760;
+const COMPACT_AT = 700;
+/* Sizing is driven by the reference's proportions rather than by the artwork's
+   own box. There the Earth is a limb: wider than the frame, cropped by both
+   side edges, with only its upper arc in view below the copy. Reproducing that
+   needs a planet far larger than the artboard — which also pushes the lettering
+   baked into the artwork's base cleanly out of frame. */
+const PLANET_MAIN_DESIGN_PX = 1360;
+const PLANET_SIDE_DESIGN_PX = 340;
+
+function useArtboard() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ width: DESIGN_BASE, height: (DESIGN_BASE * 9) / 16 });
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => {
+      const rect = el.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        setSize({ width: rect.width, height: rect.height });
+      }
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, size] as const;
+}
+
 export default function OpeningFace() {
+  const [shellRef, artboard] = useArtboard();
   const root = useRef<HTMLDivElement>(null);
-  const inView = useInView(root, { once: true, amount: 0.3 });
+  const [navOpen, setNavOpen] = useState(false);
+
+  const base = artboard.width <= COMPACT_AT ? COMPACT_BASE : DESIGN_BASE;
+  const scale = artboard.width / base;
+  const mainPx = Math.round(PLANET_MAIN_DESIGN_PX * scale);
+  const sidePx = Math.round(PLANET_SIDE_DESIGN_PX * scale);
+
+  /* The planet is seated by an explicit top offset rather than by a stage box.
+
+   A shorter stage was tried and leaves a visible horizontal seam: the artwork's
+   box is far taller than the disc inside it, so wherever the stage ends it cuts
+   across visible pixels. Seating the box directly and letting the whole slide
+   clip it means the only edge that ever touches the artwork is the frame's own
+   bottom, which is what makes it read as a planet rising out of view.
+
+   The offset has to clear the copy stack, not merely look like it does. The
+   cut-out carries only an 8px transparent margin, so its box top *is* the top of
+   the visible disc — there is no hidden headroom to hide the paragraph behind.
+   Seating at the frame's midpoint puts the disc's edge straight through the CTA,
+   so the line sits below the button's baseline with room to spare while the
+   planet still fills and overruns the lower third the way the reference does. */
+  const planetTop = artboard.height * 0.64;
+
+  /* --- Entrance sequence --------------------------------------------- *
+   * Mirrors the reference: add `.anim` before paint so the opening frame is
+   * composed rather than flashing the finished page, then add `.play` to run the
+   * stagger. The classes are stripped afterwards, leaving the slide in its
+   * authored static state with no residual transforms or running timers.
+   *
+   * The timer fallback is load-bearing, not defensive padding. `.anim` holds
+   * every element at `opacity: 0` until `.play` arrives, and a backgrounded tab
+   * suspends requestAnimationFrame entirely — so without a path that does not go
+   * through rAF the slide would stay blank. `setTimeout` keeps running in a
+   * hidden tab, so it is the one clock that can be relied on here. */
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+
+    el.classList.add("anim");
+
+    let raf1 = 0;
+    let raf2 = 0;
+    let played = false;
+
+    const play = () => {
+      if (played) return;
+      played = true;
+      el.classList.add("play");
+      window.setTimeout(() => el.classList.remove("anim", "play"), 2150);
+    };
+
+    const viaFrame = () => {
+      raf1 = requestAnimationFrame(() => {
+        raf2 = requestAnimationFrame(play);
+      });
+    };
+
+    const fontGuard = window.setTimeout(viaFrame, 500);
+    const safety = window.setTimeout(play, 700);
+
+    if (typeof document?.fonts?.ready?.then === "function") {
+      document.fonts.ready.then(viaFrame).catch(() => {});
+    }
+
+    return () => {
+      window.clearTimeout(fontGuard);
+      window.clearTimeout(safety);
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+      el.classList.remove("anim", "play");
+    };
+  }, []);
+
+  /* --- Burger menu ----------------------------------------------------- */
+  const closeNav = useCallback(() => setNavOpen(false), []);
+
+  useEffect(() => {
+    if (!navOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setNavOpen(false);
+        root.current?.querySelector<HTMLButtonElement>(".alu-burger")?.focus();
+      }
+    };
+    const onPointer = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (!root.current?.contains(target)) setNavOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("click", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("click", onPointer);
+    };
+  }, [navOpen]);
 
   return (
-    <div ref={root} className="h-full w-full font-body text-[var(--ice)]">
-      <Atmosphere ghost="A" ring="bottom-right" bokeh={16}>
-        <div className="relative flex h-full w-full flex-col px-5 py-4 @xl:px-14 @xl:py-8">
-          <header className="flex shrink-0 items-center justify-between border-b border-[var(--line)] pb-3 @xl:pb-5">
-            <div className="flex items-center gap-3 @xl:gap-4">
-              <span className="grid h-8 w-8 @xl:h-12 @xl:w-12 place-items-center border border-[#a6e86b]/45 bg-[#a6e86b]/[.08] font-mono text-xs @xl:text-xl font-bold text-[#a6e86b] shadow-[0_0_24px_rgba(166,232,107,.12)]">A_</span>
-              <span className="font-mono text-[10px] @xl:text-sm font-bold tracking-[.22em]">ALETHIA</span>
-            </div>
-            <span className="font-mono text-[7px] @xl:text-[10px] uppercase tracking-[.16em] text-[var(--steel)]">Product walkthrough · Web prototype</span>
-          </header>
+    <div ref={root} className="alu">
+      {/* Measures the artboard so the artwork can be sized in pixels. */}
+      <div ref={shellRef} className="absolute inset-0" aria-hidden="true" />
 
-          {/* Centred hero. The node graph runs full-bleed behind everything, and
-              the mascot holds the centre of the frame with the headline above
-              it and the call to action below — the reference's composition. */}
-          <main className="relative flex min-h-0 flex-1 flex-col items-center justify-center text-center">
-            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-              <NodeGraph
-                active={inView}
-                nodes={["Practice", "Progress", "Reports"]}
-                adminLabel="Admin tools"
-                fill
-                dim={0.45}
-              />
-            </div>
-
-            <div className="relative flex w-full flex-col items-center">
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5 }}
-                className="font-mono text-[7px] @xl:text-[11px] uppercase tracking-[.2em] text-[#a6e86b]"
-              >
-                A safe place to practise
-              </motion.p>
-
-              <MaskReveal>
-                <motion.h1
-                  initial={{ opacity: 0, filter: "blur(12px)", y: 18 }}
-                  animate={inView ? { opacity: 1, filter: "blur(0px)", y: 0 } : {}}
-                  transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1] }}
-                  className="mt-1 font-condensed text-[56px] @xl:text-[132px] font-bold leading-[.78] tracking-[-.055em] text-white"
-                >
-                  ALETHIA
-                </motion.h1>
-              </MaskReveal>
-
-              <div className="mt-2.5 @xl:mt-4 h-px w-full max-w-[880px] bg-gradient-to-r from-transparent via-[#a6e86b]/70 to-transparent" />
-
-              <h2 className="mt-2.5 @xl:mt-4 max-w-[980px] font-heading text-[19px] @xl:text-[38px] font-semibold leading-[1.08] tracking-[-.035em] text-[var(--ice)]">
-                The state of not being hidden.
-              </h2>
-
-              {/* The operator mascot — the deck's 3D element, held at the centre
-                  of the frame. The wrapper is a fixed height because `PixelHero`
-                  reserves its whole square box regardless of the scale applied. */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.9, delay: 0.3, ease: [0.33, 1, 0.68, 1] }}
-                className="flex h-[190px] @xl:h-[500px] w-full items-center justify-center"
-              >
-                <div className="scale-[0.5] @xl:scale-[1.02]">
-                  <PixelHero size={700} interactive={inView} spin={300} />
-                </div>
-              </motion.div>
-
-              <button
-                type="button"
-                onClick={() => navigateTo({ faceId: "face-landing" })}
-                className="mt-1 @xl:mt-2 inline-flex items-center gap-4 border border-[#a6e86b] bg-[#a6e86b] px-4 py-2.5 @xl:px-6 @xl:py-4 font-mono text-[8px] @xl:text-[12px] font-bold uppercase tracking-[.08em] text-[#07101c] shadow-[0_0_30px_rgba(166,232,107,.12)] transition hover:bg-[#b7f27d]"
-              >
-                Explore the 3D landing <span aria-hidden="true">↗</span>
-              </button>
-            </div>
-          </main>
-
-          <nav
-            aria-label="Explore product screens"
-            className="grid shrink-0 grid-cols-1 border-y border-[var(--line)] @xl:grid-cols-[1.15fr_repeat(3,minmax(0,0.62fr))]"
-          >
-            <TextContent
-              content="Practise spotting social engineering in fictional scenarios, then review the clues behind each decision."
-              className="self-center px-2 py-2 @xl:px-6 @xl:py-4 text-[8px] @xl:text-[14px] leading-relaxed text-[var(--steel)]"
-            />
-            {destinations.map((item) => (
-              <button
-                key={item.number}
-                type="button"
-                onClick={() => navigateTo({ faceId: item.faceId })}
-                className="group flex min-w-0 items-center gap-2 @xl:gap-4 border-t border-[var(--line)] px-2 py-2.5 @xl:border-l @xl:border-t-0 @xl:px-6 @xl:py-4 text-left transition hover:bg-[#a6e86b]/[.04]"
-              >
-                <span className="font-mono text-[7px] @xl:text-[11px] text-[#a6e86b]">{item.number}</span>
-                <span className="truncate text-[7px] @xl:text-[13px] font-medium text-[var(--body)] group-hover:text-white">{item.label}</span>
-                <span className="ml-auto hidden @xl:block font-mono text-[11px] text-[var(--steel)] transition group-hover:translate-x-1 group-hover:text-[#a6e86b]">↗</span>
-              </button>
-            ))}
-          </nav>
+      {/* BACKDROP — the main planet, seated low and turning slowly on the spot. */}
+      <div className="alu-sky" aria-hidden="true">
+        <div className="alu-stage" style={{ top: planetTop }}>
+          <div className="alu-hero">
+            <div className="alu-art-glow" />
+            <PlanetBody src={PLANET_MAIN} width={mainPx} />
+          </div>
         </div>
-      </Atmosphere>
+      </div>
+
+      {/* The two flanking planets, cropped by the left and right edges. */}
+      <div className="alu-flanks" aria-hidden="true">
+        <div className="alu-flank">
+          <PlanetSpin duration={52} src={PLANET_SIDE} width={sidePx} />
+        </div>
+        <div className="alu-flank">
+          <PlanetSpin duration={52} src={PLANET_SIDE} width={sidePx} />
+        </div>
+      </div>
+
+      <div className="alu-ui">
+        {/* NAV — Alethia's own mark and destinations. */}
+        <header className="alu-navbar">
+          <div className="alu-navrow" data-open={navOpen}>
+            <a className="alu-logo" href="#">
+              <span aria-hidden="true" className="alu-logo-mark">
+                A_
+              </span>
+              <b>ALETHIA</b>
+            </a>
+
+            <nav aria-label="Product screens">
+              <ul className="alu-links" id="alu-site-nav">
+                {destinations.map((item) => (
+                  <li key={item.number}>
+                    <a
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        navigateTo({ faceId: item.faceId });
+                        closeNav();
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    className="alu-pill-sm"
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      navigateTo({ faceId: "face-nqw26v" });
+                      closeNav();
+                    }}
+                  >
+                    Admin tools
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <button
+              aria-controls="alu-site-nav"
+              aria-expanded={navOpen}
+              aria-label={navOpen ? "Close navigation" : "Open navigation"}
+              className="alu-burger"
+              onClick={(event) => {
+                event.stopPropagation();
+                setNavOpen((open) => !open);
+              }}
+              type="button"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
+        </header>
+
+        {/* COPY — centred stack. Every string is Alethia's own. */}
+        <div className="alu-copy">
+          <div className="alu-col alu-eyebrow">
+            <span className="alu-ent-mask">
+              <span className="alu-ent-line">
+                <TextContent content="A safe place to practise" data-content-keys={["overline"]} />
+              </span>
+            </span>
+          </div>
+
+          {/* The wordmark doubles as the hero headline, so the name lands in the
+              centre of the composition rather than only in the nav corner. */}
+          <h1 className="alu-col alu-title">
+            <span className="alu-ent-mask">
+              <span className="alu-ent-line">
+                <TextContent content="ALETHIA" data-content-keys={["wordmark"]} />
+              </span>
+            </span>
+          </h1>
+
+          <h2 className="alu-col alu-subtitle">
+            <span className="alu-ent-mask">
+              <span className="alu-ent-line">
+                <TextContent
+                  content="The state of not being hidden."
+                  data-content-keys={["headline"]}
+                />
+              </span>
+            </span>
+          </h2>
+
+          <div className="alu-col alu-rule">
+            <span />
+          </div>
+
+          <TextContent
+            as="p"
+            className="alu-col alu-lede"
+            content="Practise spotting social engineering in fictional scenarios, then review the clues behind each decision."
+            data-content-keys={["lead"]}
+          />
+
+          <div className="alu-col alu-cta">
+            <button
+              className="alu-cta-btn"
+              onClick={() => navigateTo({ faceId: "face-landing" })}
+              type="button"
+            >
+              Start
+            </button>
+          </div>
+
+          {/* The product map, kept from the original slide. */}
+          <div className="alu-graph" aria-hidden="true">
+            <NodeGraph
+              active={false}
+              adminLabel="Admin tools"
+              bare
+              dim={1}
+              fill
+              nodes={["Practice", "Progress", "Reports"]}
+            />
+          </div>
+        </div>
+
+        <nav aria-label="Explore product screens" className="alu-dest">
+          {destinations.map((item) => (
+            <button key={item.number} onClick={() => navigateTo({ faceId: item.faceId })} type="button">
+              <b>{item.number}</b>
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        <span className="sr-only">Slide {slideNumber}</span>
+      </div>
     </div>
   );
 }

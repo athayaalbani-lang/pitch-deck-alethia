@@ -1,0 +1,968 @@
+/* ---------------------------------------------------------------------------
+   Alethia Opening — hero adapted from the "SpaceEdu" layout spec.
+
+   Two deviations from the source spec, both forced by the deck:
+
+   1. ONE unit, not the spec's single `--u` against a 1353x1163 reference. Both
+      of this deck's artboards are exactly 16:9 (1920x1080 desktop, 384x683
+      compact), so a unit derived purely from the inline axis keeps the
+      composition proportional at any scale. `--v` is kept as an alias so
+      vertical and horizontal lengths read the same value by name.
+
+   2. TYPE. The spec asks for a serif display face (Prata). This slide uses the
+      deck's own stack — Plus Jakarta Sans for display, Inter for body, IBM Plex
+      Mono for numerals — so the Opening reads as part of the same deck as the
+      other twelve slides rather than as a separate site.
+
+   3. COLOUR. The spec's cyan is Alethia's lime, and its background is Alethia's
+      navy. The white glossy pill is kept: it is layout language, not branding.
+
+   The composition itself is the spec's: full-bleed subject, centred stack
+   (eyebrow / wordmark / headline / short rule / paragraph / glossy pill), a
+   hairline-ruled nav.
+--------------------------------------------------------------------------- */
+
+.alu {
+  /* One unit for both axes. Both of the deck's artboards are exactly 16:9
+     (1920x1080 desktop, 384x683 compact), so a unit derived purely from the
+     inline axis keeps the composition proportional at any scale.
+
+     `cqw` resolves against the nearest ANCESTOR container — the slide shell,
+     which is `container-type: inline-size`. Declaring `container-type` on
+     `.alu` itself would be wrong twice over: an element cannot query its own
+     container, and size containment would collapse the slide to zero height. */
+  --u: calc(100cqw / 1920);
+  --v: var(--u);
+
+  --ink: #ffffff;
+  --accent: #a6e86b; /* spec's cyan, in Alethia's palette */
+  --rule: rgba(255, 255, 255, 0.23);
+  --btn-ink: #071227;
+
+  /* `container-type: size` is what makes `cqw`/`cqh` resolve to this slide, but
+     size containment also means the contents no longer contribute height. The
+     slide must therefore fill its shell explicitly, or it collapses to zero. */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Transparent so the shell's shared backdrop shows through. The slide's own
+     `.alu-sky` layer sits on top of it and supplies the planet's horizon lift;
+     between them the Opening reads as the same deep space as every other slide
+     rather than as its own separate void. */
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-display, "Plus Jakarta Sans"), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  isolation: isolate;
+}
+
+.alu *,
+.alu *::before,
+.alu *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------------------------------------------------- BACKDROP ---- */
+
+/* The planet rises from the bottom edge the way the reference's Earth does, with
+   the copy stacked above it. The stage is clipped, so the planet is cropped by
+   the bottom of the frame instead of floating in the middle of it. */
+/* Deep space sky, tuned from the shared tokens so this slide belongs to the
+   same family as the other twelve. It still layers its own horizon lift behind
+   the planet's limb — that is art direction specific to this slide — but the
+   base is now the deck's own ramp rather than a private one.
+
+   Kept translucent enough for the shell's shared backdrop (nebula, starfield,
+   horizon grid) to read through, so the Opening looks like the rest of the deck
+   rather than like a separate site pasted in front of it. */
+.alu-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(
+      70% 34% at 50% 100%,
+      rgba(166, 232, 107, 0.07) 0%,
+      rgba(90, 150, 205, 0.1) 46%,
+      transparent 74%
+    ),
+    radial-gradient(
+      78% 68% at 50% 78%,
+      rgba(17, 24, 35, 0.55) 0%,
+      rgba(7, 10, 18, 0.78) 64%,
+      rgba(4, 6, 11, 0.9) 100%
+    );
+}
+
+.alu-sky::after {
+  /* Vignette. Darkens the upper half where the copy sits, so the type stays
+     legible against the planet's lit surface. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    70% 48% at 50% 30%,
+    rgba(4, 6, 11, 0.8) 0%,
+    rgba(4, 6, 11, 0.45) 52%,
+    transparent 82%
+  );
+}
+
+/* The stage is a window onto the lower part of the frame, and it shows the
+   planet's TOP: `start` alignment puts the artwork's upper edge at the stage top
+   and lets the rest run off below. That is what produces the reference's
+   horizon — a shallow arc across the full width, with the disc's bulk beneath the
+   frame. Aligning to `end` instead would reveal the artwork's base, which is
+   mostly scattered debris and reads as a scrap along the bottom edge.
+
+   The planet is far wider than the artboard, the way the reference's Earth runs
+   off both sides, so only a shallow cap is ever visible and it cannot collide
+   with the copy above. */
+/* A window onto the lower part of the frame. It is NOT a crop boundary for the
+   artwork: the planet's box overhangs this on every side, so the only edge that
+   ever cuts it is the slide's own bottom, and the planet reads as rising out of
+   frame rather than being sliced off by a seam. `place-items: center` seats it on
+   the stage's centre line. The height is set inline from the measured artboard. */
+/* Spans from the planet's seating line to the bottom of the frame. `top` is set
+   inline from the measured artboard. The planet is aligned to this box's top and
+   simply overhangs it, so the box never becomes a visible crop line. */
+.alu-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: grid;
+  place-items: start center;
+  pointer-events: none;
+}
+
+/* The subject shrink-wraps to the artwork it is handed; its pixel size is
+   resolved in JS from the artboard width (see `planetPx` in face.tsx).
+
+   Sizing it here is not possible: artwork needs a pixel size, `--u` resolves to
+   a length, and `transform: scale(var(--u))` is invalid for want of a unitless
+   number. */
+.alu-hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  grid-auto-flow: column;
+}
+
+/* Artwork keeps its own aspect; the square canvas around a cut-out is not part
+   of the silhouette. */
+.alu-art {
+  display: block;
+  height: auto;
+}
+
+/* The two flanking planets, one cropped by each screen edge. */
+.alu-flanks {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.alu-flank {
+  position: absolute;
+  top: 52%;
+  transform: translateY(-50%);
+  line-height: 0;
+  /* Muted deliberately. The source artwork carries saturated cyan and violet in
+     its debris, which pulls the eye off the copy; dropping it back and easing the
+     colour keeps both planets present without competing with the type. */
+  opacity: 0.5;
+  filter: saturate(0.55) brightness(0.85);
+}
+
+.alu-flank:first-child {
+  left: calc(-104 * var(--u));
+}
+
+.alu-flank:last-child {
+  right: calc(-104 * var(--u));
+}
+
+/* A soft atmospheric lift along the planet's lit limb, matching the reference's
+   halo. Kept wide and low so it reads as glow rather than a disc behind the type. */
+.alu-art-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -6%;
+  width: 130%;
+  height: 90%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(120, 190, 235, 0.22) 0%,
+    rgba(166, 232, 107, 0.09) 42%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------- UI ----- */
+
+.alu-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.alu-ui a,
+.alu-ui button {
+  pointer-events: auto;
+}
+
+/* NAV ------------------------------------------------------------------- */
+
+.alu-navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(96 * var(--u));
+}
+
+.alu-navbar::after {
+  content: "";
+  position: absolute;
+  left: calc(60 * var(--u));
+  right: calc(60 * var(--u));
+  top: calc(94 * var(--u));
+  height: max(1px, calc(1.6 * var(--u)));
+  background: var(--rule);
+}
+
+.alu-navrow {
+  position: absolute;
+  left: calc(60 * var(--u));
+  right: calc(60 * var(--u));
+  top: 0;
+  height: calc(94 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alu-logo {
+  display: flex;
+  align-items: center;
+  gap: calc(14 * var(--u));
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.alu-logo-mark {
+  display: grid;
+  place-items: center;
+  width: calc(46 * var(--u));
+  height: calc(46 * var(--u));
+  border: calc(1.6 * var(--u)) solid var(--accent);
+  color: var(--accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: calc(19 * var(--u));
+  font-weight: 700;
+  letter-spacing: calc(-1 * var(--u));
+  background: rgba(166, 232, 107, 0.08);
+}
+
+.alu-logo b {
+  font-weight: 700;
+  font-size: calc(21 * var(--u));
+  letter-spacing: calc(3 * var(--u));
+}
+
+.alu-logo span {
+  font-weight: 400;
+  font-size: calc(21 * var(--u));
+  color: var(--accent);
+}
+
+.alu-links {
+  display: flex;
+  align-items: center;
+  gap: calc(30 * var(--u));
+  list-style: none;
+}
+
+.alu-links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(94 * var(--u));
+  padding: 0 calc(6 * var(--u));
+  color: #fff;
+  text-decoration: none;
+  font-size: calc(19 * var(--u));
+  font-weight: 400;
+  letter-spacing: calc(-0.4 * var(--u));
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+.alu-links a:hover {
+  opacity: 0.72;
+}
+
+.alu-links a[data-current="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(20 * var(--u));
+  height: calc(3 * var(--u));
+  border-radius: calc(2 * var(--u));
+  background: var(--accent);
+}
+
+/* Scoped through `.alu-links` on purpose.
+   This pill is an `<a>` inside the link row, and `.alu-links a` sets
+   `color: #fff` at (0,1,1) — which outranks a bare `.alu-pill-sm` at (0,1,0).
+   The lime fill therefore took white text, which is the unreadable pairing the
+   pill is supposed to avoid. Matching the ancestor's specificity is what lets
+   the dark ink win; the compact tier needed the same `.alu-links .alu-pill-sm`
+   shape for the identical reason. */
+.alu-links .alu-pill-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(52 * var(--u));
+  padding: 0 calc(26 * var(--u));
+  border-radius: calc(26 * var(--u));
+  background: var(--accent);
+  color: var(--btn-ink);
+  font-size: calc(17 * var(--u));
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 0.25s ease;
+}
+
+.alu-links .alu-pill-sm:hover {
+  filter: brightness(1.12);
+}
+
+.alu-burger {
+  display: none;
+  position: relative;
+  width: calc(50 * var(--u));
+  height: calc(50 * var(--u));
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(7 * var(--u));
+  flex: none;
+}
+
+.alu-burger span {
+  display: block;
+  width: calc(28 * var(--u));
+  height: calc(2.4 * var(--u));
+  border-radius: calc(2 * var(--u));
+  background: #fff;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.18s linear;
+}
+
+.alu-navrow[data-open="true"] .alu-burger span:nth-child(1) {
+  transform: translateY(calc(9.4 * var(--u))) rotate(45deg);
+}
+
+.alu-navrow[data-open="true"] .alu-burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.alu-navrow[data-open="true"] .alu-burger span:nth-child(3) {
+  transform: translateY(calc(-9.4 * var(--u))) rotate(-45deg);
+}
+
+/* COPY STACK ------------------------------------------------------------- */
+
+.alu-copy {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.alu-col {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0 calc(60 * var(--u));
+}
+
+.alu-eyebrow {
+  top: calc(168 * var(--v));
+  font-size: calc(25 * var(--v));
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: calc(7 * var(--u));
+  text-indent: calc(7 * var(--u));
+}
+
+/* The wordmark as hero headline.
+
+   Pixel face, matched to the reference rather than picked by eye. The reference
+   wordmark measures 8.17 units wide per unit of cap height; Silkscreen at its
+   natural tracking measures 7.20, and the remaining 0.97 is exactly 0.10em
+   spread across the six gaps between seven glyphs. So the tracking below is not
+   a taste call — it is the number that reproduces the reference's proportions.
+
+   400 rather than 700: Silkscreen's bold is a synthesised smear of the bitmap
+   at this size, which closes the counters and turns the letterforms muddy.
+   The reference's apparent weight comes from its size, not from a bold axis. */
+.alu-title {
+  top: calc(214 * var(--v));
+  font-family: var(--font-pixel, "Silkscreen"), monospace;
+  font-weight: 400;
+  font-size: calc(96 * var(--v));
+  line-height: 1;
+  letter-spacing: 0.1em;
+  /* Tracking adds a trailing gap after the last glyph, which pushes centred
+     text left of true centre by half the tracking. Pull it back so the wordmark
+     sits on the frame's centre line. */
+  text-indent: 0.1em;
+  text-wrap: balance;
+}
+
+/* The line itself, beneath the wordmark. */
+.alu-subtitle {
+  top: calc(344 * var(--v));
+  font-family: var(--font-display, "Plus Jakarta Sans"), sans-serif;
+  font-weight: 500;
+  font-size: calc(42 * var(--v));
+  line-height: 1.16;
+  letter-spacing: calc(-0.8 * var(--u));
+  text-wrap: balance;
+}
+
+.alu-rule {
+  top: calc(432 * var(--v));
+  height: calc(5 * var(--u));
+  font-size: 0;
+  line-height: 0;
+}
+
+.alu-rule span {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(112 * var(--u));
+  height: 100%;
+  border-radius: calc(3 * var(--u));
+  background: var(--accent);
+}
+
+.alu-lede {
+  top: calc(462 * var(--v));
+  margin: 0 auto;
+  max-width: calc(700 * var(--u));
+  font-family: var(--font-body, "Inter"), sans-serif;
+  font-size: calc(21 * var(--v));
+  font-weight: 400;
+  line-height: calc(36 * var(--v));
+  color: rgba(255, 255, 255, 0.92);
+  text-wrap: pretty;
+}
+
+.alu-cta {
+  top: calc(560 * var(--v));
+  height: calc(88 * var(--u));
+}
+
+.alu-cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(306 * var(--u));
+  height: calc(88 * var(--u));
+  border-radius: calc(44 * var(--u));
+  background: linear-gradient(180deg, #ffffff 0%, #e6f2fb 4%, #eaf4ff 72%, #ffffff 100%);
+  color: var(--btn-ink);
+  font-size: calc(21 * var(--u));
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow:
+    0 calc(12 * var(--u)) calc(22 * var(--u)) calc(-10 * var(--u)) rgba(166, 232, 107, 0.5),
+    0 0 calc(30 * var(--u)) rgba(166, 232, 107, 0.22),
+    inset 0 0 0 calc(2 * var(--u)) rgba(255, 255, 255, 0.9);
+  transition: filter 0.25s ease;
+}
+
+.alu-cta-btn:hover {
+  filter: brightness(0.97) saturate(1.05);
+}
+
+/* The product map is kept as texture rather than a panel: it spans the frame
+   behind everything at a trace opacity, so its four labels still read without
+   the opaque ground and grid turning it into a box in the middle of the sky. */
+.alu-graph {
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* DESTINATIONS ----------------------------------------------------------- */
+
+/* The three product screens, kept from the original slide's footer. Tucked into
+   the bottom-left, clear of both the centred copy and the edge-cropped planets. */
+.alu-dest {
+  position: absolute;
+  left: calc(60 * var(--u));
+  bottom: calc(48 * var(--u));
+  display: flex;
+  gap: calc(38 * var(--u));
+  pointer-events: auto;
+}
+
+.alu-dest button {
+  display: flex;
+  align-items: baseline;
+  gap: calc(11 * var(--u));
+  padding: calc(4 * var(--u)) calc(6 * var(--u));
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--font-body, "Inter"), sans-serif;
+  font-size: calc(18 * var(--v));
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.alu-dest button:hover {
+  color: var(--accent);
+}
+
+.alu-dest button b {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: calc(16 * var(--v));
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* SCROLL ----------------------------------------------------------------- */
+
+/* The scroll-down control that used to sit here has been removed. Its rules go
+   with it — leaving them would keep the `.alu-scroll` entries in the entrance
+   keyframes below alive as selectors that can never match. */
+
+/* --------------------------------------------------------- FOCUS RING --- */
+
+.alu :is(a, button):focus-visible {
+  outline: calc(2 * var(--u)) solid var(--accent);
+  outline-offset: calc(4 * var(--u));
+}
+
+/* ------------------------------------------------------ ENTRANCE MOTION - */
+/* The spec's motion language: hairlines draw from centre, type rises out of a
+   mask, copy lifts a short distance, pills settle with a small scale resolve,
+   and the backdrop fades (never translates — a translate drags a bare edge
+   into frame). Runs once; `.alu-done` restores the authored static state. */
+
+@keyframes alu-reveal {
+  from {
+    transform: translateY(115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes alu-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 10px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes alu-settle {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 8px)) scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes alu-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes alu-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.alu {
+  --e-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --e-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.alu-ent-mask {
+  display: block;
+  overflow: hidden;
+  padding-top: 0.18em;
+  margin-top: -0.18em;
+}
+
+.alu-ent-line {
+  display: block;
+}
+
+.alu.anim .alu-ent-line {
+  transform: translateY(115%);
+  will-change: transform;
+}
+
+.alu.anim .alu-navbar::after,
+.alu.anim .alu-rule span {
+  transform: scaleX(0);
+}
+
+.alu.anim :is(.alu-sky, .alu-flanks, .alu-logo, .alu-links a, .alu-burger, .alu-pill-sm, .alu-lede, .alu-cta-btn, .alu-dest button) {
+  opacity: 0;
+}
+
+.alu.play .alu-sky {
+  animation: alu-fade 1.6s var(--e-quint) 0.25s both;
+}
+
+.alu.play .alu-flanks {
+  animation: alu-fade 1.5s var(--e-quint) 0.4s both;
+}
+
+.alu.play .alu-navbar::after {
+  animation: alu-draw 0.9s var(--e-expo) 0.12s both;
+}
+
+.alu.play .alu-logo {
+  --rise: calc(9 * var(--u));
+  animation: alu-rise 0.6s var(--e-quint) 0.2s both;
+}
+
+.alu.play .alu-links a {
+  --rise: calc(9 * var(--u));
+  animation: alu-rise 0.55s var(--e-quint) both;
+}
+
+.alu.play .alu-links a:nth-child(1) {
+  animation-delay: 0.26s;
+}
+.alu.play .alu-links a:nth-child(2) {
+  animation-delay: 0.31s;
+}
+.alu.play .alu-links a:nth-child(3) {
+  animation-delay: 0.36s;
+}
+.alu.play .alu-links a:nth-child(4) {
+  animation-delay: 0.41s;
+}
+
+.alu.play .alu-pill-sm {
+  --rise: calc(9 * var(--u));
+  animation: alu-settle 0.6s var(--e-quint) 0.46s both;
+}
+
+.alu.play .alu-eyebrow .alu-ent-line {
+  animation: alu-reveal 0.75s var(--e-expo) 0.3s both;
+}
+
+.alu.play .alu-title .alu-ent-line {
+  animation: alu-reveal 0.95s var(--e-expo) 0.44s both;
+}
+
+.alu.play .alu-rule span {
+  animation: alu-draw 0.65s var(--e-expo) 0.78s both;
+}
+
+.alu.play .alu-lede {
+  --rise: calc(14 * var(--u));
+  animation: alu-rise 0.7s var(--e-quint) 0.86s both;
+}
+
+.alu.play .alu-subtitle .alu-ent-line {
+  animation: alu-reveal 0.9s var(--e-expo) 0.6s both;
+}
+
+.alu.play .alu-cta-btn {
+  --rise: calc(9 * var(--u));
+  animation: alu-settle 0.7s var(--e-quint) 1.14s both;
+}
+
+.alu.play .alu-dest button {
+  --rise: calc(8 * var(--u));
+  animation: alu-rise 0.55s var(--e-quint) 1.24s both;
+}
+
+.alu.play .alu-dest button:nth-child(2) {
+  animation-delay: 1.3s;
+}
+.alu.play .alu-dest button:nth-child(3) {
+  animation-delay: 1.36s;
+}
+
+/* The planet's own turn is driven by Motion, independent of the entrance, so it
+   keeps running once the entrance classes are stripped. */
+
+/* ---------------------------------------------------------- RESPONSIVE -- */
+
+/* Nav collapses first: below this the desktop labels fall under a legible
+   size and the pill loses its touch target. Same <a> elements re-compose into
+   a panel — the markup is never duplicated. */
+@container (max-width: 1180px) {
+  .alu-navrow {
+    left: calc(40 * var(--u));
+    right: calc(40 * var(--u));
+  }
+
+  .alu-navbar::after {
+    left: calc(40 * var(--u));
+    right: calc(40 * var(--u));
+  }
+
+  .alu-burger {
+    display: flex;
+  }
+
+  .alu-links {
+    position: absolute;
+    top: calc(104 * var(--u));
+    right: 0;
+    z-index: 5;
+    width: min(calc(340 * var(--u)), calc(100cqw - 80 * var(--u)));
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: calc(12 * var(--u));
+    border-radius: calc(20 * var(--u));
+    background: rgba(5, 12, 22, 0.92);
+    border: max(1px, calc(1 * var(--u))) solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 calc(18 * var(--u)) calc(44 * var(--u)) rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(calc(-10 * var(--u)));
+    transition: opacity 0.24s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.28s;
+  }
+
+  .alu-navrow[data-open="true"] .alu-links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .alu-links a {
+    height: auto;
+    padding: calc(13 * var(--u)) calc(16 * var(--u));
+    font-size: calc(19 * var(--v));
+    justify-content: flex-start;
+  }
+
+  .alu-links a + a {
+    border-top: max(1px, calc(1 * var(--u))) solid rgba(255, 255, 255, 0.08);
+  }
+
+  .alu-links a[data-current="true"]::after {
+    left: calc(16 * var(--u));
+    right: auto;
+    bottom: calc(10 * var(--u));
+    width: calc(28 * var(--u));
+  }
+
+  .alu-links .alu-pill-sm {
+    margin-top: calc(12 * var(--u));
+    height: calc(48 * var(--u));
+    justify-content: center;
+  }
+}
+
+/* Phone: the interface FLOWS below the nav instead of being absolutely pinned,
+   so it adapts to however many lines the copy wraps onto. */
+@container (max-width: 700px) {
+  .alu {
+    /* Re-based for the compact artboard: the same stack at a 760 design width
+       keeps the type legible instead of shrinking it with the desktop scale. */
+    --u: calc(100cqw / 760);
+  }
+
+  .alu-navbar {
+    height: calc(76 * var(--u));
+  }
+
+  .alu-navrow {
+    left: calc(28 * var(--u));
+    right: calc(28 * var(--u));
+    height: calc(74 * var(--u));
+  }
+
+  .alu-navbar::after {
+    left: calc(28 * var(--u));
+    right: calc(28 * var(--u));
+    top: calc(74 * var(--u));
+  }
+
+  .alu-links {
+    top: calc(84 * var(--u));
+  }
+
+  .alu-copy {
+    top: calc(76 * var(--u));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: calc(30 * var(--u)) calc(26 * var(--u)) 0;
+  }
+
+  .alu-col {
+    position: static;
+    /* Without an explicit width the flex column shrink-wraps each row to its
+       content, which collapses `.alu-cta` to the button and stops the flanking
+       subjects from being cropped by the screen edges. */
+    width: 100%;
+    right: auto;
+    padding: 0;
+  }
+
+  .alu-eyebrow {
+    font-size: calc(19 * var(--v));
+    letter-spacing: calc(6 * var(--u));
+    text-indent: calc(6 * var(--u));
+  }
+
+  .alu-title {
+    margin-top: calc(16 * var(--u));
+    font-size: calc(46 * var(--v));
+    /* Tracking stays proportional here too — resizing the wordmark must not
+       change its proportions, only its size. */
+    letter-spacing: 0.1em;
+    text-indent: 0.1em;
+  }
+
+  .alu-subtitle {
+    margin-top: calc(14 * var(--u));
+    font-size: calc(23 * var(--v));
+  }
+
+  .alu-rule {
+    margin-top: calc(20 * var(--u));
+    height: calc(4 * var(--u));
+  }
+
+  .alu-rule span {
+    width: calc(86 * var(--u));
+  }
+
+  .alu-lede {
+    margin-top: calc(18 * var(--u));
+    font-size: calc(19 * var(--v));
+    line-height: calc(30 * var(--v));
+    max-width: calc(420 * var(--u));
+    text-wrap: balance;
+  }
+
+  .alu-cta {
+    position: relative;
+    top: auto;
+    margin-top: calc(28 * var(--u));
+    height: calc(66 * var(--u));
+  }
+
+  .alu-cta-btn {
+    width: calc(200 * var(--u));
+    height: calc(66 * var(--u));
+    border-radius: calc(33 * var(--u));
+    font-size: calc(16 * var(--v));
+  }
+
+  .alu-flank:first-child {
+    left: calc(-70 * var(--u));
+  }
+
+  .alu-flank:last-child {
+    right: calc(-70 * var(--u));
+  }
+
+  .alu-graph {
+    display: none;
+  }
+
+  .alu-dest {
+    top: auto;
+    bottom: calc(28 * var(--u));
+    right: calc(20 * var(--u));
+    flex-direction: column;
+    align-items: flex-end;
+    gap: calc(4 * var(--u));
+  }
+
+  .alu-dest button {
+    font-size: calc(14 * var(--v));
+  }
+
+  .alu-dest button b {
+    font-size: calc(12 * var(--v));
+  }
+}
+
+/* Short artboards: the destinations move up clear of the bottom edge.
+   Expressed on the inline axis because the shell's container is inline-size
+   only — a height condition can never match against it. */
+@container (max-width: 700px) {
+  .alu-dest {
+    bottom: calc(20 * var(--u));
+    top: auto;
+  }
+}
+
+/* --------------------------------------------------- REDUCED MOTION ------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .alu-slot,
+  .alu-slot img,
+  .alu-stage > *,
+  .alu-links,
+  .alu-burger span,
+  .alu-pill-sm,
+  .alu-cta-btn {
+    transition: none;
+  }
+
+  .alu-slot:hover,
+  .alu-slot:active {
+    transform: none;
+  }
+
+  /* `.anim` is never added under reduced motion, so the entrance never runs. */
+}

@@ -60,13 +60,13 @@ export default function ReportHubFace() {
           />
         </Reveal>
 
-        <Reveal className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-[#263544] pb-2 @xl:pb-4" index={1} y={10}>
+        <Reveal className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-[var(--space-line)] pb-2 @xl:pb-4" index={1} y={10}>
           <div className="flex items-center gap-1.5 @xl:gap-2">
             <ProductPill tone="signal">All reports</ProductPill>
             <ProductPill>My reports</ProductPill>
           </div>
           <div className="flex items-center gap-1.5 @xl:gap-2">
-            <span className="mr-1 font-mono text-[6px] uppercase tracking-[.1em] text-[#8191a1] @xl:text-[9px]">Sort</span>
+            <span className="mr-1 font-mono text-[6px] uppercase tracking-[.1em] text-[var(--ink-muted)] @xl:text-[9px]">Sort</span>
             <ProductPill tone="signal">Top</ProductPill>
             <ProductPill>Newest</ProductPill>
             <ProductPill>Oldest</ProductPill>
@@ -77,12 +77,12 @@ export default function ReportHubFace() {
           <Reveal className="flex min-h-0 flex-col" index={2} y={14}>
             <ProductPanel className="flex h-full min-h-0 flex-col">
               <div className="mb-2 flex items-center justify-between gap-3 @xl:mb-4">
-                <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[#a6e86b] @xl:text-[11px]">Report feed</h2>
+                <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[var(--lime)] @xl:text-[11px]">Report feed</h2>
                 <ProductPill>Illustrative examples</ProductPill>
               </div>
 
               {/* Selectable feed — picking a row drives the detail panel. */}
-              <div className="flex min-h-0 flex-1 flex-col divide-y divide-[#263544] overflow-hidden border-y border-[#263544]">
+              <div className="flex min-h-0 flex-1 flex-col divide-y divide-[var(--space-line)] overflow-hidden border-y border-[var(--space-line)]">
                 {sampleReports.map((item, index) => {
                   const active = index === selected;
                   return (
@@ -92,14 +92,14 @@ export default function ReportHubFace() {
                       onClick={() => setSelected(index)}
                       aria-pressed={active}
                       className={`relative flex min-h-0 flex-1 flex-col justify-center px-2 py-1.5 text-left transition-colors @xl:px-4 @xl:py-3 ${
-                        active ? "border-l-2 border-l-[#a6e86b] bg-[#a6e86b]/[.055]" : "border-l-2 border-l-transparent hover:bg-[#a6e86b]/[.025]"
+                        active ? "border-l-2 border-l-[var(--lime)] bg-[var(--lime)]/[.055]" : "border-l-2 border-l-transparent hover:bg-[var(--lime)]/[.025]"
                       }`}
                     >
                       {active ? (
                         <motion.span
                           layoutId="report-active-bar"
                           aria-hidden="true"
-                          className="absolute inset-y-0 left-0 w-[2px] bg-[#a6e86b]"
+                          className="absolute inset-y-0 left-0 w-[2px] bg-[var(--lime)]"
                           transition={{ type: "spring", stiffness: 340, damping: 32 }}
                         />
                       ) : null}
@@ -107,7 +107,7 @@ export default function ReportHubFace() {
                         <h3 className="text-[8px] font-semibold leading-snug @xl:text-sm">{item.title}</h3>
                         <ProductPill tone={item.tone}>{item.state}</ProductPill>
                       </div>
-                      <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[6px] text-[#8191a1] @xl:mt-2 @xl:text-[9px]">
+                      <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[6px] text-[var(--ink-muted)] @xl:mt-2 @xl:text-[9px]">
                         <span>{item.meta}</span>
                         <span>·</span>
                         <span>Contributor username shown</span>
@@ -116,16 +116,16 @@ export default function ReportHubFace() {
                   );
                 })}
               </div>
-              <p className="mt-2 font-mono text-[6px] text-[#8191a1] @xl:mt-3 @xl:text-[9px]">Titles and report rows above are examples, not live community data.</p>
+              <p className="mt-2 font-mono text-[6px] text-[var(--ink-muted)] @xl:mt-3 @xl:text-[9px]">Titles and report rows above are examples, not live community data.</p>
             </ProductPanel>
           </Reveal>
 
           <Reveal className="flex min-h-0 flex-col" index={3} y={14}>
             <Tilt className="flex h-full min-h-0 flex-col" max={3} lift={7}>
               <ProductPanel className="relative flex h-full min-h-0 flex-col">
-                <div className="flex items-start justify-between gap-3 border-b border-[#263544] pb-2 @xl:pb-4">
+                <div className="flex items-start justify-between gap-3 border-b border-[var(--space-line)] pb-2 @xl:pb-4">
                   <div>
-                    <p className="font-mono text-[6px] uppercase tracking-[.12em] text-[#a6e86b] @xl:text-[9px]">Illustrative report detail</p>
+                    <p className="font-mono text-[6px] uppercase tracking-[.12em] text-[var(--lime)] @xl:text-[9px]">Illustrative report detail</p>
                     {/* Keyed so the panel re-animates when the selection moves. */}
                     <AnimatePresence mode="wait">
                       <motion.h2
@@ -144,8 +144,8 @@ export default function ReportHubFace() {
                 </div>
 
                 <div className="grid flex-1 grid-cols-2 gap-2 py-2 @xl:gap-3 @xl:py-4">
-                  <div className="border border-[#263544] bg-[#0b1420] p-2 @xl:p-4">
-                    <p className="font-mono text-[6px] uppercase text-[#8191a1] @xl:text-[9px]">Channel</p>
+                  <div className="border border-[var(--space-line)] bg-[var(--space-panel)] p-2 @xl:p-4">
+                    <p className="font-mono text-[6px] uppercase text-[var(--ink-muted)] @xl:text-[9px]">Channel</p>
                     <AnimatePresence mode="wait">
                       <motion.p
                         key={report.channel}
@@ -159,8 +159,8 @@ export default function ReportHubFace() {
                       </motion.p>
                     </AnimatePresence>
                   </div>
-                  <div className="border border-[#263544] bg-[#0b1420] p-2 @xl:p-4">
-                    <p className="font-mono text-[6px] uppercase text-[#8191a1] @xl:text-[9px]">Pattern</p>
+                  <div className="border border-[var(--space-line)] bg-[var(--space-panel)] p-2 @xl:p-4">
+                    <p className="font-mono text-[6px] uppercase text-[var(--ink-muted)] @xl:text-[9px]">Pattern</p>
                     <AnimatePresence mode="wait">
                       <motion.p
                         key={report.pattern}
@@ -174,8 +174,8 @@ export default function ReportHubFace() {
                       </motion.p>
                     </AnimatePresence>
                   </div>
-                  <div className="col-span-2 border border-[#263544] bg-[#0b1420] p-2 @xl:p-4">
-                    <p className="font-mono text-[6px] uppercase text-[#8191a1] @xl:text-[9px]">Report context</p>
+                  <div className="col-span-2 border border-[var(--space-line)] bg-[var(--space-panel)] p-2 @xl:p-4">
+                    <p className="font-mono text-[6px] uppercase text-[var(--ink-muted)] @xl:text-[9px]">Report context</p>
                     <AnimatePresence mode="wait">
                       <motion.p
                         key={report.context}
@@ -183,7 +183,7 @@ export default function ReportHubFace() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.22 }}
-                        className="mt-1 text-[7px] leading-relaxed text-[#c2ccd6] @xl:text-xs"
+                        className="mt-1 text-[7px] leading-relaxed text-[var(--ink-soft)] @xl:text-xs"
                       >
                         {report.context}
                       </motion.p>
@@ -191,9 +191,9 @@ export default function ReportHubFace() {
                   </div>
                 </div>
 
-                <div className="border-t border-[#263544] pt-2 @xl:pt-4">
+                <div className="border-t border-[var(--space-line)] pt-2 @xl:pt-4">
                   <div className="flex items-center justify-between gap-2">
-                    <p className="font-mono text-[6px] uppercase tracking-[.1em] text-[#a6e86b] @xl:text-[9px]">Community context</p>
+                    <p className="font-mono text-[6px] uppercase tracking-[.1em] text-[var(--lime)] @xl:text-[9px]">Community context</p>
                     <ProductPill>{report.verdict}</ProductPill>
                   </div>
                   <div className="mt-2 flex flex-wrap items-center gap-2 @xl:mt-3">

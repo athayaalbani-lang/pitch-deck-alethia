@@ -48,13 +48,18 @@ export function Atmosphere({
               : null;
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-black">
-      {/* Key light raking in from the top-left, tinted to the brand purple. */}
+    <div className="relative h-full w-full overflow-hidden bg-[var(--space-base)]">
+      {/* Key light raking in from the top-left, tinted lime.
+
+          The faces that use Atmosphere would otherwise paint their own void
+          here, hiding the shared backdrop the shell lays down underneath. Kept
+          at low alpha so the nebula, starfield and horizon grid from
+          `alethia-theme.css` still read through it. */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(70% 60% at 22% 8%, rgba(166,232,107,0.14), transparent 62%), radial-gradient(56% 50% at 88% 96%, rgba(126,217,87,0.09), transparent 66%)",
+            "radial-gradient(70% 60% at 22% 8%, rgba(166,232,107,0.10), transparent 62%), radial-gradient(56% 50% at 88% 96%, rgba(94,143,46,0.07), transparent 66%)",
         }}
         aria-hidden="true"
       />

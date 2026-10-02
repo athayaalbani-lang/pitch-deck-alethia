@@ -59,6 +59,58 @@
         { "id": "mv6", "label": "Server-scored, replay-proof ledger" }
       ]
     },
+    "liveSim": {
+      "type": "table",
+      "title": "Live simulation",
+      "columns": [
+        { "key": "channel", "title": "Inbound channel", "type": "text" },
+        { "key": "signals", "title": "Signals surfaced", "type": "text" }
+      ],
+      "rows": [
+        {
+          "id": "sim1",
+          "channel": "WhatsApp",
+          "from": "KurirKita Support",
+          "message": "Your account closes in 30 minutes unless you re-verify. Confirm now: k-verify.id/reverify",
+          "signals": [
+            "Account closing in 30 minutes",
+            "Not the registered number",
+            "k-verify.id ≠ kurikita.co.id"
+          ],
+          "call": "Report · do not tap",
+          "score": "0.94",
+          "verdict": "Blocked server-side"
+        },
+        {
+          "id": "sim2",
+          "channel": "Email",
+          "from": "AP Accounts Payable",
+          "message": "Invoice INV-8841 attached. Bank details updated — remit to the new account before Friday.",
+          "signals": [
+            "Reply-to differs from sender",
+            "Changed payment destination",
+            "No matching PO number"
+          ],
+          "call": "Verify by known number",
+          "score": "0.91",
+          "verdict": "Held for a second channel"
+        },
+        {
+          "id": "sim3",
+          "channel": "SMS",
+          "from": "KurirKita",
+          "message": "Your parcel is held. Pay the Rp 24,000 customs fee within 2 hours to release delivery.",
+          "signals": [
+            "Fee invented to create urgency",
+            "Short link, no order reference",
+            "Carrier never asks for payment"
+          ],
+          "call": "Report · do not pay",
+          "score": "0.89",
+          "verdict": "Blocked server-side"
+        }
+      ]
+    },
     "targetNote": {
       "type": "text",
       "content": "First-year registered-user target — [fill in]. This is an assumption, not data."

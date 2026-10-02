@@ -71,6 +71,7 @@ function FaceArtboard({
         data-face-visible={isVisible ? "true" : "false"}
         style={{
           display: hidden ? "none" : "flex",
+          position: "relative",
           transform: "translateZ(0)",
           color: "var(--foreground)",
           containerType: "inline-size",
@@ -78,8 +79,19 @@ function FaceArtboard({
           height: `${height}px`,
         }}
       >
+        {/* The one backdrop every slide shares — deep space, nebula, starfield,
+            horizon grid. Applied here rather than per slide so the thirteen
+            faces cannot drift apart again; a slide departs from it only by
+            deliberately painting over it. */}
+        <div className="alx-backdrop" aria-hidden="true" />
+
         <div
-          style={{ marginBlock: "auto", width: "100%", height: "100%" }}
+          style={{
+            marginBlock: "auto",
+            position: "relative",
+            width: "100%",
+            height: "100%",
+          }}
           ref={innerFaceRef}
         >
           {children}

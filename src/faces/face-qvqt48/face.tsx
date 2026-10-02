@@ -7,6 +7,7 @@ import { Overline, Ring } from "@/components/ui/8bit";
 import { Counter, Glint, Sprite3D, Tilt } from "@/components/ui/anim";
 import { blocks } from "./face.content.json";
 import { controls } from "./face.controls.json";
+import { LiveSimulation } from "./components/live-simulation";
 
 const MONO = "font-terminal uppercase tracking-[0.18em]";
 const ACCENTS = ["var(--cyan)", "var(--cyan)", "var(--cyan)"];
@@ -39,7 +40,7 @@ export default function AudienceFace() {
                   delay={0.5}
                   depth={26}
                   float={8}
-                  glow="#7fc4ff"
+                  glow="var(--signal-info)"
                   spin
                   src="/media/operator-pixel-cutout.svg"
                 />
@@ -143,34 +144,38 @@ export default function AudienceFace() {
           </div>
 
           {/* RIGHT RAIL — MVP */}
-          <div className="@xl:w-[22%] border-t @xl:border-t-0 @xl:border-l border-[var(--line)] px-5 py-4 @xl:px-8 @xl:py-10 flex flex-col gap-3 @xl:gap-6">
+          <div className="@xl:w-[28%] border-t @xl:border-t-0 @xl:border-l border-[var(--line)] px-5 py-4 @xl:px-7 @xl:py-8 flex flex-col gap-3 @xl:gap-5">
             <Capsule size="sm" tilt={-2}>
               <TextContent
                 content={blocks.mvpHeading.content}
                 data-content-keys={["mvpHeading"]}
               />
             </Capsule>
-            <div className="flex flex-col gap-1.5 @xl:gap-3">
+
+            {/* What the shipped thing actually does, beside what it is. */}
+            <LiveSimulation scenarios={blocks.liveSim.rows} />
+
+            <div className="flex flex-col gap-1.5 @xl:gap-2">
               {blocks.mvpItems.rows.map((row, i) => (
                 <motion.div
                   key={row.id}
                   initial={{ opacity: 0 }}
                   animate={inView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.5 + i * 0.07 }}
-                  className="border-b border-[var(--line)] pb-1 @xl:pb-2"
+                  className="border-b border-[var(--line)] pb-1 @xl:pb-1.5"
                 >
                   <TextContent
                     content={row.label}
-                    className={`${MONO} block text-[var(--body)] text-[8px] @xl:text-[13px] leading-snug`}
+                    className={`${MONO} block text-[var(--body)] text-[8px] @xl:text-[11px] leading-snug`}
                   />
                 </motion.div>
               ))}
             </div>
-            <div className="mt-auto border border-[var(--hairline)] px-3 py-2 @xl:px-4 @xl:py-4">
+            <div className="mt-auto border border-[var(--hairline)] px-3 py-2 @xl:px-3 @xl:py-3">
               <TextContent
                 content={blocks.targetNote.content}
                 data-content-keys={["targetNote"]}
-                className={`${MONO} block text-[var(--amber)] text-[8px] @xl:text-[12px] leading-relaxed`}
+                className={`${MONO} block text-[var(--amber)] text-[8px] @xl:text-[10px] leading-relaxed`}
               />
             </div>
           </div>

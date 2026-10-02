@@ -73,14 +73,14 @@ export default function ProfileFace() {
                     src="/media/operator-pixel-cutout.svg"
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="font-mono text-[6px] uppercase tracking-[.16em] text-[#a6e86b] @xl:text-[10px]">Level 02 · Investigator</p>
+                    <p className="font-mono text-[6px] uppercase tracking-[.16em] text-[var(--lime)] @xl:text-[10px]">Level 02 · Investigator</p>
                     <h1 className="mt-1.5 text-lg font-bold tracking-[-.02em] @xl:text-[30px]">Username</h1>
-                    <p className="mt-1 text-[7px] leading-relaxed text-[#8191a1] @xl:text-[11px]">Bio and social links are optional profile details.</p>
+                    <p className="mt-1 text-[7px] leading-relaxed text-[var(--ink-muted)] @xl:text-[11px]">Bio and social links are optional profile details.</p>
                     <div className="mt-2.5 flex flex-wrap items-center gap-2 @xl:mt-4">
-                      <span className="rounded-[var(--rw-radius)] border border-[#263544] px-2 py-1 font-mono text-[6px] uppercase tracking-[.1em] text-[#c2ccd6] transition-colors hover:border-[#a6e86b]/50 hover:text-[#a6e86b] @xl:px-3 @xl:py-1.5 @xl:text-[9px]">
+                      <span className="rounded-[var(--rw-radius)] border border-[var(--space-line)] px-2 py-1 font-mono text-[6px] uppercase tracking-[.1em] text-[var(--ink-soft)] transition-colors hover:border-[var(--lime)]/50 hover:text-[var(--lime)] @xl:px-3 @xl:py-1.5 @xl:text-[9px]">
                         Profile link ↗
                       </span>
-                      <span className="rounded-[var(--rw-radius)] border border-[#a6e86b]/45 bg-[#a6e86b]/[.08] px-2 py-1 font-mono text-[6px] font-bold uppercase tracking-[.1em] text-[#a6e86b] @xl:px-3 @xl:py-1.5 @xl:text-[9px]">
+                      <span className="rounded-[var(--rw-radius)] border border-[var(--lime)]/45 bg-[var(--lime)]/[.08] px-2 py-1 font-mono text-[6px] font-bold uppercase tracking-[.1em] text-[var(--lime)] @xl:px-3 @xl:py-1.5 @xl:text-[9px]">
                         Edit profile
                       </span>
                     </div>
@@ -89,10 +89,10 @@ export default function ProfileFace() {
 
                 {/* Practice trace — a line chart, drawn so the path is visible
                     rather than boxed in a grid of cells. */}
-                <div className="border-t border-[#263544] pt-2.5 @xl:pt-4">
+                <div className="border-t border-[var(--space-line)] pt-2.5 @xl:pt-4">
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className="font-mono text-[6px] uppercase tracking-[.12em] text-[#8191a1] @xl:text-[9px]">Practice trace</p>
-                    <p className="font-mono text-[6px] text-[#a6e86b] @xl:text-[9px]">{modulesDone} active days</p>
+                    <p className="font-mono text-[6px] uppercase tracking-[.12em] text-[var(--ink-muted)] @xl:text-[9px]">Practice trace</p>
+                    <p className="font-mono text-[6px] text-[var(--lime)] @xl:text-[9px]">{modulesDone} active days</p>
                   </div>
                   <PracticeTrace />
                 </div>
@@ -104,8 +104,8 @@ export default function ProfileFace() {
             <ProductPanel className="flex h-full min-h-0 flex-col">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[#a6e86b] @xl:text-[12px]">Activity per module</h2>
-                  <p className="mt-1 text-[7px] text-[#8191a1] @xl:mt-2 @xl:text-[12px]">Every finished module is recorded together with the habits you used.</p>
+                  <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[var(--lime)] @xl:text-[12px]">Activity per module</h2>
+                  <p className="mt-1 text-[7px] text-[var(--ink-muted)] @xl:mt-2 @xl:text-[12px]">Every finished module is recorded together with the habits you used.</p>
                 </div>
                 <ProductPill tone="signal">Training modules</ProductPill>
               </div>
@@ -116,32 +116,32 @@ export default function ProfileFace() {
                   return (
                     <motion.li
                       key={module.no}
-                      className="flex min-h-0 items-center gap-2.5 border-l-2 border-l-[#263544] pl-2.5 transition-colors hover:border-l-[#a6e86b]/60 @xl:gap-5 @xl:pl-5"
+                      className="flex min-h-0 items-center gap-2.5 border-l-2 border-l-[var(--space-line)] pl-2.5 transition-colors hover:border-l-[var(--lime)]/60 @xl:gap-5 @xl:pl-5"
                       initial={{ opacity: 0, x: -14 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.25 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <span className="font-mono text-[7px] text-[#8191a1] @xl:text-[11px]">{module.no}</span>
+                      <span className="font-mono text-[7px] text-[var(--ink-muted)] @xl:text-[11px]">{module.no}</span>
                       <div className="min-w-0 flex-1">
                         <h3 className="truncate text-[9px] font-semibold @xl:text-[16px]">{module.title}</h3>
-                        <p className="mt-0.5 font-mono text-[5px] uppercase tracking-[.1em] text-[#6b7885] @xl:text-[9px]">{module.tag}</p>
+                        <p className="mt-0.5 font-mono text-[5px] uppercase tracking-[.1em] text-[var(--ink-faint)] @xl:text-[9px]">{module.tag}</p>
                         {module.habits.length > 0 ? (
                           <p className="mt-1 flex flex-wrap items-center gap-x-1.5 font-mono text-[6px] @xl:mt-2 @xl:gap-x-3 @xl:text-[10px]">
                             {module.habits.map((habit, habitIndex) => (
                               <span className="flex items-center gap-1" key={habit}>
-                                <span className="text-[#a6e86b]">{habit}</span>
-                                <span className={habit ? "text-[#a6e86b]" : "text-[#4d5a67]"}>{habit ? "✓" : "·"}</span>
-                                {habitIndex < module.habits.length - 1 ? <span className="text-[#4d5a67]">·</span> : null}
+                                <span className="text-[var(--lime)]">{habit}</span>
+                                <span className={habit ? "text-[var(--lime)]" : "text-[var(--ink-faint)]"}>{habit ? "✓" : "·"}</span>
+                                {habitIndex < module.habits.length - 1 ? <span className="text-[var(--ink-faint)]">·</span> : null}
                               </span>
                             ))}
                           </p>
                         ) : (
-                          <p className="mt-1 text-[6px] text-[#6b7885] @xl:mt-2 @xl:text-[10px]">Start one module to see your first report.</p>
+                          <p className="mt-1 text-[6px] text-[var(--ink-faint)] @xl:mt-2 @xl:text-[10px]">Start one module to see your first report.</p>
                         )}
                       </div>
                       <span
                         className={`shrink-0 font-mono text-[6px] uppercase tracking-[.1em] @xl:text-[9px] ${
-                          done ? "text-[#a6e86b]" : "text-[#6b7885]"
+                          done ? "text-[var(--lime)]" : "text-[var(--ink-faint)]"
                         }`}
                       >
                         {module.state}
@@ -159,7 +159,7 @@ export default function ProfileFace() {
           <Reveal className="flex min-h-0 flex-col" index={2} y={12}>
             <ProductPanel className="flex h-full min-h-0 flex-col">
               <div className="flex items-center justify-between gap-3">
-                <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[#a6e86b] @xl:text-[11px]">Account identity</h2>
+                <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[var(--lime)] @xl:text-[11px]">Account identity</h2>
                 <ProductPill>Sign in required</ProductPill>
               </div>
               <dl className="mt-auto space-y-1.5 @xl:mt-3 @xl:space-y-3">
@@ -167,14 +167,14 @@ export default function ProfileFace() {
                   { term: "Username", detail: "Account-specific" },
                   { term: "Email", detail: "Private account field" },
                 ].map((row) => (
-                  <div className="flex items-baseline justify-between gap-3 border-b border-[#263544] pb-1 @xl:pb-2" key={row.term}>
-                    <dt className="font-mono text-[6px] uppercase tracking-[.1em] text-[#8191a1] @xl:text-[9px]">{row.term}</dt>
-                    <dd className="truncate text-[7px] text-[#c2ccd6] @xl:text-[12px]">{row.detail}</dd>
+                  <div className="flex items-baseline justify-between gap-3 border-b border-[var(--space-line)] pb-1 @xl:pb-2" key={row.term}>
+                    <dt className="font-mono text-[6px] uppercase tracking-[.1em] text-[var(--ink-muted)] @xl:text-[9px]">{row.term}</dt>
+                    <dd className="truncate text-[7px] text-[var(--ink-soft)] @xl:text-[12px]">{row.detail}</dd>
                   </div>
                 ))}
                 <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-mono text-[6px] uppercase tracking-[.1em] text-[#8191a1] @xl:text-[9px]">Controls</dt>
-                  <dd className="text-[7px] text-[#a6e86b] @xl:text-[12px]">Edit · Sign out</dd>
+                  <dt className="font-mono text-[6px] uppercase tracking-[.1em] text-[var(--ink-muted)] @xl:text-[9px]">Controls</dt>
+                  <dd className="text-[7px] text-[var(--lime)] @xl:text-[12px]">Edit · Sign out</dd>
                 </div>
               </dl>
             </ProductPanel>
@@ -183,28 +183,28 @@ export default function ProfileFace() {
           <Reveal className="flex min-h-0 flex-col" index={3} y={12}>
             <ProductPanel className="flex h-full min-h-0 flex-col">
               <div className="flex items-center justify-between gap-3">
-                <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[#a6e86b] @xl:text-[11px]">Your progress</h2>
+                <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[var(--lime)] @xl:text-[11px]">Your progress</h2>
                 <ProductPill tone="signal">View insights</ProductPill>
               </div>
 
               <div className="mt-2 space-y-1.5 @xl:mt-4 @xl:space-y-3">
                 <ProgressRule delay={0.1} label="Familiar" />
                 <ProgressRule delay={0.22} label="Skilled" />
-                <ProgressRule delay={0.34} label="Needs practice" tone="#edbd67" />
+                <ProgressRule delay={0.34} label="Needs practice" tone="var(--signal-warn)" />
               </div>
 
-              <div className="mt-auto grid grid-cols-2 gap-2 border-t border-[#263544] pt-2 @xl:mt-4 @xl:pt-4">
-                <div className="border-l-2 border-l-[#a6e86b] pl-2 @xl:pl-4">
-                  <p className="font-mono text-[5px] uppercase tracking-[.1em] text-[#8191a1] @xl:text-[8px]">Modules completed</p>
+              <div className="mt-auto grid grid-cols-2 gap-2 border-t border-[var(--space-line)] pt-2 @xl:mt-4 @xl:pt-4">
+                <div className="border-l-2 border-l-[var(--lime)] pl-2 @xl:pl-4">
+                  <p className="font-mono text-[5px] uppercase tracking-[.1em] text-[var(--ink-muted)] @xl:text-[8px]">Modules completed</p>
                   <p className="mt-0.5 font-mono text-[11px] font-bold tabular-nums @xl:text-[19px]">{modulesDone} / 3</p>
                 </div>
-                <div className="border-l-2 border-l-[#a6e86b] pl-2 @xl:pl-4">
-                  <p className="font-mono text-[5px] uppercase tracking-[.1em] text-[#8191a1] @xl:text-[8px]">Practice streak</p>
+                <div className="border-l-2 border-l-[var(--lime)] pl-2 @xl:pl-4">
+                  <p className="font-mono text-[5px] uppercase tracking-[.1em] text-[var(--ink-muted)] @xl:text-[8px]">Practice streak</p>
                   <p className="mt-0.5 font-mono text-[11px] font-bold tabular-nums @xl:text-[19px]">{modulesDone} days</p>
                 </div>
               </div>
 
-              <p className="mt-2 text-[6px] leading-relaxed text-[#6b7885] @xl:mt-3 @xl:text-[9px]">
+              <p className="mt-2 text-[6px] leading-relaxed text-[var(--ink-faint)] @xl:mt-3 @xl:text-[9px]">
                 Public profiles expose a limited set of profile details and community activity. Email and account progress remain private.
               </p>
             </ProductPanel>
@@ -212,7 +212,7 @@ export default function ProfileFace() {
 
           <Reveal className="flex min-h-0 flex-col" index={4} y={12}>
             <ProductPanel className="flex h-full min-h-0 flex-col">
-              <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[#a6e86b] @xl:text-[11px]">My reports</h2>
+              <h2 className="font-mono text-[8px] font-bold uppercase tracking-[.14em] text-[var(--lime)] @xl:text-[11px]">My reports</h2>
               <div className="mt-1.5 flex flex-wrap gap-1 @xl:mt-3">
                 {tabs.map((item, index) => (
                   <button
@@ -221,14 +221,14 @@ export default function ProfileFace() {
                     onClick={() => setTab(index)}
                     aria-pressed={tab === index}
                     className={`rounded-[var(--rw-radius)] border px-1.5 py-0.5 font-mono text-[5px] uppercase tracking-[.08em] transition-colors @xl:px-2.5 @xl:py-1 @xl:text-[8px] ${
-                      tab === index ? "border-[#a6e86b]/55 bg-[#a6e86b]/[.08] text-[#a6e86b]" : "border-transparent text-[#6b7885] hover:text-[#c2ccd6]"
+                      tab === index ? "border-[var(--lime)]/55 bg-[var(--lime)]/[.08] text-[var(--lime)]" : "border-transparent text-[var(--ink-faint)] hover:text-[var(--ink-soft)]"
                     }`}
                   >
                     {item.label}
                   </button>
                 ))}
               </div>
-              <div className="relative mt-1.5 min-h-0 flex-1 border-l-2 border-l-[#263544] pl-2.5 @xl:mt-3 @xl:pl-5">
+              <div className="relative mt-1.5 min-h-0 flex-1 border-l-2 border-l-[var(--space-line)] pl-2.5 @xl:mt-3 @xl:pl-5">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={tabs[tab].label}
@@ -239,7 +239,7 @@ export default function ProfileFace() {
                     className="flex h-full flex-col justify-center"
                   >
                     <p className="text-[8px] font-semibold leading-tight @xl:text-[13px]">{tabs[tab].label}</p>
-                    <p className="mt-1 text-[6px] leading-relaxed text-[#8191a1] @xl:mt-2 @xl:text-[10px]">{tabs[tab].note}</p>
+                    <p className="mt-1 text-[6px] leading-relaxed text-[var(--ink-muted)] @xl:mt-2 @xl:text-[10px]">{tabs[tab].note}</p>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -280,15 +280,15 @@ function PracticeTrace() {
       <svg className="h-full w-full" preserveAspectRatio="none" viewBox={`0 0 100 ${height}`}>
         <defs>
           <linearGradient id="trace-wash" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#a6e86b" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#a6e86b" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--lime)" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="var(--lime)" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path d={area} fill="url(#trace-wash)" />
         <motion.path
           d={line}
           fill="none"
-          stroke="#a6e86b"
+          stroke="var(--lime)"
           strokeLinecap="round"
           strokeLinejoin="round"
           /* Width is in viewBox units, not pixels: the chart is stretched
@@ -305,7 +305,7 @@ function PracticeTrace() {
 
       <motion.span
         aria-hidden="true"
-        className="absolute h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#a6e86b] @xl:h-2.5 @xl:w-2.5"
+        className="absolute h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--lime)] @xl:h-2.5 @xl:w-2.5"
         style={{
           left: `${lastX}%`,
           top: `${(lastY / height) * 100}%`,
@@ -321,11 +321,11 @@ function PracticeTrace() {
 
 /* A single rule per mastery state. The sweep is a travelling highlight, not a
    fill — the deck reports no mastery figures, so a bar would assert one. */
-function ProgressRule({ label, delay, tone = "#a6e86b" }: { label: string; delay: number; tone?: string }) {
+function ProgressRule({ label, delay, tone = "var(--lime)" }: { label: string; delay: number; tone?: string }) {
   return (
     <div className="mt-1 flex items-center gap-2 @xl:mt-2 @xl:gap-3">
-      <span className="min-w-0 flex-1 truncate text-[7px] text-[#c2ccd6] @xl:text-[11px]">{label}</span>
-      <span className="relative h-px flex-1 bg-[#263544] @xl:h-[2px]">
+      <span className="min-w-0 flex-1 truncate text-[7px] text-[var(--ink-soft)] @xl:text-[11px]">{label}</span>
+      <span className="relative h-px flex-1 bg-[var(--space-line)] @xl:h-[2px]">
         <motion.span
           aria-hidden="true"
           className="absolute inset-y-0 w-1/3"
@@ -335,7 +335,7 @@ function ProgressRule({ label, delay, tone = "#a6e86b" }: { label: string; delay
           transition={{ duration: 2.6, delay, repeat: Infinity, repeatDelay: 1.5, ease: "easeInOut" }}
         />
       </span>
-      <span className="shrink-0 font-mono text-[6px] text-[#6b7885] @xl:text-[9px]">—</span>
+      <span className="shrink-0 font-mono text-[6px] text-[var(--ink-faint)] @xl:text-[9px]">—</span>
     </div>
   );
 }
