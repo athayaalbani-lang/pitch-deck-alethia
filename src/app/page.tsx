@@ -15,6 +15,7 @@ import Face8uelwyFace from "@/faces/face-8uelwy/face.tsx";
 import Face9sa50dFace from "@/faces/face-9sa50d/face.tsx";
 import Facer3r76iFace from "@/faces/face-r3r76i/face.tsx";
 import Facenqw26vFace from "@/faces/face-nqw26v/face.tsx";
+import FacetryoutFace from "@/faces/face-tryout/face.tsx";
 import Faceywfin7Face from "@/faces/face-ywfin7/face.tsx";
 const visibleFaces = faces.filter((face) => !face.hidden);
 
@@ -31,6 +32,7 @@ export const componentMap = {
   "face-9sa50d": Face9sa50dFace,
   "face-r3r76i": Facer3r76iFace,
   "face-nqw26v": Facenqw26vFace,
+  "face-tryout": FacetryoutFace,
   "face-ywfin7": Faceywfin7Face,
 };
 

@@ -61,6 +61,11 @@
       "hidden": false
     },
     {
+      "id": "face-tryout",
+      "name": "Try the Prototype",
+      "hidden": false
+    },
+    {
       "id": "face-ywfin7",
       "name": "Closing & Call to Action",
       "hidden": false

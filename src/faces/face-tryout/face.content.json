@@ -1,0 +1,17 @@
+{
+  "blocks": {
+    "badge": { "type": "text", "content": "Live prototype // Try it now" },
+    "statusLabel": { "type": "text", "content": "No install · runs in browser" },
+    "title": { "type": "text", "content": "Touch the real thing." },
+    "lead": {
+      "type": "text",
+      "content": "The prototype is live. Scan the code to became investigator."
+    },
+    "urlLabel": { "type": "text", "content": "Prototype URL" },
+    "url": { "type": "text", "content": "https://alethia-cyber-learning.netlify.app/" },
+    "ctaLabel": { "type": "text", "content": "Open prototype" },
+    "qrCaption": { "type": "text", "content": "Scan to open" },
+    "qrNote": { "type": "text", "content": "Point camera · no app needed" },
+    "footerLabel": { "type": "text", "content": "One scenario · two minutes · zero setup" }
+  }
+}
